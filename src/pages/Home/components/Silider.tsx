@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import '../slider.css'
+import { useState, useEffect } from 'react';
+import './../../../slider.css'
 
-const Slider = ({ images, interval }) => {
+type Props = {
+  images: string[]
+  interval: number
+}
+
+const Slider = ({ images, interval }: Props) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -13,9 +18,6 @@ const Slider = ({ images, interval }) => {
 
   return (
     <>
-      <button onClick={() => {
-        setIndex((prevIndex) => (prevIndex + 1) % images.length)
-      }}>click</button>
       <div className="slider">
         {images.map((image, idx) => (
           <img
@@ -25,8 +27,6 @@ const Slider = ({ images, interval }) => {
             className={idx === index ? 'active' : 'inactive'}
           />
         ))}
-
-
       </div>
     </>
   );
