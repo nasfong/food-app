@@ -20,12 +20,16 @@ const Slider = ({ images, interval }: Props) => {
     <>
       <div className="slider">
         {images.map((image, idx) => (
-          <img
-            key={idx}
-            src={image}
-            alt={`Slide ${idx}`}
-            className={idx === index ? 'active' : 'inactive'}
-          />
+          <span key={idx} className=''>
+            <img
+              // key={idx}
+              src={image}
+              alt={`Slide ${idx}`}
+              className={idx === index ? 'active' : 'inactive'}
+            />
+            <div className="inner-shadow"></div>
+
+          </span>
         ))}
       </div>
     </>

@@ -5,11 +5,13 @@ import Home from "./pages/Home/Home"
 function App() {
 
   return (
-    <GlobalStateProvider>
-      <Navbar>
-        <Home />
-      </Navbar>
-    </GlobalStateProvider>
+    <div style={{ fontFamily: "'Gideon Roman', serif" }}>
+      <GlobalStateProvider>
+        <Navbar>
+          <Home />
+        </Navbar>
+      </GlobalStateProvider>
+    </div>
   )
 }
 
