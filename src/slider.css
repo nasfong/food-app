@@ -4,6 +4,8 @@
   object-fit: cover;
   object-position: center;
   overflow: hidden;
+  position: relative; /* Add this to establish a positioning context */
+
 }
 
 .slider img {
@@ -21,7 +23,7 @@
   opacity: 1;
   transform: scale(1);
   animation-delay: 0.5s;
-  animation: zoom 5s infinite;
+  animation: zoom 10    s infinite;
 }
 
 /* .slider img.inactive {

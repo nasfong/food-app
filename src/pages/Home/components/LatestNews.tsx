@@ -57,12 +57,12 @@ const LatestNews = () => {
             <img src={item.image} alt="" className="brightness-50 h-full w-full object-cover" />
 
             <div className='absolute bottom-24 left-10 flex justify-center items-center gap-5'>
-              <img src={item.image} alt="" className=' h-[300px] w-[600px]  object-cover' />
+              <img src={item.image} alt="" className='h-[400px] w-[600px] object-cover' />
               <div className="text-white">
                 <div>{item.date}</div>
                 <div className=''>{item.name}</div>
                 <div className=''>{item.detail}</div>
-                <button className='mt-5 p-2'>Add Card</button>
+                <button className='mt-5 p-2 text-white '>Add Card</button>
               </div>
             </div>
           </SwiperSlide>

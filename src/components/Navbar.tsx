@@ -46,7 +46,8 @@ export default function ElevateAppBar(props: Props) {
         <AppBar
           sx={{
             backgroundColor: trigger ? undefined : "transparent",
-            transition: "background-color 0.3s ease"
+            transition: "background-color 0.3s ease",
+            boxShadow: 0
           }}
         >
           <Toolbar>

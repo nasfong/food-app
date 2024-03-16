@@ -1,5 +1,7 @@
 // import '../styles/foodCard.css'
 
+import { useGlobalData } from "@/hook/useGlobalData"
+
 const cards = [
   {
     image: 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
@@ -22,8 +24,14 @@ const cards = [
 ]
 
 const FoodCard = () => {
+  const { card, dispatch } = useGlobalData()
+  console.log(card)
+
+  const AddCard = () => {
+    // dispatch({ type: "Card", payload: })
+  }
   return (
-    <div>
+    <div onClick={AddCard} className="cursor-pointer">
       <div className="text-center">
         <p>- Should to Try -</p>
         <h1>CHEF RECOMMENDS</h1>
@@ -40,7 +48,7 @@ const FoodCard = () => {
               <p className="text-gray-700 text-base">
                 Lorem ipsum dolor sit amet
               </p>
-              <button className='mt-5 p-2'>Add Card</button>
+              <button className='mt-5 p-2'style={{boxShadow: "0 0.2rem #e6bb65"}}>Add Card</button>
             </div>
           </div>
         ))}
