@@ -1,3 +1,7 @@
+// import '../styles/foodCard.css'
+
+import { useGlobalData } from "@/hook/useGlobalData"
+
 const cards = [
   {
     image: 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
@@ -20,29 +24,31 @@ const cards = [
 ]
 
 const FoodCard = () => {
+  const { card, dispatch } = useGlobalData()
+  console.log(card)
+
+  const AddCard = () => {
+    // dispatch({ type: "Card", payload: })
+  }
   return (
-    <div>
+    <div onClick={AddCard} className="cursor-pointer">
       <div className="text-center">
         <p>- Should to Try -</p>
         <h1>CHEF RECOMMENDS</h1>
       </div>
-      <div className="flex flex-wrap justify-center space-x-5">
+      <div className="flex flex-wrap justify-center">
         {cards.map((item, index) => (
-          <div key={index} className="w-full max-w-sm border border-gray-200 bg-[#efefef]">
-            <div className="w-full h-64 rounded overflow-hidden shadow-lg">
+          <div key={index} className="w-full max-w-sm border border-gray-200 bg-[#efefef] text-center rounded-xl relative my-5 mx-2">
+            <div className="w-full h-64 rounded overflow-hidden shadow-lg flex flex-col relative">
               <img className="w-full h-full object-cover" src={item.image} alt="Sunset in the mountains" />
+              <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>${item.price}</div>
             </div>
-            <div className="px-6 py-4">
+            <div className="px-8 flex-grow py-8">
               <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
               <p className="text-gray-700 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                Lorem ipsum dolor sit amet
               </p>
-              <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Add Card
-                <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-              </a>
+              <button className='button2 mt-5 p-2' style={{ boxShadow: "0 0.2rem #e6bb65" }}>Add Card</button>
             </div>
           </div>
         ))}

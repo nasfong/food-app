@@ -23,14 +23,19 @@ const Slider = () => {
     <>
       <div className="slider">
         {images.map((image, idx) => (
-          <div key={idx} className='image-shadow'>
+          <span key={idx} className=''>
             <img
-              key={idx}
+              // key={idx}
               src={image}
               alt={`Slide ${idx}`}
               className={idx === index ? 'active' : 'inactive'}
             />
-          </div>
+            <div className="inner-shadow"></div>
+            <div className='absolute inset-0 flex justify-center items-center text-center text-white'>
+              <div className='text-2xl md:text-6xl '>Cristiano Restaurant</div>
+              {/* <div>123 Main Street, Uni 21, New York City</div> */}
+            </div>
+          </span>
         ))}
         <div
           className='absolute text-white  

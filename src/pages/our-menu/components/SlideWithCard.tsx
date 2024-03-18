@@ -26,7 +26,7 @@ const cards = [
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { useRef } from 'react';
 
-const Promotion = () => {
+const SlideWithCard = () => {
   const progressCircle = useRef<any>(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s: any, time: any, progress: any) => {
@@ -34,30 +34,20 @@ const Promotion = () => {
     (progressContent.current as any).textContent = `${Math.ceil(time / 1000)}s`;
   };
   return (
-    <div className='h-[500px] my-10 bg-gray'>
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={30}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
-        {cards.map((item, index) => (
-          <SwiperSlide key={index}>
-            <img src={item.image} alt="" className='object-cover' />
-            <div className='absolute bg-white bg-opacity-80 p-5'>
-              <div className='font-bold'>{item.name}</div>
-              <div>{item.detail}</div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className='relative h-[500px] my-10 bg-gray flex justify-center items-center'>
+      <img
+        src="https://imgs.search.brave.com/oiEqgwJQYE06WHRyr5yXE9L0HjuGoJexVYemQRFK_7Q/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE0/NjcwMDM5MDk1ODUt/MmY4YTcyNzAwMjg4/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4bGVI/QnNiM0psTFdabFpX/UjhNVEI4Zkh4bGJu/d3dmSHg4Zkh3PQ"
+        alt=""
+        className='w-full h-full object-cover absolute'
+      />
+      <div className='absolute bg-white bg-opacity-90 p-10 text-center max-w-[800px]'>
+        <div className='title'>DESSERTS</div>
+        <div className='mt-5'>
+          LOREM IPSUM HAS BEEN THE INDUSTRY’S STANDARD DUMMY TEXT EVER SINCE THE 1500S, WHEN AN UNKNOWN PRINTER TOOK A GALLEY OF TYPE AND SCRAMBLED IT TO MAKE A TYPE SPECIMEN BOOK.
+        </div>
+      </div>
     </div>
   )
 }
 
-export default Promotion
+export default SlideWithCard

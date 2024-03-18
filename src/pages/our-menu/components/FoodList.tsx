@@ -13,10 +13,16 @@ const cards = [
     name: 'Chicken and Walnut Salad',
     price: '10.95',
     detail: 'Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing'
+  },
+  {
+    image: 'https://imgs.search.brave.com/m5uimNhN8PWgJ-xav3Qvom0MQJOuba3GLlWrhgWiehw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY3RmYXNzZXRz/Lm5ldC9ocmx0eDEy/cGw4aHEvMmYxUHEy/eThhcVVYV2dWU0No/MWNONC9kZmU1MWUy/MDRjYmVmOGZkZjA0/OWIzMWY4OWE2NWUw/NS9mb29kLWFuZC1k/cmluay1pbWFnZXMu/anBnP2ZpdD1maWxs/Jnc9NjAwJmg9NDAw',
+    name: 'Chicken and Walnut Salad',
+    price: '10.95',
+    detail: 'Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing'
   }
 ];
 
-const RadomDish = () => {
+const FoodList = () => {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 
   return (
@@ -49,11 +55,8 @@ const RadomDish = () => {
           </div>
         ))}
       </div>
-      <div className='text-center'>
-        <button className='text-black button1'>View Full Menu</button>
-      </div>
     </div>
   );
 };
 
-export default RadomDish;
+export default FoodList;
