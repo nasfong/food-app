@@ -1,8 +1,8 @@
 import '../styles/footer.css'
 const Footer = () => {
   return (
-    <div className="flex">
-      <div className="w-1/2 text-center bg-[#23262B] text-white p-12 relative">
+    <div className="flex flex-col md:flex-row">
+      <div className="md:w-1/2 text-center bg-[#23262B] text-white p-12 relative">
         <div className="">
           <div>Contact US</div>
           <div>123 Main Street, Uni 21, New York City</div>
@@ -11,7 +11,7 @@ const Footer = () => {
           <div>Sat - Sun: 10:00 - 23:00</div>
         </div>
       </div>
-      <div className="w-1/2 text-center bg-[#1A2124] p-12 text-white relative">
+      <div className="md:w-1/2 text-center bg-[#1A2124] p-12 text-white relative">
         <div className="">
           <div>Follow Us</div>
           <div>Join us on social networks</div>

@@ -25,7 +25,7 @@ const cards = [
 
 const Food = () => {
   return (
-    <div className="h-[400px] my-16 bg-gray container mx-auto text-center">
+    <div className="h-[400px] my-[100px] bg-gray container mx-auto text-center">
       <div>
         <div className='form-to'>From 11:00am to 10:00pm</div>
         <div className='title'>ORDER ONLINE</div>

@@ -80,7 +80,7 @@
   }
 }
 
-button {
+.button2 {
   /* background-color: #eee; */
   border: none;
   padding: 1rem;
@@ -92,18 +92,18 @@ button {
   cursor: pointer;
 }
 
-button:active {
+.button2:active {
   color: #e6bb65;
   box-shadow: 0 0.2rem #e6bb65;
   transform: translateY(0.2rem);
 }
 
-button:hover:not(:disabled) {
+.button2:hover:not(:disabled) {
   color: #e6bb65;
   box-shadow: 0 0.2rem #e6bb65;
 }
 
-button:disabled {
+.button2:disabled {
   cursor: auto;
   color: grey;
 }

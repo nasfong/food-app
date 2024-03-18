@@ -1,6 +1,33 @@
 .rounded-corner-img {
-  width: 200px; /* Adjust as needed */
-  height: 200px; /* Adjust as needed */
-  border-radius: 0px 50% 50% 50%; /* This creates rounded corners on one side */
-  overflow: hidden; /* This ensures the image stays within the rounded corners */
+  height: 75px;
+  width: 75px;
+  object-fit: cover;
+  border-radius: 0px 50% 50% 50%;
+}
+.button1 {
+  /* background-color: #eee; */
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  width: 10em;
+  border-radius: 1rem;
+  color: #e6bb65;
+  box-shadow: 0 0.2rem #000;
+  cursor: pointer;
+}
+
+.button1:active {
+  color: #e6bb65;
+  box-shadow: 0 0.2rem #e6bb65;
+  transform: translateY(0.2rem);
+}
+
+.button1:hover:not(:disabled) {
+  color: #e6bb65;
+  box-shadow: 0 0.2rem #e6bb65;
+}
+
+.button1:disabled {
+  cursor: auto;
+  color: grey;
 }

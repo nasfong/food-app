@@ -28,7 +28,10 @@ const Slider = ({ images, interval }: Props) => {
               className={idx === index ? 'active' : 'inactive'}
             />
             <div className="inner-shadow"></div>
-
+            <div className='absolute inset-0 flex justify-center items-center text-center text-white'>
+              <div className='text-2xl md:text-6xl '>Cristiano Restaurant</div>
+              {/* <div>123 Main Street, Uni 21, New York City</div> */}
+            </div>
           </span>
         ))}
       </div>

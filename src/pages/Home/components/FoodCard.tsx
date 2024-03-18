@@ -48,7 +48,7 @@ const FoodCard = () => {
               <p className="text-gray-700 text-base">
                 Lorem ipsum dolor sit amet
               </p>
-              <button className='mt-5 p-2'style={{boxShadow: "0 0.2rem #e6bb65"}}>Add Card</button>
+              <button className='button2 mt-5 p-2'style={{boxShadow: "0 0.2rem #e6bb65"}}>Add Card</button>
             </div>
           </div>
         ))}
