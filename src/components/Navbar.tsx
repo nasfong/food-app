@@ -8,13 +8,14 @@ import Box from '@mui/material/Box';
 import { Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Footer from '@/pages/Home/components/Footer';
 
 const navItems = [
   { label: 'Home', url: '/' },
   { label: 'Our Menu', url: '/our-menu' },
   { label: 'Shop', url: '/shop' },
   { label: 'Gallery', url: '/gallery' },
-  { label: 'Our New', url: '/our-new' },
+  { label: 'Our News', url: '/our-news' },
   { label: 'Reservation', url: '/reservation' },
   { label: 'Contact Us', url: '/contact-us' },
 ];
@@ -101,7 +102,7 @@ export default function ElevateAppBar(props: Props) {
           <AppBar
             sx={{
               backgroundColor: "#1A2124",
-              transition: "transform 0.3s ease",
+              transition: "transform 0.5s ease",
               transform: trigger ? "translateY(-100%)" : "translateY(0)",
             }}
           >
@@ -134,7 +135,7 @@ export default function ElevateAppBar(props: Props) {
           component="nav"
           sx={{
             backgroundColor: trigger ? "#1A2124" : "transparent",
-            transition: "background-color 0.3s ease, transform 0.3s ease", // Added transform transition
+            transition: "background-color 0.5s ease, transform 0.5s ease", // Added transform transition
             boxShadow: 0,
             transform: isMobile || trigger ? "translateY(0)" : "translateY(24%)" // Added transform for animation
           }}
@@ -190,10 +191,12 @@ export default function ElevateAppBar(props: Props) {
       <Box sx={{ mt: -8 }}>
         {props.children}
         <Outlet />
+        <Footer />
         <Box sx={{ my: 2 }}>
 
         </Box>
       </Box>
+
     </React.Fragment >
   );
 }
