@@ -107,21 +107,3 @@
   cursor: auto;
   color: grey;
 }
-
-.image-scroll {
-  overflow-x: scroll;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
-}
-
-.image-scroll img {
-  display: inline-block;
-  width: 100vw; /* Make images take full width of the viewport */
-  height: auto;
-  transition: transform 0.5s ease; /* Transition effect for smooth scrolling */
-}
-
-/* Add delay to the transition */
-.image-scroll img:nth-child(n+2) {
-  transition-delay: 0.5s; /* Adjust the delay as needed */
-}
