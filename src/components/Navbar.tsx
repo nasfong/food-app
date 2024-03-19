@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Footer from '@/pages/Home/components/Footer';
 
 const navItems = [
   { label: 'Home', url: '/' },
@@ -190,10 +191,12 @@ export default function ElevateAppBar(props: Props) {
       <Box sx={{ mt: -8 }}>
         {props.children}
         <Outlet />
+        <Footer />
         <Box sx={{ my: 2 }}>
 
         </Box>
       </Box>
+
     </React.Fragment >
   );
 }

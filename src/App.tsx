@@ -3,6 +3,8 @@ import { GlobalStateProvider } from "./hook/useGlobalData"
 import Home from "./pages/Home/Home"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import OurMenu from "./pages/our-menu/OurMenu"
+import Shop from "./pages/shop/Shop"
+import ShopDetail from "./pages/shop/ShopDetail"
 
 function App() {
 
@@ -14,6 +16,11 @@ function App() {
             <Route path="" element={<Navbar />}>
               <Route index element={<Home />} />
               <Route path="our-menu" element={<OurMenu />} />
+              <Route path="shop" >
+                <Route index element={<Shop />} />
+                <Route path=":name" element={<Shop />} />
+                <Route path=":name/detail" element={<ShopDetail />} />
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>

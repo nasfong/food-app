@@ -28,7 +28,6 @@ const Home = () => {
       <LatestNews />
       <Testimonials />
       <Map />
-      <Footer />
     </div>
   )
 }
