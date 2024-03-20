@@ -7,6 +7,7 @@ import Shop from "./pages/shop/Shop"
 import ShopDetail from "./pages/shop/ShopDetail"
 import Gallery from "./pages/gallery/Gallery"
 import OurNews from "./pages/our-news/OurNews"
+import Admin from "./pages/admin/Admin"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
               </Route>
               <Route path="gallery" element={<Gallery />} />
               <Route path="our-news" element={<OurNews />} />
+              <Route path="admin" element={<Admin />} />
             </Route>
           </Routes>
         </BrowserRouter>

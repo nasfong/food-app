@@ -46,6 +46,8 @@ const cards = [
   }
 ]
 
+
+
 const Body = () => {
   return (
     <div className='container text-center my-20'>
@@ -53,7 +55,7 @@ const Body = () => {
         {shop.map((item, index) => (
           <NavLink
             key={index}
-            to="/shop/salad"
+            to={`/shop/${item.name.toLowerCase()}`}
             // className={({ isActive, isPending }) =>
             //   isPending ? "pending" : isActive ? "text-red-900s" : ""
             // }
@@ -75,12 +77,12 @@ const Body = () => {
               <p className="text-gray-700 text-base">
                 Lorem ipsum dolor sit amet
               </p>
-              <button className='button2 mt-5 p-2'style={{boxShadow: "0 0.2rem #e6bb65"}}>Add To Card</button>
+              <button className='button2 mt-5 p-2' style={{ boxShadow: "0 0.2rem #e6bb65" }}>Add To Card</button>
             </div>
           </div>
         ))}
       </div>
-      
+
     </div>
   )
 }

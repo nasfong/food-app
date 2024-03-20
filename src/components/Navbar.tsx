@@ -18,6 +18,7 @@ const navItems = [
   { label: 'Our News', url: '/our-news' },
   { label: 'Reservation', url: '/reservation' },
   { label: 'Contact Us', url: '/contact-us' },
+  { label: 'Admin', url: '/admin' },
 ];
 const drawerWidth = 240;
 interface Props {
