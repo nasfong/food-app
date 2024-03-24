@@ -20,7 +20,7 @@ const RadomDish = () => {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 
   return (
-    <div className="container my-12">
+    <div className="container my-20">
       <div className='mb-12 text-center'>
         <div className='form-to'>Random Dishes</div>
         <div className='title'>FROM OUR MENU</div>
@@ -35,7 +35,7 @@ const RadomDish = () => {
               onMouseLeave={() => setHoveredIndex(-1)}
             />
             <div className='ml-2'>
-              <div className="flex justify-between font-bold text-[#EEC27A]">
+              <div className="flex justify-between font-bold text-[var(--color)]">
                 <div>{item.name}</div>
                 <div>${item.price}</div>
               </div>
@@ -50,7 +50,7 @@ const RadomDish = () => {
         ))}
       </div>
       <div className='text-center'>
-        <button className='text-black button1'>View Full Menu</button>
+        <button className='text-black button1 mt-10'>View Full Menu</button>
       </div>
     </div>
   );

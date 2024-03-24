@@ -32,10 +32,10 @@ const Testimonials = () => {
     (progressContent.current as any).textContent = `${Math.ceil(time / 1000)}s`;
   };
   return (
-    <div className='h-[600px]'>
-      <div>
-        <div className='text-[#e6bb65]'>- What Our Clients Say -</div>
-        <div className='text-white text-4xl'>TESTIMONIALS</div>
+    <div className='h-[600px] my-10'>
+      <div className='mb-12 text-center'>
+        <div className='form-to'>What Our Clients Say</div>
+        <div className='title'>TESTIMONIALS</div>
       </div>
       <div className='h-[400px] mt-10 bg-gray'>
         <Swiper

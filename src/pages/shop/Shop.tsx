@@ -4,7 +4,6 @@ import Body from './components/Body'
 const Shop = () => {
   return (
     <div>
-      <BackgroundImage />
       <Body />
     </div>
   )

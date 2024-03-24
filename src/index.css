@@ -86,20 +86,20 @@
   font-size: 0.8rem;
   width: 10em;
   border-radius: 1rem;
-  color: #e6bb65;
+  color: var(--color);
   box-shadow: 0 0.2rem #ffffff;
   cursor: pointer;
 }
 
 .button2:active {
-  color: #e6bb65;
-  box-shadow: 0 0.2rem #e6bb65;
+  color: var(--color);
+  box-shadow: 0 0.2rem var(--color);
   transform: translateY(0.2rem);
 }
 
 .button2:hover:not(:disabled) {
-  color: #e6bb65;
-  box-shadow: 0 0.2rem #e6bb65;
+  color: var(--color);
+  box-shadow: 0 0.2rem var(--color);
 }
 
 .button2:disabled {

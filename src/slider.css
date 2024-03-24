@@ -23,7 +23,7 @@
   opacity: 1;
   transform: scale(1);
   animation-delay: 0.5s;
-  animation: zoom 10s infinite;
+  animation: zoom 7s infinite;
 }
 .slider img.inactive {
   opacity: 0;

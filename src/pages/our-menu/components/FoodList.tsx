@@ -41,11 +41,11 @@ const FoodList = () => {
               onMouseLeave={() => setHoveredIndex(-1)}
             />
             <div className='ml-2'>
-              <div className="flex justify-between font-bold text-[#EEC27A]">
+              <div className="flex justify-between font-bold text-[var(--color)]">
                 <div>{item.name}</div>
                 <div>${item.price}</div>
               </div>
-              <div className="mt-1 flex items-start">{item.detail}</div>
+              <div className="my-1 flex items-start">{item.detail}</div>
             </div>
             {hoveredIndex === index && (
               <div className="absolute top-[-230px] left-20 bg-white border-2 border-gray-300 rounded p-2 shadow z-10">

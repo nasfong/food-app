@@ -1,19 +1,12 @@
-import Star from '@/components/Star'
 import { Rating } from '@material-tailwind/react'
-import React from 'react'
 
-const reviewer = [
-  { name: 'STRANGE TEA', data: 'August 6, 2016', comment: 'Tasty!', star: 5 },
-  { name: 'ABDULTAIYEBC (verified owner)', data: 'August 6, 2016', comment: 'Good', star: 4 },
-  { name: 'HASAN', data: 'February 19, 2020', comment: 'Tasty!', star: 3 },
-]
-
-const Reviewer = () => {
+const Reviewer = ({ data }: any) => {
+  console.log(data)
   return (
     <div className='container'>
       <div className='text-4xl'>3 reviews for Cherry Pie</div>
       <div className=''>
-        {reviewer.map((item, index) => (
+        {data?.map((item: any, index: any) => (
           <div key={index} className='bg-[#F8F8F8] p-5 m-5 rounded-md'>
             <div className='flex justify-between'>
               <div className='flex gap-3'>

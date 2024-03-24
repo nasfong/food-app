@@ -7,6 +7,9 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 
 import './../../../food.css'
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const cards = [
   {
@@ -24,8 +27,20 @@ const cards = [
 ]
 
 const Food = () => {
+  const navigate = useNavigate()
+  const { data } = useQuery<any[]>({
+    queryKey: ['food-type'],
+    queryFn: () =>
+      axios.get('/food-type').then((res) =>
+        res.data,
+      ),
+  })
+
+  const handleClick = (foodType: string) => {
+    navigate(`shop/${foodType}`)
+  }
   return (
-    <div className="h-[400px] my-[100px] bg-gray container mx-auto text-center">
+    <div className="h-[400px] mt-10 mb-28 bg-gray container mx-auto text-center">
       <div>
         <div className='form-to'>From 11:00am to 10:00pm</div>
         <div className='title'>ORDER ONLINE</div>
@@ -57,13 +72,14 @@ const Food = () => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        {cards.map((item, index) => (
-          <SwiperSlide key={index}>
+        {data?.map((item, index) => (
+          <SwiperSlide key={index} onClick={() => handleClick(item._id)}>
             <img
-              src={item.image}
+              src={item.image || 'https://www.invoicera.com/wp-content/uploads/2023/11/default-image.jpg'}
               alt={`Slide 1s`}
               className='img rounded-lg'
             />
+            <div className="inner-shadow-food"></div>
             <div className='absolute bottom-16 text-white uppercase'>
               {item.name}
             </div>

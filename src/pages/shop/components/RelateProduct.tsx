@@ -19,14 +19,14 @@ const cards = [
   },
 ]
 
-const RelateProduct = () => {
+const RelateProduct = ({ data }: any) => {
   return (
     <div className="text-center mt-20">
       <div className="title">
         RELATED PRODUCTS
       </div>
       <div className="flex flex-wrap justify-center mt-10">
-        {cards.map((item, index) => (
+        {data?.map((item: any, index: any) => (
           <div key={index} className="w-full max-w-sm border border-gray-200 bg-[#efefef] text-center rounded-xl relative my-5 mx-2">
             <div className="w-full h-64 rounded overflow-hidden shadow-lg flex flex-col relative">
               <img className="w-full h-full object-cover" src={item.image} alt="Sunset in the mountains" />

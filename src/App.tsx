@@ -8,6 +8,7 @@ import ShopDetail from "./pages/shop/ShopDetail"
 import Gallery from "./pages/gallery/Gallery"
 import OurNews from "./pages/our-news/OurNews"
 import Admin from "./pages/admin/Admin"
+import Store from "./pages/store/Store"
 
 function App() {
 
@@ -21,12 +22,13 @@ function App() {
               <Route path="our-menu" element={<OurMenu />} />
               <Route path="shop" >
                 <Route index element={<Shop />} />
-                <Route path=":name" element={<Shop />} />
-                <Route path=":name/detail" element={<ShopDetail />} />
+                <Route path=":foodType" element={<Shop />} />
+                <Route path=":foodId/:foodType/detail" element={<ShopDetail />} />
               </Route>
               <Route path="gallery" element={<Gallery />} />
               <Route path="our-news" element={<OurNews />} />
               <Route path="admin" element={<Admin />} />
+              <Route path="store" element={<Store />} />
             </Route>
           </Routes>
         </BrowserRouter>

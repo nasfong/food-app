@@ -9,13 +9,13 @@ import './../../../promoition.css';
 
 const cards = [
   {
-    image: 'https://imgs.search.brave.com/oiEqgwJQYE06WHRyr5yXE9L0HjuGoJexVYemQRFK_7Q/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE0/NjcwMDM5MDk1ODUt/MmY4YTcyNzAwMjg4/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4bGVI/QnNiM0psTFdabFpX/UjhNVEI4Zkh4bGJu/d3dmSHg4Zkh3PQ',
+    image: 'https://cdn11.bigcommerce.com/s-t5mzvifm/product_images/uploaded_images/prorestaurantequipment-seotool-37328-tipsforimproving-blogbanner1.jpg',
     name: 'Roast Duck Breast',
     price: '14.50',
     detail: 'Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce'
   },
   {
-    image: 'https://imgs.search.brave.com/m5uimNhN8PWgJ-xav3Qvom0MQJOuba3GLlWrhgWiehw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY3RmYXNzZXRz/Lm5ldC9ocmx0eDEy/cGw4aHEvMmYxUHEy/eThhcVVYV2dWU0No/MWNONC9kZmU1MWUy/MDRjYmVmOGZkZjA0/OWIzMWY4OWE2NWUw/NS9mb29kLWFuZC1k/cmluay1pbWFnZXMu/anBnP2ZpdD1maWxs/Jnc9NjAwJmg9NDAw',
+    image: 'https://images.getbento.com/accounts/5cd3abbf1d76fd4b1351f8efda30f047/media/images/57852CH_Quality_BISTRO_NYC_559.jpg?w=1200&fit=crop&auto=compress,format&h=600',
     name: 'Chicken and Walnut Salad',
     price: '10.95',
     detail: 'Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing'
@@ -48,10 +48,10 @@ const Promotion = () => {
       >
         {cards.map((item, index) => (
           <SwiperSlide key={index}>
-            <img src={item.image} alt="" className='object-cover' />
-            <div className='absolute bg-white bg-opacity-80 p-5'>
-              <div className='font-bold'>{item.name}</div>
-              <div>{item.detail}</div>
+            <img src={item.image} alt="" className='promotion object-cover' />
+            <div className='absolute bg-white bg-opacity-95 p-5'>
+              <div className='font-bold text-[32px]'>{item.name}</div>
+              <div className='text-[16px]'>{item.detail}</div>
             </div>
           </SwiperSlide>
         ))}

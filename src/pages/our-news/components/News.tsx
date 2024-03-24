@@ -1,29 +1,107 @@
-const news = [
-  {
-    name: 'Where can I get some?',
-    image: 'https://ychef.files.bbci.co.uk/1280x720/p09wrjyz.jpg',
-    date: 'April 3, 2018',
-    comment: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly…'
-  },
-  {
-    name: 'Where can I get some?',
-    image: 'https://www.moonriverpearls.com/wp-content/uploads/2019/11/Beef-Steak-201910-001.jpg',
-    date: 'April 3, 2018',
-    comment: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly…'
-  },
-  {
-    name: 'Where can I get some?',
-    image: 'https://qph.cf2.quoracdn.net/main-qimg-8533e9f97a10ff91b5fbef304046e972-lq',
-    date: 'April 3, 2018',
-    comment: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly…'
-  },
+import { Box, Button, Modal, TextField } from "@mui/material";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-]
+interface FormData {
+  _id: string
+  name: string;
+  image: string
+  content: string
+  date: string
+}
 
-const News = () => {
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+const News = ({ data, refetch }: any) => {
+  const { handleSubmit, register, formState: { errors }, reset, watch } = useForm<FormData>();
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => {
+    reset({})
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+    reset({})
+  }
+
+  const mutation = useMutation({
+    mutationFn: (formData: FormData) => {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('image', formData.image[0]); // Access the first file in the FileList
+      formDataToSend.append('content', formData.content);
+      formDataToSend.append('date', formData.date);
+      return axios.post('/our-new', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      }).then(() => {
+        refetch()
+        handleClose()
+        reset()
+      })
+    },
+  })
+
+
+  const deleteMutation = useMutation({
+    mutationFn: (id: string) => {
+      return axios.delete(`/our-new/${id}`).then(() => {
+        refetch()
+      })
+    },
+  })
+  const handleDelete = (id: string) => {
+    deleteMutation.mutate(id)
+  }
+
+  const updateMutation = useMutation({
+    mutationFn: (formData: FormData) => {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('image', formData.image[0]); // Access the first file in the FileList
+      formDataToSend.append('content', formData.content);
+      formDataToSend.append('date', formData.date);
+      formDataToSend.append('_method', 'PUT')
+      return axios.put(`/our-new/${formData._id}`, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      }).then(() => {
+        refetch();
+        handleClose();
+        reset();
+      })
+    },
+  })
+  const handleEdit = (data: any) => {
+    reset({ ...data })
+    handleOpen()
+  }
+
+  const onSubmit = (data: any) => {
+    const image = data.image[0] ? data.image : null
+    if (data._id) updateMutation.mutate({ ...data, image }, data._id)
+    else mutation.mutate(data)
+  }
   return (
     <div className="container">
-      {news.map((item, index) => (
+      <div className='text-end mt-3'>
+        <Button variant='contained' onClick={handleOpen}>Add Our-New</Button>
+      </div>
+      {data?.map((item: any, index: any) => (
         <div
           key={index}
           className={`my-20 relative flex ${index % 2 && 'flex-row-reverse'}`}
@@ -34,15 +112,65 @@ const News = () => {
             ${index % 2 ? 'top-1/2 right-1/2 translate-x-24' : 'top-1/2 left-1/2 '}
              transform -translate-x-24 -translate-y-1/2
             bg-[#EFEFEF] p-16 text-center
+            shadow-xl
             `}
           >
             <div>{item.date}</div>
             <div>{item.name}</div>
-            <div>{item.comment}</div>
+            <div>{item.content}</div>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={() => handleEdit(item)}
+            >Edit</Button>
+            <Button
+              variant='contained'
+              color='error'
+              onClick={() => handleDelete(item._id)}
+            >Delete</Button>
           </div>
         </div>
       ))}
-
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Box sx={style}>
+            <input type="file" {...register('image')} />
+            <TextField
+              {...register('name', { required: true })}
+              label="Name"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              error={!!errors.name}
+              helperText={errors.name ? "First Name is required" : ""}
+            />
+            <TextField
+              {...register('content', { required: true })}
+              label="Content"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              error={!!errors.content}
+              helperText={errors.content ? "First Name is required" : ""}
+            />
+            <TextField
+              {...register('date', { required: true })}
+              label="Date"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              error={!!errors.date}
+              helperText={errors.date ? "First Name is required" : ""}
+            />
+            <Button variant='contained' type='submit'>
+              Create
+            </Button>
+          </Box>
+        </form>
+      </Modal>
     </div>
   )
 }

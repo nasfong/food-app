@@ -5,10 +5,11 @@ import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
-import { Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Badge, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme } from '@mui/material';
+import { LocalGroceryStore, Menu } from '@mui/icons-material';
 import { Outlet, useNavigate } from 'react-router-dom';
-import Footer from '@/pages/Home/components/Footer';
+import Footer from '@/pages/Home/components/Footer';import { useGlobalData } from '@/hook/useGlobalData';
+ LocalGroceryStore
 
 const navItems = [
   { label: 'Home', url: '/' },
@@ -58,6 +59,7 @@ export default function ElevateAppBar(props: Props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { card } = useGlobalData()
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -87,6 +89,11 @@ export default function ElevateAppBar(props: Props) {
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItem>
+          <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemText primary={'Store'} />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -135,7 +142,7 @@ export default function ElevateAppBar(props: Props) {
         <AppBar
           component="nav"
           sx={{
-            backgroundColor: trigger ? "#1A2124" : "transparent",
+            backgroundColor: true ? "#1A2124" : "transparent",
             transition: "background-color 0.5s ease, transform 0.5s ease", // Added transform transition
             boxShadow: 0,
             transform: isMobile || trigger ? "translateY(0)" : "translateY(24%)" // Added transform for animation
@@ -152,7 +159,7 @@ export default function ElevateAppBar(props: Props) {
               onClick={handleDrawerToggle}
               sx={{ mr: 2, display: { md: 'none' } }}
             >
-              <MenuIcon />
+              <Menu />
             </IconButton>
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
               {navItems.map((item) => (
@@ -166,6 +173,16 @@ export default function ElevateAppBar(props: Props) {
                   {item.label}
                 </Button>
               ))}
+              <Button
+                sx={{ color: '#fff' }}
+                // onMouseEnter={() => handleMouseEnter(item)}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => handleClick('/store')}
+              >
+                <Badge badgeContent={card.length} color="secondary" >
+                  <LocalGroceryStore />
+                </Badge>
+              </Button>
             </Box>
           </Toolbar>
         </AppBar>

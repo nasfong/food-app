@@ -91,7 +91,7 @@ const Admin = () => {
     mutationFn: (formData: FormData) => {
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
-      // formDataToSend.append('image', null); // Access the first file in the FileList
+      formDataToSend.append('image', formData.image[0]); // Access the first file in the FileList
       formDataToSend.append('star', formData.star.toString());
       formDataToSend.append('price', formData.price.toString());
       formDataToSend.append('description', formData.description);
@@ -115,6 +115,7 @@ const Admin = () => {
 
   const onSubmit = (data: any) => {
     const image = data.image[0] ? data.image : null
+    console.log(image)
     if (data._id) updateMutation.mutate({ ...data, image }, data._id)
     else mutation.mutate(data)
   }
