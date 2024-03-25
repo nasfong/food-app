@@ -1,9 +1,29 @@
-import { formatMoney, truncateDescription } from "@/lib/utils"
-import { Link } from "react-router-dom"
-
-
+import { formatMoney, truncateDescription } from "@/lib/utils";
+import { Check } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const FoodCard = ({ data, handleAddCard }: any) => {
+  const [cardStates, setCardStates] = useState(data.map(() => ({ loading: false, checked: false })));
+
+  const handleButtonClick = (index: any, item: any) => {
+    const newCardStates = [...cardStates];
+    newCardStates[index].loading = true;
+    setCardStates(newCardStates);
+
+    setTimeout(() => {
+      newCardStates[index].loading = false;
+      newCardStates[index].checked = true;
+      setCardStates(newCardStates);
+      handleAddCard(item);
+      setTimeout(() => {
+        newCardStates[index].checked = false;
+        setCardStates(newCardStates);
+      }, 3000);
+    }, 1500);
+  };
+
   return (
     <div className="my-20">
       <div className="text-center mb-6">
@@ -35,19 +55,22 @@ const FoodCard = ({ data, handleAddCard }: any) => {
                 </p>
               </div>
               <button
-                className='button2 mt-5 p-2 relative z-10'
+                className='button2 mt-5 p-2 relative z-10 flex justify-center align-middle gap-3'
                 style={{ boxShadow: "0 0.2rem #e6bb65" }}
-                onClick={() => handleAddCard(item)}
+                onClick={() => handleButtonClick(index, item)}
               >
-                Add Card
+                <span>Add Card</span>
+                {cardStates[index].loading && (
+                  <CircularProgress size="1rem" color='inherit' />
+                )}
+                {cardStates[index].checked && <Check fontSize='small' />}
               </button>
             </div>
           </div>
         ))}
       </div>
-
     </div>
   )
 }
 
-export default FoodCard
+export default FoodCard;
