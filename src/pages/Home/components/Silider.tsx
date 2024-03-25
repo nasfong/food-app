@@ -21,29 +21,22 @@ const Slider = () => {
 
   return (
     <>
-      <div className="slider">
+      <div className="slider w-[100%] h-[50vh] md:h-[100vh] ">
         {images.map((image, idx) => (
           <span key={idx} className=''>
             <img
               // key={idx}
               src={image}
               alt={`Slide ${idx}`}
-              className={idx === index ? 'active' : 'inactive'}
+              className={idx === index ? 'active' : 'inactive' + 'bg-black '}
             />
             <div className="inner-shadow"></div>
-            <div className='absolute inset-0 flex justify-center items-center text-center text-white'>
-              <div className='text-2xl md:text-6xl '>Cristiano Restaurant</div>
-              {/* <div>123 Main Street, Uni 21, New York City</div> */}
+            <div className='absolute inset-0 flex flex-col justify-center items-center text-center text-white'>
+              <div className='text-4xl md:text-6xl'>Meom Restaurant</div>
+              <div className='text-[14px] md:text-xl'>123 Main Street, Uni 21, New York City</div>
             </div>
           </span>
         ))}
-        <div
-          className='absolute text-white  
-          top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-          text-6xl text-center'
-        >
-          Cristiano Restaurant
-        </div>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
 
 const containerStyle = {
@@ -7,9 +7,9 @@ const containerStyle = {
 };
 
 const center = {
-  lat: -3.745,
-  lng: -38.523
-};
+  lat: 11.562108,
+  lng: 104.888535
+}; // Phnom Penh
 
 const Map = () => {
 
@@ -39,8 +39,8 @@ const Map = () => {
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-      { /* Child components, such as markers, info windows, etc. */ }
-      <></>
+      
+      <Marker position={center}></Marker>
     </GoogleMap>
 ) : <></>
 }

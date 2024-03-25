@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { Link, NavLink, useParams } from 'react-router-dom'
 import BackgroundImage from './BackgroundImage';
 import { useGlobalData } from '@/hook/useGlobalData';
+import { Pagination } from '@/components/Pagination';
+import { formatMoney, truncateDescription } from '@/lib/utils';
 
 interface Food {
   _id: string;
@@ -16,6 +18,11 @@ interface Food {
   description: string
   foodType: string
   chef: boolean
+}
+interface FoodQuery {
+  data: Food[]
+  totalPages: number
+  currentPage: number
 }
 interface FormData {
   _id: string
@@ -41,6 +48,7 @@ const style = {
 };
 
 const Body = () => {
+  const [currentPage, setCurrentPage] = useState(1)
   const { handleSubmit, register, formState: { errors }, reset, watch } = useForm<FormData>();
   const { data: foodTypeList } = useQuery<Food[]>({
     queryKey: ['food-type'],
@@ -50,10 +58,10 @@ const Body = () => {
       ),
   })
   const { foodType } = useParams()
-  const { data, refetch, isLoading } = useQuery<Food[]>({
-    queryKey: ['food', { foodType: foodType }],
+  const { data, refetch, isLoading, error } = useQuery<FoodQuery>({
+    queryKey: ['food', { foodType: foodType, pageSize: 3, page: currentPage }],
     queryFn: () =>
-      axios.get('/food', { params: { foodType: foodType } }).then((res) => res.data),
+      axios.get('/food', { params: { foodType: foodType, pageSize: 3, page: currentPage } }).then((res) => res.data),
   })
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
@@ -162,37 +170,65 @@ const Body = () => {
           <Button variant='contained' onClick={handleOpen}>Add Food</Button>
         </div>
         <div className="flex flex-wrap justify-center">
-          {isLoading ? <>Loading...</> : !data?.length && <>No Food</>}
-          {data?.map((item, index) => (
-            <div key={index} className="w-[360px] max-w-sm border border-gray-200 bg-[#efefef] text-center rounded-xl relative my-5 mx-2">
-              <Link to={`/shop/${item._id}/${item.foodType}/detail`} className="w-full h-64 rounded overflow-hidden shadow-lg flex flex-col relative">
-                <img className="w-full h-full object-cover" src={item.image} alt="Sunset in the mountains" />
-                <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>${item.price}</div>
-              </Link>
-              <div className="px-8 flex-grow py-8">
-                <div className="font-bold text-xl mb-2"> {item.name}</div>
-                <p className="text-gray-700 text-base">
-                  {item.description}
-                </p>
-                <button
-                  className='button2 mt-5 p-2'
-                  style={{ boxShadow: "0 0.2rem #e6bb65" }}
-                  onClick={() => handleAddCard(item)}
-                >Add To Card</button>
-              </div>
-              <Button
-                variant='contained'
-                color='primary'
-                onClick={() => handleEdit(item)}
-              >Edit</Button>
-              <Button
-                variant='contained'
-                color='error'
-                onClick={() => handleDelete(item._id)}
-              >Delete</Button>
-            </div>
-          ))}
+          {error ? (<div className='py-32'>Something went wrong!</div>)
+            : isLoading ? <div className='py-32'>Loading...</div>
+              : !data?.data.length ? <div className='py-32'>No Food</div> :
+                <>
+                  {data?.data.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col w-full max-w-sm border bg-[#efefef] text-center relative my-5 mx-2 hover:shadow-xl transition"
+                      style={{ minHeight: "300px" }} // Set a minimum height for each item
+                    >
+                      <Link
+                        to={`/shop/${item._id}/${item.foodType}/detail`}
+                        className=""
+                      >
+                        <img className="w-full h-52 object-cover" src={item.image} alt="Sunset in the mountains" />
+                        <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>
+                          {formatMoney(item.price)}
+                        </div>
+                      </Link>
+                      <div className='relative'>
+                        <div className="flex-grow px-8 py-6 flex flex-col items-center justify-between">
+                          <div className='border-dashed border border-gray-400 absolute top-[10px] bottom-[10px] left-[10px] right-[10px]'></div>
+                          <div>
+                            <div className="font-bold text-xl mb-2">{item.name}</div>
+                            <p className="text-gray-700 text-base">
+                              {truncateDescription(item.description, 100)}
+                            </p>
+                          </div>
+                          <button
+                            className='button2 mt-5 p-2 relative z-10'
+                            style={{ boxShadow: "0 0.2rem #e6bb65" }}
+                            onClick={() => handleAddCard(item)}
+                          >
+                            Add Card
+                          </button>
+                        </div>
+                        <div className='mb-3'>
+                          <Button
+                            variant='contained'
+                            color='primary'
+                            onClick={() => handleEdit(item)}
+                            size='small'
+                          >Edit</Button> {' '}
+                          <Button
+                            variant='contained'
+                            color='error'
+                            onClick={() => handleDelete(item._id)}
+                            size='small'
+                          >Delete</Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </>
+          }
         </div>
+
+        {data?.totalPages ? <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={data.totalPages} /> : null}
+
         <Modal
           open={open}
           onClose={handleClose}

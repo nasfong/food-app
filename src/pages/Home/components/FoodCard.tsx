@@ -26,7 +26,8 @@ const FoodCard = ({ data, handleAddCard }: any) => {
                 {formatMoney(item.price)}
               </div>
             </Link>
-            <div className="flex-grow px-8 py-6 flex flex-col items-center justify-between">
+            <div className="relative flex-grow px-8 py-6 flex flex-col items-center justify-between">
+              <div className='border-dashed border border-gray-400 absolute top-[10px] bottom-[10px] left-[10px] right-[10px]'></div>
               <div>
                 <div className="font-bold text-xl mb-2">{item.name}</div>
                 <p className="text-gray-700 text-base">
@@ -34,7 +35,7 @@ const FoodCard = ({ data, handleAddCard }: any) => {
                 </p>
               </div>
               <button
-                className='button2 mt-5 p-2'
+                className='button2 mt-5 p-2 relative z-10'
                 style={{ boxShadow: "0 0.2rem #e6bb65" }}
                 onClick={() => handleAddCard(item)}
               >

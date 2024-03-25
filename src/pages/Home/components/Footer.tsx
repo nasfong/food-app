@@ -1,4 +1,7 @@
+import { FacebookOutlined, Telegram } from '@mui/icons-material';
 import '../styles/footer.css'
+import { IconButton } from '@mui/material';
+
 const Footer = () => {
   return (
     <div className="flex flex-col md:flex-row">
@@ -15,9 +18,12 @@ const Footer = () => {
         <div className="">
           <div className='text-2xl text-[#CB933D] mb-3'>Follow Us</div>
           <div>Join us on social networks</div>
-          <button>Facebook</button>
-          <button>Instagram</button>
-          <button>Telegram</button>
+          <IconButton size="large">
+            <FacebookOutlined sx={{ color: '#fff' }} fontSize='large' />
+          </IconButton>
+          <IconButton size="large">
+            <Telegram sx={{ color: '#fff' }} fontSize='large' />
+          </IconButton>
         </div>
       </div>
     </div>

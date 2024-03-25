@@ -22,7 +22,6 @@ const message = [
 
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 const Testimonials = () => {
   const progressCircle = useRef<any>(null);
@@ -48,8 +47,6 @@ const Testimonials = () => {
           pagination={{
             clickable: true,
           }}
-          navigation={true}
-          modules={[Autoplay, Pagination, Navigation]}
           onAutoplayTimeLeft={onAutoplayTimeLeft}
           className="mySwiper"
         >

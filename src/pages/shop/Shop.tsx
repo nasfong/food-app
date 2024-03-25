@@ -1,4 +1,3 @@
-import BackgroundImage from './components/BackgroundImage'
 import Body from './components/Body'
 
 const Shop = () => {

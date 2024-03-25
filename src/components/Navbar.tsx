@@ -7,9 +7,9 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
 import { Badge, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import { LocalGroceryStore, Menu } from '@mui/icons-material';
-import { Outlet, useNavigate } from 'react-router-dom';
-import Footer from '@/pages/Home/components/Footer';import { useGlobalData } from '@/hook/useGlobalData';
- LocalGroceryStore
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
+LocalGroceryStore
 
 const navItems = [
   { label: 'Home', url: '/' },
@@ -47,6 +47,7 @@ function ElevationScroll(props: Props) {
 
 export default function ElevateAppBar(props: Props) {
   const { window } = props;
+  const location = useLocation();
   const navigate = useNavigate()
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -65,7 +66,7 @@ export default function ElevateAppBar(props: Props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const [hoveredItem, setHoveredItem] = React.useState(null);
+  const [_, setHoveredItem] = React.useState(null);
 
   const handleMouseEnter = (item: any) => {
     setHoveredItem(item);
@@ -132,7 +133,6 @@ export default function ElevateAppBar(props: Props) {
               <div className='flex align-middle'>
                 <div>Contact Us</div>
                 <img src="/svg/facebook.svg" alt="" style={{ height: 20 }} />
-
               </div>
             </div>
           </AppBar>
@@ -142,16 +142,13 @@ export default function ElevateAppBar(props: Props) {
         <AppBar
           component="nav"
           sx={{
-            backgroundColor: true ? "#1A2124" : "transparent",
+            backgroundColor: trigger || location.pathname === '/store' ? "#1A2124" : "transparent",
             transition: "background-color 0.5s ease, transform 0.5s ease", // Added transform transition
             boxShadow: 0,
-            transform: isMobile || trigger ? "translateY(0)" : "translateY(24%)" // Added transform for animation
+            transform: isMobile || trigger ? "translateY(0)" : "translateY(30%)" // Added transform for animation
           }}
         >
-          <Toolbar className='py-8 flex justify-between'>
-            <Typography variant="h6" component="div">
-              Cristiano
-            </Typography>
+          <Toolbar className='py-6 flex justify-between'>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -161,6 +158,10 @@ export default function ElevateAppBar(props: Props) {
             >
               <Menu />
             </IconButton>
+            <Typography variant="h6" component="div">
+              Cristiano
+            </Typography>
+
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
               {navItems.map((item) => (
                 <Button
@@ -173,17 +174,17 @@ export default function ElevateAppBar(props: Props) {
                   {item.label}
                 </Button>
               ))}
-              <Button
-                sx={{ color: '#fff' }}
-                // onMouseEnter={() => handleMouseEnter(item)}
-                onMouseLeave={handleMouseLeave}
-                onClick={() => handleClick('/store')}
-              >
-                <Badge badgeContent={card.length} color="secondary" >
-                  <LocalGroceryStore />
-                </Badge>
-              </Button>
             </Box>
+            <Button
+              sx={{ color: '#fff' }}
+              // onMouseEnter={() => handleMouseEnter(item)}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleClick('/store')}
+            >
+              <Badge badgeContent={card.length} color="secondary" >
+                <LocalGroceryStore />
+              </Badge>
+            </Button>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
@@ -197,7 +198,7 @@ export default function ElevateAppBar(props: Props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
@@ -210,11 +211,7 @@ export default function ElevateAppBar(props: Props) {
         {props.children}
         <Outlet />
         <Footer />
-        <Box sx={{ my: 2 }}>
-
-        </Box>
       </Box>
-
     </React.Fragment >
   );
 }

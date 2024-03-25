@@ -13,16 +13,16 @@ import { useGlobalData } from '@/hook/useGlobalData'
 
 const Home = () => {
   const { addCard } = useGlobalData()
-  const { data } = useQuery<any[]>({
+  const { data } = useQuery<any>({
     queryKey: ['food', { chef: true }],
     queryFn: () =>
-      axios.get('/food', { params: { chef: true } }).then((res) => res.data),
+      axios.get('/food', { params: { chef: true, pageSize:3 } }).then((res) => res.data),
   })
 
   const handleAddCard = (data: any) => {
     addCard(data, 1)
   }
-
+  
   return (
     <div>
       <Slider />
@@ -30,7 +30,7 @@ const Home = () => {
       <Promotion />
       <RadomDish />
       <CallUs />
-      <FoodCard data={data} handleAddCard={handleAddCard} />
+      <FoodCard data={data?.data} handleAddCard={handleAddCard} />
       <LatestNews />
       <Testimonials />
       <Map />
