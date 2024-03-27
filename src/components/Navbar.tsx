@@ -177,7 +177,6 @@ export default function ElevateAppBar(props: Props) {
             </Box>
             <Button
               sx={{ color: '#fff' }}
-              // onMouseEnter={() => handleMouseEnter(item)}
               onMouseLeave={handleMouseLeave}
               onClick={() => handleClick('/store')}
             >

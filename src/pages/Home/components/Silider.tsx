@@ -28,8 +28,12 @@ const Slider = () => {
               key={idx}
               src={image}
               alt={`Slide ${idx}`}
+<<<<<<< HEAD
               className={(idx === index ? 'active' : 'inactive') + ''}
               loading='lazy'
+=======
+              className={idx === index ? 'active' : 'inactive' + 'bg-black'}
+>>>>>>> e783d98fa4aee8cebff199ef489958bd5a276c23
             />
             <div className="inner-shadow"></div>
             <div className='absolute inset-0 flex flex-col justify-center items-center text-center text-white'>
