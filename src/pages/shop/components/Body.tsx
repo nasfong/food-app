@@ -8,6 +8,7 @@ import BackgroundImage from './BackgroundImage';
 import { useGlobalData } from '@/hook/useGlobalData';
 import { Pagination } from '@/components/Pagination';
 import { formatMoney, truncateDescription } from '@/lib/utils';
+import { admin } from '@/constant/constant';
 
 interface Food {
   _id: string;
@@ -149,7 +150,7 @@ const Body = () => {
     <>
       <BackgroundImage data={foodTypeList?.find(item => item._id === foodType)} />
       <div className='container text-center my-20'>
-        <div className='mb-10'>
+        <div className='mb-10 flex flex-wrap justify-start md:justify-center gap-3'>
           {foodTypeList?.map((item, index) => (
             <NavLink
               key={index}
@@ -167,7 +168,9 @@ const Body = () => {
           ))}
         </div>
         <div className='text-end'>
-          <Button variant='contained' onClick={handleOpen}>Add Food</Button>
+          {admin && (
+            <Button variant='contained' onClick={handleOpen}>Add Food</Button>
+          )}
         </div>
         <div className="flex flex-wrap justify-center">
           {error ? (<div className='py-32'>Something went wrong!</div>)
@@ -206,20 +209,22 @@ const Body = () => {
                             Add Card
                           </button>
                         </div>
-                        <div className='mb-3'>
-                          <Button
-                            variant='contained'
-                            color='primary'
-                            onClick={() => handleEdit(item)}
-                            size='small'
-                          >Edit</Button> {' '}
-                          <Button
-                            variant='contained'
-                            color='error'
-                            onClick={() => handleDelete(item._id)}
-                            size='small'
-                          >Delete</Button>
-                        </div>
+                        {admin && (
+                          <div className='mb-3'>
+                            <Button
+                              variant='contained'
+                              color='primary'
+                              onClick={() => handleEdit(item)}
+                              size='small'
+                            >Edit</Button> {' '}
+                            <Button
+                              variant='contained'
+                              color='error'
+                              onClick={() => handleDelete(item._id)}
+                              size='small'
+                            >Delete</Button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}

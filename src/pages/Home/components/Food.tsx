@@ -64,8 +64,9 @@ const Food = () => {
               alt={`Slide 1s`}
               className='img rounded-lg'
             />
+            <div className=' border border-white absolute top-[10px] bottom-[10px] left-[5px] right-[5px]'></div>
             <div className="inner-shadow-food"></div>
-            <div className='absolute bottom-16 text-white uppercase'>
+            <div className='absolute bottom-16 text-white uppercase font-bold'>
               {item.name}
             </div>
             <div className="inner-shadow-footer"></div>

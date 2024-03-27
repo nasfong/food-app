@@ -36,7 +36,7 @@ import { Pagination, Navigation } from 'swiper/modules';
 
 const LatestNews = () => {
   return (
-    <div className='relative h-[650px] mt-10 bg-gray'>
+    <div className='relative h-[750px] mt-10 bg-gray'>
       <div className='absolute top-10 left-0 right-0 text-center z-10'>
         <div className='form-to text-xl'>From Our Blog</div>
         <div className='title text-white text-4xl border-white'>LATEST NEWS</div>
@@ -53,18 +53,18 @@ const LatestNews = () => {
         className="mySwiper z-0"
       >
         {cards.map((item, index) => (
-          <SwiperSlide key={index} className='relative'>
+          <SwiperSlide key={index} className='relative font-bold'>
             <img src={item.image} alt="" className="brightness-50 h-full w-full object-cover" />
 
-            <div className='absolute top-44 right-50 flex justify-center items-center gap-5 w-[70%]'>
-              <img src={item.image} alt="" className='h-[400px] w-[600px] object-cover' />
+            <div className='absolute top-44 right-50 flex flex-col md:flex-row justify-center items-center gap-5 w-[70%]'>
+              <img src={item.image} alt="" className='h-[200px] w-[600px] md:h-[400px] md:w-[600px] object-cover' />
               <div className="text-white text-start flex flex-col gap-5">
                 <div className=''>{item.date}</div>
                 <div className='text-4xl'>{item.name}</div>
                 <div className=''>{item.detail}</div>
-                <button className='mt-5 p-2 text-white text-start'>
+                {/* <button className='mt-5 p-2 text-white text-start'>
                   Add Card
-                </button>
+                </button> */}
               </div>
             </div>
           </SwiperSlide>

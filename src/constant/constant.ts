@@ -5,3 +5,5 @@ export const holiday = 'Sat - Sun: 10:00 - 23:00'
 export const facebook = ''
 export const tiktok = ''
 export const telegram = ''
+
+export const admin = false

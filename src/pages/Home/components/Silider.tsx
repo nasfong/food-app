@@ -25,10 +25,11 @@ const Slider = () => {
         {images.map((image, idx) => (
           <span key={idx} className=''>
             <img
-              // key={idx}
+              key={idx}
               src={image}
               alt={`Slide ${idx}`}
-              className={idx === index ? 'active' : 'inactive' + 'bg-black '}
+              className={(idx === index ? 'active' : 'inactive') + ''}
+              loading='lazy'
             />
             <div className="inner-shadow"></div>
             <div className='absolute inset-0 flex flex-col justify-center items-center text-center text-white'>

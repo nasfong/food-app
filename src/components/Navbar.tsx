@@ -76,6 +76,10 @@ export default function ElevateAppBar(props: Props) {
     setHoveredItem(null);
   };
 
+  const handleClick = (url: string) => {
+    navigate(url)
+  }
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -85,23 +89,19 @@ export default function ElevateAppBar(props: Props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item.label}>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => handleClick(item.url)}>
               <ListItemText primary={item.label} />
             </ListItemButton>
           </ListItem>
         ))}
         <ListItem>
-          <ListItemButton sx={{ textAlign: 'center' }}>
+          <ListItemButton sx={{ textAlign: 'center' }} onClick={() => handleClick('/store')}>
             <ListItemText primary={'Store'} />
           </ListItemButton>
         </ListItem>
       </List>
     </Box>
   );
-
-  const handleClick = (url: string) => {
-    navigate(url)
-  }
 
   return (
     <React.Fragment>
