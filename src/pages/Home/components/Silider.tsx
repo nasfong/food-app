@@ -28,17 +28,13 @@ const Slider = () => {
               key={idx}
               src={image}
               alt={`Slide ${idx}`}
-<<<<<<< HEAD
               className={(idx === index ? 'active' : 'inactive') + ''}
               loading='lazy'
-=======
-              className={idx === index ? 'active' : 'inactive' + 'bg-black'}
->>>>>>> e783d98fa4aee8cebff199ef489958bd5a276c23
             />
             <div className="inner-shadow"></div>
             <div className='absolute inset-0 flex flex-col justify-center items-center text-center text-white'>
               <div className='text-4xl md:text-6xl'>Meom Restaurant</div>
-              <div className='text-[14px] md:text-xl'>123 Main Street, Uni 21, New York City</div>
+              <div className='text-[ßß14px] md:text-xl'>123 Main Street, Uni 21, New York City</div>
             </div>
           </span>
         ))}
