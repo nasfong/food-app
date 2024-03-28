@@ -2,14 +2,15 @@ import Food from './components/Food'
 import Promotion from './components/Promotion'
 import RadomDish from './components/RadomDish'
 import CallUs from './components/CallUs'
-import FoodCard from './components/FoodCard'
+import ChefRecommend from './components/ChefRecommend'
 import LatestNews from './components/LatestNews'
 import Testimonials from './components/Testimonials'
 import Map from './components/Map'
 import Slider from './components/Silider'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, } from '@tanstack/react-query'
 import axios from 'axios'
 import { useGlobalData } from '@/hook/useGlobalData'
+import { useCallback, useEffect, useState } from 'react'
 interface Food {
   _id: string;
   name: string;
@@ -33,15 +34,21 @@ function getRandomSubarray(array: any[]) {
 
 const Home = () => {
   const { addCard } = useGlobalData()
+  const [dataChef, setDataChef] = useState<any>([])
   const { data } = useQuery<FoodQuery>({
     queryKey: ['food', { chef: true }],
     queryFn: () =>
-      axios.get('/food', { params: { pageSize: 6 } }).then((res) => res.data),
+    axios.get('/food', { params: { pageSize: 6 } }).then((res) => res.data),
   })
 
-  const handleAddCard = (data: any) => {
-    addCard(data, 1)
-  }
+  useEffect(() => {
+    setDataChef(data?.data && getRandomSubarray(data.data.filter(item => item.chef)))
+  },[data?.data])
+  
+  const handleAddCard = useCallback((item: any) => {
+    console.log(item)
+    addCard(item, 1)
+  }, [addCard])
 
   return (
     <div>
@@ -50,7 +57,7 @@ const Home = () => {
       <Promotion />
       <RadomDish data={data?.data} />
       <CallUs />
-      <FoodCard data={data?.data && getRandomSubarray(data.data.filter(item => item.chef)) } handleAddCard={handleAddCard} />
+      <ChefRecommend data={dataChef} handleAddCard={handleAddCard} />
       <LatestNews />
       <Testimonials />
       <Map />

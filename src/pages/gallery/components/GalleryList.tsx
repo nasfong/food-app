@@ -100,30 +100,32 @@ const GalleryList = () => {
   }
   return (
     <div className='container my-20'>
-      <div className='text-end'>
+      <div className='text-end mb-6'>
         <Button variant='contained' onClick={handleOpen}>Add Food</Button>
       </div>
       <PhotoProvider>
-        <div className=" flex flex-wrap">
+        <div className="flex flex-wrap justify-center gap-3">
           {data?.map((item, index) => (
-            <div key={index}>
+            <div key={index} className=' w-full md:w-1/2 lg:w-1/3 xl:w-1/4  h-full md:h-1/2 lg:h-1/3 xl:h-1/4'>
               <PhotoView src={item.image}>
                 <img
                   src={item.image}
                   alt=""
-                  className='object-cover h-48 w-96 m-6'
+                  className='object-cover h-full max-w-full'
                 />
               </PhotoView>
-              <Button
-                variant='contained'
-                color='primary'
-                onClick={() => handleEdit(item)}
-              >Edit</Button>
-              <Button
-                variant='contained'
-                color='error'
-                onClick={() => handleDelete(item._id)}
-              >Delete</Button>
+              <div className='mt-3'>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  onClick={() => handleEdit(item)}
+                >Edit</Button> {' '}
+                <Button
+                  variant='contained'
+                  color='error'
+                  onClick={() => handleDelete(item._id)}
+                >Delete</Button>
+              </div>
             </div>
           ))}
         </div>

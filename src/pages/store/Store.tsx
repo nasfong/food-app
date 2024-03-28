@@ -8,7 +8,7 @@ const Store = () => {
   }
   return (
     <div>
-      <div className='h-[122px]'></div>
+      <div className='h-[100px]'></div>
       <div className='bg-gray-100 p-8 mb-20 text-2xl'>
         CARD
       </div>

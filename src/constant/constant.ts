@@ -6,4 +6,4 @@ export const facebook = ''
 export const tiktok = ''
 export const telegram = ''
 
-export const admin = false
+export const admin = true

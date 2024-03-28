@@ -1,4 +1,4 @@
-import { Box, Button, Modal, TextField } from "@mui/material";
+import { Box, Button, Modal, TextField, useMediaQuery } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
@@ -25,7 +25,8 @@ const style = {
 };
 
 const News = ({ data, refetch }: any) => {
-  const { handleSubmit, register, formState: { errors }, reset, watch } = useForm<FormData>();
+  const matches = useMediaQuery('(min-width:768px)')
+  const { handleSubmit, register, formState: { errors }, reset } = useForm<FormData>();
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
     reset({})
@@ -96,6 +97,7 @@ const News = ({ data, refetch }: any) => {
     if (data._id) updateMutation.mutate({ ...data, image }, data._id)
     else mutation.mutate(data)
   }
+  console.log(matches)
   return (
     <div className="container">
       <div className='text-end mt-3'>
@@ -104,19 +106,19 @@ const News = ({ data, refetch }: any) => {
       {data?.map((item: any, index: any) => (
         <div
           key={index}
-          className={`my-20 relative flex ${index % 2 && 'flex-row-reverse'}`}
+          className={`my-20 relative flex ${index % 2 && 'flex-row-reverse'} ${matches ? '' : 'flex-col'}`}
         >
-          <img src={item.image} alt="" className=" object-cover h-80 w-[600px] rounded-sm" />
+          <img src={item.image} alt="" className="object-cover h-80 w-full md:w-[600px] rounded-sm" />
           <div
-            className={`absolute
-            ${index % 2 ? 'top-1/2 right-1/2 translate-x-24' : 'top-1/2 left-1/2 '}
-             transform -translate-x-24 -translate-y-1/2
-            bg-[#EFEFEF] p-16 text-center
+            className={`
+            ${matches ? `absolute ${index % 2 ? 'top-1/2 right-1/2 translate-x-24' : 'top-1/2 left-1/2 '}
+            transform -translate-x-24 -translate-y-1/2` : ``}       
+            bg-[#EFEFEF] py-10 px-8 text-center
             shadow-xl
             `}
           >
             <div>{item.date}</div>
-            <div>{item.name}</div>
+            <div className='font-bold text-2xl'>{item.name}</div>
             <div>{item.content}</div>
             <Button
               variant='contained'

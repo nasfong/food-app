@@ -6,7 +6,7 @@ const VisitUs = () => {
         <div className='form-to'>Visit us</div>
         <div className='title'>OUR LOCATION</div>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
         <div className="bg-[#f5f5f5] py-16 px-6 relative text-center">
           <div className='text-xl mb-2 font-bold'>PHONE</div>
           <a href={`tel:${phoneNumber}`} className="relative z-10">

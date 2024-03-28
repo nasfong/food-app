@@ -24,6 +24,9 @@ const Footer = () => {
           <IconButton size="large">
             <Telegram sx={{ color: '#fff' }} fontSize='large' />
           </IconButton>
+          <IconButton size="large">
+            <img src="/svg/tiktok.svg" alt="" />
+          </IconButton>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ const Background = () => {
       />
       <div className="inner-shadow"></div>
       <div className="absolute inset-0 flex justify-center items-center text-center text-white">
-        <div className="text-2xl md:text-6xl">Our Menu</div>
+        <div className="text-4xl md:text-6xl font-bold">Contact Us</div>
       </div>
     </div>
   )

@@ -17,9 +17,7 @@ const navItems = [
   { label: 'Shop', url: '/shop' },
   { label: 'Gallery', url: '/gallery' },
   { label: 'Our News', url: '/our-news' },
-  { label: 'Reservation', url: '/reservation' },
   { label: 'Contact Us', url: '/contact-us' },
-  { label: 'Admin', url: '/admin' },
 ];
 const drawerWidth = 240;
 interface Props {
@@ -81,9 +79,9 @@ export default function ElevateAppBar(props: Props) {
   }
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', bgcolor: '#1a2124', color: '#fff', minHeight: '100%' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Maom Khmer Cuisine
       </Typography>
       <Divider />
       <List>
@@ -161,29 +159,31 @@ export default function ElevateAppBar(props: Props) {
             <Typography variant="h6" component="div">
               Cristiano
             </Typography>
-
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-              {navItems.map((item) => (
-                <Button
-                  key={item.label}
-                  sx={{ color: '#fff' }}
-                  onMouseEnter={() => handleMouseEnter(item)}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={() => handleClick(item.url)}
-                >
-                  {item.label}
-                </Button>
-              ))}
+            <Box sx={{display: 'flex'}}>
+              <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                {navItems.map((item) => (
+                  <Button
+                    key={item.label}
+                    sx={{ color: '#fff', fontFamily: '"Gideon Roman", serif', fontWeight: 700 }}
+                    onMouseEnter={() => handleMouseEnter(item)}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={() => handleClick(item.url)}
+                  >
+                    {item.label}
+                  </Button>
+                ))}
+              </Box>
+              <Button
+                sx={{ color: '#fff' }}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => handleClick('/store')}
+              >
+                <Badge badgeContent={card.length} color="secondary" >
+                  <LocalGroceryStore />
+                </Badge>
+              </Button>
             </Box>
-            <Button
-              sx={{ color: '#fff' }}
-              onMouseLeave={handleMouseLeave}
-              onClick={() => handleClick('/store')}
-            >
-              <Badge badgeContent={card.length} color="secondary" >
-                <LocalGroceryStore />
-              </Badge>
-            </Button>
+
           </Toolbar>
         </AppBar>
       </ElevationScroll>

@@ -6,17 +6,16 @@ const FoodCard = ({ data, handleAddCard }: any) => {
   return (
     <div className='container flex justify-center'>
       {/* Card */}
-      <div className="mt-[200px] relative flex bg-clip-border font-bold bg-white text-gray-700 shadow-md w-full  flex-row">
-        <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>${data?.price}</div>
-        <div
-          className="relative w-3/5 m-0 overflow-hidden text-gray-700 bg-white bg-clip-border shrink-0">
+      <div className="mt-28 md:mt-[200px] relative bg-clip-border font-bold bg-white bg-opacity-50 text-gray-700 shadow-md w-full flex flex-col md:flex-row">
+        <div className="relative w-full md:w-3/5 m-0 overflow-hidden text-gray-700 bg-white bg-clip-border shrink-0">
           <img
             src={data?.image}
             alt="card-image"
-            className="object-cover w-full h-[400px]"
+            className="object-cover "
           />
         </div>
-        <div className="p-6">
+        <div className="p-6 relative w-full">
+          <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>${data?.price}</div>
           <h6
             className="block mb-4  text-base antialiased leading-relaxed tracking-normal text-gray-700 uppercase">
             {/* <Rating value={5} placeholder={undefined} /> */}
@@ -29,7 +28,11 @@ const FoodCard = ({ data, handleAddCard }: any) => {
           </p>
           <div className="flex gap-3">
             <button
-              className="text-white bg-[#d1a054] hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-[#d1a054] 
+              hover:bg-black focus:ring-4 focus:outline-none 
+              focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 
+              text-center dark:bg-blue-600 dark:hover:bg-blue-700 
+              dark:focus:ring-blue-800"
               onClick={() => handleAddCard(data, count)}
             >
               Add to cart
@@ -40,7 +43,11 @@ const FoodCard = ({ data, handleAddCard }: any) => {
                 type="button"
                 id="decrement-button"
                 data-input-counter-decrement="quantity-input"
-                className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                className="bg-gray-100 
+                dark:bg-gray-700 dark:hover:bg-gray-600 
+                dark:border-gray-600 hover:bg-gray-200 border 
+                border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 
+                dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
                 onClick={() => setCount(c => c - 1)}
                 disabled={count <= 1}
               >

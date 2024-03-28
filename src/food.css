@@ -6,7 +6,7 @@ body {
   padding: 0;
 }
 :root {
-  --color: #D1A054
+  --color: #d1a054;
 }
 
 .swiper {
@@ -32,9 +32,13 @@ body {
   width: 100%;
   height: 80%;
   object-fit: cover;
-  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-  --tw-brightness: brightness(.75);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  transition:
+    transform 0.3s ease,
+    width 0.3s ease,
+    height 0.3s ease;
+  --tw-brightness: brightness(0.75);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate)
+    var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .swiper-slide:hover .img {
@@ -42,7 +46,8 @@ body {
   width: 100%;
   height: 85%;
   --tw-brightness: brightness(1);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate)
+    var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .inner-shadow-food {
@@ -54,7 +59,10 @@ body {
   box-shadow:
     inset 0 30px 20px -10px rgba(24, 24, 24, 0.9),
     inset 0 -80px 20px -10px rgba(24, 24, 24, 18%);
-  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    width 0.3s ease,
+    height 0.3s ease;
 }
 
 .swiper-slide:hover .inner-shadow-food {
@@ -71,32 +79,17 @@ body {
 .form-to {
   font-size: 14px;
   color: var(--color);
-  position: relative;
-  /* Necessary for positioning pseudo-elements */
-  margin-bottom: 14px;
+  margin-bottom: 7px;
 }
 
 .form-to::before,
 .form-to::after {
-  content: '';
-  /* Empty content */
-  position: absolute;
-  /* Positioning */
-  top: 50%;
-  /* Align vertically */
+  content: "";
+  position: relative;
   border-top: 1px solid var(--color);
-  /* Solid border */
-  width: 10px;
-  /* Length of the dashes */
-
-}
-
-.form-to::before {
-  left: 40%;
-}
-
-.form-to::after {
-  right: 40%;
+  padding: 0 5px;
+  margin: 0 10px;
+  top: 9px;
 }
 
 .title {

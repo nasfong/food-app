@@ -1,17 +1,23 @@
-import '../styles/our-menu.css'
+type Props = {
+  // data: {
+  //   image: string
+  //   title: string
+  // } | undefined
+  data?: any
+}
 
-const Background = () => {
+const Background = ({data}: Props) => {
   return (
     <div className="relative">
       <img
-        src="https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg"
+        src={data?.image}
         alt=""
         className="relative object-cover w-full brightness-75"
         style={{ maxHeight: '80vh' }}
       />
       <div className="inner-shadow"></div>
       <div className="absolute inset-0 flex justify-center items-center text-center text-white">
-        <div className="text-4xl md:text-6xl font-bold">Our Menu</div>
+        <div className="text-4xl md:text-6xl font-bold">{data?.title}</div>
       </div>
     </div>
   )

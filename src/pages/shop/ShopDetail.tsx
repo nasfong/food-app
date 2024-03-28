@@ -32,9 +32,9 @@ const ShopDetail = () => {
       axios.get('/food').then((res) => res.data),
   })
   const { data: dataComment } = useQuery<any[]>({
-    queryKey: ['comment'],
+    queryKey: ['comment', { food: foodId }],
     queryFn: () =>
-      axios.get('/comment').then((res) => res.data),
+      axios.get('/comment', { params: { food: foodId } }).then((res) => res.data),
   })
 
   const handleAddCard = async (data: any, quantity: number) => {
@@ -46,7 +46,11 @@ const ShopDetail = () => {
       <BackgroundBlur image={data?.data.find(item => item._id === foodId)?.image} />
       <FoodCard data={data?.data.find(item => item._id === foodId)} handleAddCard={handleAddCard} />
       <RelateProduct data={data?.data.filter(item => item.foodType === foodType && item._id !== foodId)} />
-      <Reviewer data={dataComment} />
+      <Reviewer
+        data={dataComment}
+        dataFood={data?.data.find(item => item._id === foodId)}
+
+      />
 
     </div>
   )

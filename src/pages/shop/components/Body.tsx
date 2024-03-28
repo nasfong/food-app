@@ -4,11 +4,11 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, NavLink, useParams } from 'react-router-dom'
-import BackgroundImage from './BackgroundImage';
 import { useGlobalData } from '@/hook/useGlobalData';
 import { Pagination } from '@/components/Pagination';
 import { formatMoney, truncateDescription } from '@/lib/utils';
 import { admin } from '@/constant/constant';
+import Background from '@/components/Background';
 
 interface Food {
   _id: string;
@@ -148,13 +148,15 @@ const Body = () => {
 
   return (
     <>
-      <BackgroundImage data={foodTypeList?.find(item => item._id === foodType)} />
+      <Background data={foodTypeList?.find(item => item._id === foodType) || { image: 'https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg', title: 'Shop' }} />
+
       <div className='container text-center my-20'>
         <div className='mb-10 flex flex-wrap justify-start md:justify-center gap-3'>
           {foodTypeList?.map((item, index) => (
             <NavLink
               key={index}
               to={`/shop/${item._id}`}
+              onClick={()=>setCurrentPage(1)}
               className={`
             uppercase mx-5 
             hover:border-b border-[#CB933D] 
