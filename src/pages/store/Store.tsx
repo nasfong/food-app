@@ -6,6 +6,8 @@ const Store = () => {
   const handleDelete = async (id: number) => {
     await removeCard(id)
   }
+
+  
   return (
     <div>
       <div className='h-[100px]'></div>
@@ -13,7 +15,7 @@ const Store = () => {
         CARD
       </div>
       <div className='container'>
-        <TableWithStripedRows data={card} handleDelete={handleDelete} />
+        <TableWithStripedRows data={card.slice().reverse()} handleDelete={handleDelete} />
       </div>
     </div>
   )

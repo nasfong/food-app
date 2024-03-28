@@ -1,14 +1,15 @@
 import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, NavLink, useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { useGlobalData } from '@/hook/useGlobalData';
 import { Pagination } from '@/components/Pagination';
-import { formatMoney, truncateDescription } from '@/lib/utils';
 import { admin } from '@/constant/constant';
 import Background from '@/components/Background';
+import Swal from 'sweetalert2'
+import FoodCard from '@/components/FoodCard';
 
 interface Food {
   _id: string;
@@ -104,8 +105,25 @@ const Body = () => {
       })
     },
   })
-  const handleDelete = (id: string) => {
-    deleteMutation.mutate(id)
+  const handleDelete = async (id: string) => {
+    await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteMutation.mutate(id)
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
   }
 
   const updateMutation = useMutation({
@@ -146,17 +164,46 @@ const Body = () => {
     await addCard(data, 1)
   }
 
+  const [cardStates, setCardStates] = useState<{ loading: boolean; checked: boolean; }[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      setCardStates(data?.data.map(() => ({ loading: false, checked: false })));
+    }
+  }, [data]);
+
+  const handleButtonClick = (index: number, item: Food) => {
+    const newCardStates = [...cardStates];
+    if (newCardStates[index]) {
+      newCardStates[index].loading = true;
+      setCardStates(newCardStates);
+      setTimeout(() => {
+        if (newCardStates[index]) {
+          newCardStates[index].loading = false;
+          newCardStates[index].checked = true;
+          handleAddCard(item);
+          setCardStates(newCardStates);
+          setTimeout(() => {
+            if (newCardStates[index]) {
+              newCardStates[index].checked = false;
+              setCardStates(newCardStates);
+            }
+          }, 3000);
+        }
+      }, 1500);
+    }
+  };
+
   return (
     <>
       <Background data={foodTypeList?.find(item => item._id === foodType) || { image: 'https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg', title: 'Shop' }} />
-
       <div className='container text-center my-20'>
         <div className='mb-10 flex flex-wrap justify-start md:justify-center gap-3'>
           {foodTypeList?.map((item, index) => (
             <NavLink
               key={index}
               to={`/shop/${item._id}`}
-              onClick={()=>setCurrentPage(1)}
+              onClick={() => setCurrentPage(1)}
               className={`
             uppercase mx-5 
             hover:border-b border-[#CB933D] 
@@ -180,55 +227,15 @@ const Body = () => {
               : !data?.data.length ? <div className='py-32'>No Food</div> :
                 <>
                   {data?.data.map((item, index) => (
-                    <div
+                    <FoodCard
                       key={index}
-                      className="flex flex-col w-full max-w-sm border bg-[#efefef] text-center relative my-5 mx-2 hover:shadow-xl transition"
-                      style={{ minHeight: "300px" }} // Set a minimum height for each item
-                    >
-                      <Link
-                        to={`/shop/${item._id}/${item.foodType}/detail`}
-                        className=""
-                      >
-                        <img className="w-full h-52 object-cover" src={item.image} alt="Sunset in the mountains" />
-                        <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>
-                          {formatMoney(item.price)}
-                        </div>
-                      </Link>
-                      <div className='relative'>
-                        <div className="flex-grow px-8 py-6 flex flex-col items-center justify-between">
-                          <div className='border-dashed border border-gray-400 absolute top-[10px] bottom-[10px] left-[10px] right-[10px]'></div>
-                          <div>
-                            <div className="font-bold text-xl mb-2">{item.name}</div>
-                            <p className="text-gray-700 text-base">
-                              {truncateDescription(item.description, 100)}
-                            </p>
-                          </div>
-                          <button
-                            className='button2 mt-5 p-2 relative z-10'
-                            style={{ boxShadow: "0 0.2rem #e6bb65" }}
-                            onClick={() => handleAddCard(item)}
-                          >
-                            Add Card
-                          </button>
-                        </div>
-                        {admin && (
-                          <div className='mb-3'>
-                            <Button
-                              variant='contained'
-                              color='primary'
-                              onClick={() => handleEdit(item)}
-                              size='small'
-                            >Edit</Button> {' '}
-                            <Button
-                              variant='contained'
-                              color='error'
-                              onClick={() => handleDelete(item._id)}
-                              size='small'
-                            >Delete</Button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                      item={item}
+                      index={index}
+                      handleButtonClick={handleButtonClick}
+                      cardStates={cardStates}
+                      handleEdit={handleEdit}
+                      handleDelete={handleDelete}
+                    />
                   ))}
                 </>
           }
@@ -287,7 +294,7 @@ const Body = () => {
                   variant="outlined"
                   labelId="demo-simple-select-label"
                   {...register('foodType')} // Registering the input
-                  value={watch('foodType') || ''}
+                  value={watch('foodType') || '' || foodType}
                 >
                   {foodTypeList?.map((item) => (
                     <MenuItem

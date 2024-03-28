@@ -45,11 +45,13 @@ const ShopDetail = () => {
     <div>
       <BackgroundBlur image={data?.data.find(item => item._id === foodId)?.image} />
       <FoodCard data={data?.data.find(item => item._id === foodId)} handleAddCard={handleAddCard} />
-      <RelateProduct data={data?.data.filter(item => item.foodType === foodType && item._id !== foodId)} />
+      <RelateProduct
+        data={data?.data.filter(item => item.foodType === foodType && item._id !== foodId)}
+        handleAddCard={handleAddCard}
+      />
       <Reviewer
         data={dataComment}
         dataFood={data?.data.find(item => item._id === foodId)}
-
       />
 
     </div>

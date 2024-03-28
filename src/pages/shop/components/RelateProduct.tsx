@@ -1,25 +1,36 @@
-const cards = [
-  {
-    image: 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg',
-    name: 'Roast Duck Breast',
-    price: '14.50',
-    detail: 'Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce'
-  },
-  {
-    image: 'https://www.foodandwine.com/thmb/fjNakOY7IcuvZac1hR3JcSo7vzI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/FAW-recipes-pasta-sausage-basil-and-mustard-hero-06-cfd1c0a2989e474ea7e574a38182bbee.jpg',
-    name: 'Chicken and Walnut Salad',
-    price: '10.95',
-    detail: 'Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing'
-  },
-  {
-    image: 'https://media.post.rvohealth.io/wp-content/uploads/2020/09/healthy-eating-ingredients-732x549-thumbnail.jpg',
-    name: 'Chicken and Walnut Salad',
-    price: '10.95',
-    detail: 'Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing'
-  },
-]
+import FoodCard from "@/components/FoodCard"
+import { useEffect, useState } from "react";
 
-const RelateProduct = ({ data }: any) => {
+const RelateProduct = ({ data,handleAddCard }: any) => {
+  const [cardStates, setCardStates] = useState<{ loading: boolean; checked: boolean; }[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      setCardStates(data.map(() => ({ loading: false, checked: false })));
+    }
+  }, [data]);
+
+  const handleButtonClick = (index: number, item: any) => {
+    const newCardStates = [...cardStates];
+    if (newCardStates[index]) {
+      newCardStates[index].loading = true;
+      setCardStates(newCardStates);
+      setTimeout(() => {
+        if (newCardStates[index]) {
+          newCardStates[index].loading = false;
+          newCardStates[index].checked = true;
+          handleAddCard(item, 1);
+          setCardStates(newCardStates);
+          setTimeout(() => {
+            if (newCardStates[index]) {
+              newCardStates[index].checked = false;
+              setCardStates(newCardStates);
+            }
+          }, 3000);
+        }
+      }, 1500);
+    }
+  };
   return (
     <div className="text-center mt-20">
       <div className="title">
@@ -27,19 +38,13 @@ const RelateProduct = ({ data }: any) => {
       </div>
       <div className="flex flex-wrap justify-center mt-10">
         {data?.map((item: any, index: any) => (
-          <div key={index} className="w-full max-w-sm border border-gray-200 bg-[#efefef] text-center rounded-xl relative my-5 mx-2">
-            <div className="w-full h-64 rounded overflow-hidden shadow-lg flex flex-col relative">
-              <img className="w-full h-full object-cover" src={item.image} alt="Sunset in the mountains" />
-              <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>${item.price}</div>
-            </div>
-            <div className="px-8 flex-grow py-8">
-              <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-              <p className="text-gray-700 text-base">
-                Lorem ipsum dolor sit amet
-              </p>
-              <button className='button2 mt-5 p-2' style={{ boxShadow: "0 0.2rem #e6bb65" }}>Add To Card</button>
-            </div>
-          </div>
+          <FoodCard
+            key={index}
+            index={index}
+            item={item}
+            handleButtonClick={handleButtonClick}
+            cardStates={cardStates}
+          />
         ))}
       </div>
     </div>

@@ -164,7 +164,7 @@ export default function ElevateAppBar(props: Props) {
                 {navItems.map((item) => (
                   <Button
                     key={item.label}
-                    sx={{ color: '#fff', fontFamily: '"Gideon Roman", serif', fontWeight: 700 }}
+                    sx={{ color: '#fff', fontFamily: '"Gideon Roman", serif', fontWeight: 500 }}
                     onMouseEnter={() => handleMouseEnter(item)}
                     onMouseLeave={handleMouseLeave}
                     onClick={() => handleClick(item.url)}

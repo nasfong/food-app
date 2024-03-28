@@ -1,9 +1,10 @@
+import { admin } from '@/constant/constant'
 import { formatMoney, truncateDescription } from '@/lib/utils'
 import { Check } from '@mui/icons-material'
-import { CircularProgress } from '@mui/material'
+import { Button, CircularProgress } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-const FoodCard = ({ item, index, handleButtonClick, cardStates }: any) => {
+const FoodCard = ({ item, index, handleButtonClick, cardStates, handleEdit, handleDelete }: any) => {
 
   return (
     <div
@@ -37,6 +38,26 @@ const FoodCard = ({ item, index, handleButtonClick, cardStates }: any) => {
           {cardStates[index]?.checked && <Check fontSize='small' />}
         </button>
       </div>
+      {admin && (
+        <div className='mb-3'>
+          {handleEdit && (
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={() => handleEdit(item)}
+              size='small'
+            >Edit</Button>
+          )} {' '}
+          {handleDelete && (
+            <Button
+              variant='contained'
+              color='error'
+              onClick={() => handleDelete(item._id)}
+              size='small'
+            >Delete</Button>
+          )}
+        </div>
+      )}
     </div>
   )
 }
