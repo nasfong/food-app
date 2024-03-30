@@ -12,7 +12,7 @@ const Background = ({data}: Props) => {
       <img
         src={data?.image}
         alt=""
-        className="relative object-cover w-full brightness-75"
+        className="relative object-cover w-full brightness-75 bg-black"
         style={{ maxHeight: '80vh' }}
       />
       <div className="inner-shadow"></div>
