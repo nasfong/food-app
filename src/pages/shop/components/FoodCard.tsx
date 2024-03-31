@@ -1,4 +1,5 @@
 // import { Rating } from "@material-tailwind/react"
+import { formatMoney } from "@/lib/utils"
 import { useState } from "react"
 
 const FoodCard = ({ data, handleAddCard }: any) => {
@@ -15,7 +16,9 @@ const FoodCard = ({ data, handleAddCard }: any) => {
           />
         </div>
         <div className="p-6 relative w-full">
-          <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>${data?.price}</div>
+          <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>
+            {formatMoney(data?.price)}
+          </div>
           <h6
             className="block mb-4  text-base antialiased leading-relaxed tracking-normal text-gray-700 uppercase">
             {/* <Rating value={5} placeholder={undefined} /> */}

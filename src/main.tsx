@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const queryClient = new QueryClient()
 
-axios.defaults.baseURL = "http://localhost:5000"
+axios.defaults.baseURL = "https://maomkhmercuisine.online/"
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.post['Accept'] = 'application/json'
 

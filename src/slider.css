@@ -15,6 +15,7 @@
   opacity: 0;
   transition: opacity 3s ease-in-out;
   animation: zoom 7s infinite;
+  background-color: #000;
 }
 
 .slider img.active {

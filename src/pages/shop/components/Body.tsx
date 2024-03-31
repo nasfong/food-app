@@ -1,8 +1,7 @@
-import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material';
+import { Box, Button, Modal } from '@mui/material';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { NavLink, useParams } from 'react-router-dom'
 import { useGlobalData } from '@/hook/useGlobalData';
 import { Pagination } from '@/components/Pagination';
@@ -14,31 +13,33 @@ import FoodCard from '@/components/FoodCard';
 interface Food {
   _id: string;
   name: string;
-  image: string
-  star: number
-  price: number
-  description: string
-  foodType: string
-  chef: boolean
+  image: string;
+  star: number;
+  price: number;
+  description: string;
+  foodType: string;
+  chef: boolean;
 }
+
 interface FoodQuery {
-  data: Food[]
-  totalPages: number
-  currentPage: number
+  data: Food[];
+  totalPages: number;
+  currentPage: number;
 }
+
 interface FormData {
-  _id: string
+  _id: string;
   name: string;
-  image: string
-  star: number
-  price: number
-  description: string
-  foodType: string
-  chef: boolean
+  image: File | string;
+  star: number;
+  price: number;
+  description: string;
+  foodType: string;
+  chef: boolean;
 }
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -50,8 +51,20 @@ const style = {
 };
 
 const Body = () => {
+  const [ImagePreview, setImagePreview] = useState<any>('')
   const [currentPage, setCurrentPage] = useState(1)
-  const { handleSubmit, register, formState: { errors }, reset, watch } = useForm<FormData>();
+  const initState = {
+    _id: '',
+    image: '',
+    name: '',
+    description: '',
+    price: '',
+    star: 0,
+    foodType: '',
+    chef: false,
+  }
+  const [formInput, setFormInput] = useState<any>(initState)
+
   const { data: foodTypeList } = useQuery<Food[]>({
     queryKey: ['food-type'],
     queryFn: () =>
@@ -67,19 +80,25 @@ const Body = () => {
   })
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
-    reset({})
     setOpen(true)
   }
   const handleClose = () => {
     setOpen(false)
-    reset({})
+    setFormInput(initState)
+    setImagePreview('')
   }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const inputValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
+    setFormInput({ ...formInput, [name]: inputValue });
+  };
 
   const mutation = useMutation({
     mutationFn: (formData: FormData) => {
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
-      formDataToSend.append('image', formData.image[0]); // Access the first file in the FileList
+      formDataToSend.append('image', formData.image); // Access the first file in the FileList
       formDataToSend.append('star', formData.star.toString());
       formDataToSend.append('price', formData.price.toString());
       formDataToSend.append('description', formData.description);
@@ -92,7 +111,7 @@ const Body = () => {
       }).then(() => {
         refetch()
         handleClose()
-        reset()
+        setFormInput(initState)
       })
     },
   })
@@ -128,9 +147,12 @@ const Body = () => {
 
   const updateMutation = useMutation({
     mutationFn: (formData: FormData) => {
+      console.log({ formData })
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
-      formDataToSend.append('image', formData.image[0]); // Access the first file in the FileList
+      if (formData.image) {
+        formDataToSend.append('image', formData.image)
+      }
       formDataToSend.append('star', formData.star.toString());
       formDataToSend.append('price', formData.price.toString());
       formDataToSend.append('description', formData.description);
@@ -144,20 +166,17 @@ const Body = () => {
       }).then(() => {
         refetch();
         handleClose();
-        reset();
+        setFormInput(initState);
       })
     },
   })
   const handleEdit = (data: any) => {
-    reset({ ...data })
+    setFormInput({ ...data })
+    setImagePreview(data.image)
     handleOpen()
   }
 
-  const onSubmit = (data: any) => {
-    const image = data.image[0] ? data.image : null
-    if (data._id) updateMutation.mutate({ ...data, image }, data._id)
-    else mutation.mutate(data)
-  }
+
   const { addCard } = useGlobalData()
 
   const handleAddCard = async (data: any) => {
@@ -191,6 +210,29 @@ const Body = () => {
           }, 3000);
         }
       }, 1500);
+    }
+  };
+
+  const handleChangeImage = (e: any) => {
+    let files = e.target.files || e.dataTransfer.files
+    if (!files.length) return
+
+    const file = files[0]
+    setFormInput({ ...formInput, image: file })
+    const reader = new FileReader()
+    reader.onloadend = function (e) {
+      setImagePreview(e.target?.result)
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    console.log(formInput)
+    if (formInput._id) {
+      updateMutation.mutate({ ...formInput });
+    } else {
+      mutation.mutate(formInput);
     }
   };
 
@@ -247,69 +289,83 @@ const Body = () => {
           open={open}
           onClose={handleClose}
         >
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={onSubmit}>
             <Box sx={style}>
-              <input type="file" {...register('image')} />
-              <TextField
-                {...register('name', { required: true })}
-                label="Name"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                error={!!errors.name}
-                helperText={errors.name ? "First Name is required" : ""}
-              />
-              <TextField
-                {...register('description', { required: true })}
-                label="Description"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                error={!!errors.description}
-                helperText={errors.description ? "First Name is required" : ""}
-              />
-              <TextField
-                {...register('star', { required: true })}
-                label="Star"
-                type='number'
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                error={!!errors.star}
-                helperText={errors.star ? "First Name is required" : ""}
-              />
-              <TextField
-                {...register('price', { required: true })}
-                label="Price"
-                variant="outlined"
-                type='number'
-                fullWidth
-                margin="normal"
-                error={!!errors.price}
-                helperText={errors.price ? "First Name is required" : ""}
-              />
-              <FormControl fullWidth margin="normal">
-                <InputLabel id="demo-simple-select-label">Food Type</InputLabel>
-                <Select
-                  variant="outlined"
-                  labelId="demo-simple-select-label"
-                  {...register('foodType')} // Registering the input
-                  value={watch('foodType') || '' || foodType}
+              <input type="file" name='image' onChange={handleChangeImage} />
+              {ImagePreview && (
+                <img src={ImagePreview} className='h-full w-full' alt="" />
+              )}
+              <div>
+                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  name="name"
+                  onChange={handleChange}
+                  value={formInput.name}
+                  placeholder="John"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Description
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  name="description"
+                  onChange={handleChange}
+                  value={formInput.description}
+                  placeholder="John"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Price
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  name="price"
+                  onChange={handleChange}
+                  value={formInput.price}
+                  placeholder="John"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Food Type
+                </label>
+                <select
+                  id="countries"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  name="foodType"
+                  onChange={handleChange}
+                  value={formInput.foodType}
                 >
+                  <option value=''>-- select type --</option>
                   {foodTypeList?.map((item) => (
-                    <MenuItem
-                      key={item._id}
-                      value={item._id}
-                    >{item.name}</MenuItem>
+                    <option key={item._id} value={item._id}>{item.name}</option>
                   ))}
-                </Select>
-              </FormControl>
-              <FormControlLabel
-                control={<Checkbox checked={watch('chef')} />}
-                {...register('chef')}
-                label="Chef Recommend"
-                sx={{ width: '100%' }}
-              />
+                </select>
+              </div>
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  onChange={handleChange}
+                  checked={formInput.chef}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Chef Recommend
+                </label>
+              </div>
 
               <Button variant='contained' type='submit'>
                 Create

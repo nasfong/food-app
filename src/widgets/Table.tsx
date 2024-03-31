@@ -1,6 +1,7 @@
 import { Card, Typography } from "@material-tailwind/react";
 import { IconButton } from "@mui/material";
 import { Clear } from '@mui/icons-material'
+import { formatMoney } from "@/lib/utils";
 
 const TABLE_HEAD = ["", "", "Product", "Price", "Quantity", "Subtotal"];
 
@@ -45,7 +46,7 @@ export function TableWithStripedRows({ data, handleDelete }: any) {
               </td>
               <td className="p-4">
                 <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium" placeholder={undefined}>
-                  $ {item.price}
+                  {formatMoney(item?.price)}
                 </Typography>
               </td>
               <td className="p-4">
@@ -55,7 +56,7 @@ export function TableWithStripedRows({ data, handleDelete }: any) {
               </td>
               <td className="p-4">
                 <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium" placeholder={undefined}>
-                  $ {Number(item.price) * item.quantity}
+                  {formatMoney(Number(item.price) * item.quantity)}
                 </Typography>
               </td>
             </tr>
