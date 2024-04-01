@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const queryClient = new QueryClient()
 
-axios.defaults.baseURL = "http://localhost:5000/"
+axios.defaults.baseURL = import.meta.env.VITE_API_URL
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.post['Accept'] = 'application/json'
 
