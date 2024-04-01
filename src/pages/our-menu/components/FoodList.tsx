@@ -1,12 +1,7 @@
-import { useState } from 'react';
 import '../../../ramdomDish.css';
-import { truncateDescription } from '@/lib/utils';
 import RandomCard from '@/components/RandomCard';
 
-
 const FoodList = ({ data }: any) => {
-  const [hoveredIndex, setHoveredIndex] = useState(-1);
-
   return (
     <div className="container my-12">
       <div className='mb-12 text-center'>
