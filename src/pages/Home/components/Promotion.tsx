@@ -23,16 +23,16 @@ const cards = [
 ]
 
 // import required modules
-import { Pagination, Navigation, Autoplay } from 'swiper/modules';
-import { useRef } from 'react';
+import { Pagination, Navigation } from 'swiper/modules';
+// import { useRef } from 'react';
 
 const Promotion = () => {
-  const progressCircle = useRef<any>(null);
-  const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (s: any, time: any, progress: any) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress);
-    (progressContent.current as any).textContent = `${Math.ceil(time / 1000)}s`;
-  };
+  // const progressCircle = useRef<any>(null);
+  // const progressContent = useRef(null);
+  // const onAutoplayTimeLeft = (s: any, time: any, progress: any) => {
+  //   progressCircle.current.style.setProperty('--progress', 1 - progress);
+  //   (progressContent.current as any).textContent = `${Math.ceil(time / 1000)}s`;
+  // };
   return (
     <div className='h-[500px] my-10 bg-gray'>
       <Swiper

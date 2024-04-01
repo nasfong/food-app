@@ -18,7 +18,7 @@ const Map = () => {
     googleMapsApiKey: "AIzaSyBVR6OkfLXHW82kWhxyeqOFnuyWlNzHwLM"
   })
 
-  const [map, setMap] = useState(null)
+  const [_, setMap] = useState(null)
 
   const onLoad = useCallback(function callback(map: any) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -28,7 +28,7 @@ const Map = () => {
     setMap(map)
   }, [])
 
-  const onUnmount = useCallback(function callback(map: any) {
+  const onUnmount = useCallback(function callback(_: any) {
     setMap(null)
   }, [])
   return isLoaded ? (

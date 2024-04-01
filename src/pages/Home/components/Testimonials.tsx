@@ -26,7 +26,7 @@ const message = [
 const Testimonials = () => {
   const progressCircle = useRef<any>(null);
   const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (s: any, time: any, progress: any) => {
+  const onAutoplayTimeLeft = (_: any, time: any, progress: any) => {
     progressCircle.current.style.setProperty('--progress', 1 - progress);
     (progressContent.current as any).textContent = `${Math.ceil(time / 1000)}s`;
   };
