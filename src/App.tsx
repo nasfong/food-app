@@ -11,6 +11,7 @@ import Admin from "./pages/admin/Admin"
 import Store from "./pages/store/Store"
 import { useLayoutEffect } from "react"
 import ContactUs from "./pages/contact-us/ContactUs"
+import SignIn from "./pages/sign-in/SignIn"
 
 
 const BackToTop = ({ children }: any) => {
@@ -42,6 +43,7 @@ function App() {
                 <Route path="admin" element={<Admin />} />
                 <Route path="contact-us" element={<ContactUs />} />
                 <Route path="store" element={<Store />} />
+                <Route path="sign-in" element={<SignIn />} />
               </Route>
             </Routes>
           </BackToTop>

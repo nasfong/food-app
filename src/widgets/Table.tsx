@@ -2,6 +2,8 @@ import { Card, Typography } from "@material-tailwind/react";
 import { IconButton } from "@mui/material";
 import { Clear } from '@mui/icons-material'
 import { formatMoney } from "@/lib/utils";
+import { default_image } from "@/constant/constant";
+
 
 const TABLE_HEAD = ["", "", "Product", "Price", "Quantity", "Subtotal"];
 
@@ -37,6 +39,9 @@ export function TableWithStripedRows({ data, handleDelete }: any) {
                   src={item.image}
                   alt=""
                   className="w-[120px] h-[80px]"
+                  onError={(e) => {
+                    (e.target as any).src = default_image;
+                  }}
                 />
               </td>
               <td className="p-4">

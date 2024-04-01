@@ -1,3 +1,4 @@
+import { default_image } from "@/constant/constant"
 
 const BackgroundImage = () => {
   return (
@@ -7,6 +8,9 @@ const BackgroundImage = () => {
         alt=""
         className="relative object-cover w-full"
         style={{ height: '60vh' }}
+        onError={(e) => {
+          (e.target as any).src = default_image
+        }}
       />
       <div className="inner-shadow"></div>
       <div className="absolute inset-0 flex justify-center items-center text-center text-white">

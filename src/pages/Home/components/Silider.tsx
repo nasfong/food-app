@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './../../../slider.css'
+import { default_image } from '@/constant/constant';
 
 const images =
   [
@@ -30,6 +31,9 @@ const Slider = () => {
               alt={`Slide ${idx}`}
               className={(idx === index ? 'active' : 'inactive') + ''}
               loading='lazy'
+              onError={(e) => {
+                (e.target as any).src = default_image
+              }}
             />
             <div className="inner-shadow"></div>
             <div className='absolute inset-0 flex flex-col justify-center items-center text-center text-white'>

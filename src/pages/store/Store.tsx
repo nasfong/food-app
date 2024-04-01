@@ -10,7 +10,7 @@ const Store = () => {
     await removeCard(id)
   }
 
-  const sum = card.reduce((accumulator, currentValue) => accumulator + Number(currentValue.price), 0);
+  const sum = card.reduce((accumulator, currentValue) => accumulator + (Number(currentValue.price) * currentValue.quantity), 0);
   return (
     <div>
       <div className='h-[100px]'></div>

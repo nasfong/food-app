@@ -9,7 +9,9 @@ import { Badge, Button, Divider, Drawer, IconButton, List, ListItem, ListItemBut
 import { LocalGroceryStore, Menu } from '@mui/icons-material';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
-LocalGroceryStore
+import { admin, default_image } from '@/constant/constant';
+
+const reload = () => window.location.reload()
 
 const navItems = [
   { label: 'Home', url: '/' },
@@ -18,6 +20,7 @@ const navItems = [
   { label: 'Gallery', url: '/gallery' },
   { label: 'Our News', url: '/our-news' },
   { label: 'Contact Us', url: '/contact-us' },
+  { label: 'Sign In', url: '/sign-in' },
 ];
 const drawerWidth = 240;
 interface Props {
@@ -54,7 +57,7 @@ export default function ElevateAppBar(props: Props) {
   });
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme as any).breakpoints.down('md'));
   const container = window !== undefined ? () => window().document.body : undefined;
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -78,6 +81,13 @@ export default function ElevateAppBar(props: Props) {
     navigate(url)
   }
 
+  function logout() {
+    localStorage.removeItem('admin')
+    setTimeout(() => {
+      reload()
+    }, 500)
+  }
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', bgcolor: '#1a2124', color: '#fff', minHeight: '100%' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -92,11 +102,6 @@ export default function ElevateAppBar(props: Props) {
             </ListItemButton>
           </ListItem>
         ))}
-        <ListItem>
-          <ListItemButton sx={{ textAlign: 'center' }} onClick={() => handleClick('/store')}>
-            <ListItemText primary={'Store'} />
-          </ListItemButton>
-        </ListItem>
       </List>
     </Box>
   );
@@ -116,13 +121,27 @@ export default function ElevateAppBar(props: Props) {
             <div className='flex justify-between items-center p-2'>
               <div className='flex gap-x-10'>
                 <div className='flex align-middle items-center'>
-                  <img src="/svg/map.svg" alt="" style={{ height: 15 }} />
+                  <img
+                    src="/svg/map.svg"
+                    alt=""
+                    style={{ height: 15 }}
+                    onError={(e) => {
+                      (e.target as any).src = default_image
+                    }}
+                  />
                   <div>
                     123 Main Street, Uni 21, New York City
                   </div>
                 </div>
                 <div className='flex align-middle items-center'>
-                  <img src="/svg/phone.svg" alt="" style={{ height: 15 }} />
+                  <img
+                    src="/svg/phone.svg"
+                    alt=""
+                    style={{ height: 15 }}
+                    onError={(e) => {
+                      (e.target as any).src = default_image
+                    }}
+                  />
                   <div>
                     +38 (012) 34 56 789
                   </div>
@@ -130,7 +149,14 @@ export default function ElevateAppBar(props: Props) {
               </div>
               <div className='flex align-middle'>
                 <div>Contact Us</div>
-                <img src="/svg/facebook.svg" alt="" style={{ height: 20 }} />
+                <img
+                  src="/svg/facebook.svg"
+                  alt=""
+                  style={{ height: 20 }}
+                  onError={(e) => {
+                    (e.target as any).src = default_image
+                  }}
+                />
               </div>
             </div>
           </AppBar>
@@ -140,10 +166,10 @@ export default function ElevateAppBar(props: Props) {
         <AppBar
           component="nav"
           sx={{
-            backgroundColor: trigger || location.pathname === '/store' ? "#1A2124" : "transparent",
-            transition: "background-color 0.5s ease, transform 0.5s ease", // Added transform transition
+            backgroundColor: trigger || location.pathname === '/store' || location.pathname === '/sign-in' ? "#1A2124" : "transparent",
+            transition: "background-color 0.5s ease, transform 0.5s ease",
             boxShadow: 0,
-            transform: isMobile || trigger ? "translateY(0)" : "translateY(30%)" // Added transform for animation
+            transform: isMobile || trigger ? "translateY(0)" : "translateY(30%)"
           }}
         >
           <Toolbar className='py-6 flex justify-between'>
@@ -157,20 +183,32 @@ export default function ElevateAppBar(props: Props) {
               <Menu />
             </IconButton>
             <Typography variant="h6" component="div">
-              Cristiano
+              <img src="/image/logo-menu.png" alt="" className='h-[40px] w-[40px]' />
             </Typography>
-            <Box sx={{display: 'flex'}}>
+            <Box sx={{ display: 'flex' }}>
               <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 {navItems.map((item) => (
-                  <Button
-                    key={item.label}
-                    sx={{ color: '#fff', fontFamily: '"Gideon Roman", serif', fontWeight: 500 }}
-                    onMouseEnter={() => handleMouseEnter(item)}
-                    onMouseLeave={handleMouseLeave}
-                    onClick={() => handleClick(item.url)}
-                  >
-                    {item.label}
-                  </Button>
+                  item.url === '/sign-in' ? (
+                    <Button
+                      key={item.label}
+                      sx={{ color: '#fff', fontFamily: '"Gideon Roman", serif', fontWeight: 500 }}
+                      onMouseEnter={() => handleMouseEnter(item)}
+                      onMouseLeave={handleMouseLeave}
+                      onClick={() => admin ? logout() : handleClick(item.url)}
+                    >
+                      {admin ? 'Logout' : item.label}
+                    </Button>
+                  ) : (
+                    <Button
+                      key={item.label}
+                      sx={{ color: '#fff', fontFamily: '"Gideon Roman", serif', fontWeight: 500 }}
+                      onMouseEnter={() => handleMouseEnter(item)}
+                      onMouseLeave={handleMouseLeave}
+                      onClick={() => handleClick(item.url)}
+                    >
+                      {item.label}
+                    </Button>
+                  )
                 ))}
               </Box>
               <Button

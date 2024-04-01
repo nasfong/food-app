@@ -6,4 +6,10 @@ export const facebook = ''
 export const tiktok = ''
 export const telegram = ''
 
-export const admin = true
+export const admin = !!localStorage.getItem('admin')
+export const default_image = '/image/default-image.jpg'
+
+export const sign_in = {
+  username: 'maom@maomkhmercuisine.com',
+  password: '12345'
+}

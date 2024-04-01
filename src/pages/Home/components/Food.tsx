@@ -8,8 +8,9 @@ import { Pagination } from 'swiper/modules';
 
 import './../../../food.css'
 import { useNavigate } from 'react-router-dom';
+import { default_image } from '@/constant/constant';
 
-const Food = ({data}: any) => {
+const Food = ({ data }: any) => {
   const navigate = useNavigate()
 
   const handleClick = (foodType: string) => {
@@ -54,6 +55,9 @@ const Food = ({data}: any) => {
               src={item.image || 'https://www.invoicera.com/wp-content/uploads/2023/11/default-image.jpg'}
               alt={`Slide 1s`}
               className='img rounded-lg'
+              onError={(e) => {
+                (e.target as any).src = default_image
+              }}
             />
             <div className=' border border-white absolute top-[10px] bottom-[10px] left-[5px] right-[5px]'></div>
             <div className="inner-shadow-food"></div>

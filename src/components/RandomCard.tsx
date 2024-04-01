@@ -1,3 +1,4 @@
+import { default_image } from '@/constant/constant';
 import { truncateDescription } from '@/lib/utils';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +13,9 @@ const RandomCard = ({ item, index }: any) => {
         className='rounded-corner-img'
         onMouseEnter={() => setHoveredIndex(index)}
         onMouseLeave={() => setHoveredIndex(-1)}
+        onError={(e) => {
+          (e.target as any).src = default_image
+        }}
       />
       <div className='ml-2 w-[100%]'>
         <div className="flex justify-between border-b-2 border-dashed">
@@ -22,7 +26,14 @@ const RandomCard = ({ item, index }: any) => {
       </div>
       {hoveredIndex === index && (
         <div className="absolute top-[-230px] left-20 bg-white border-2 border-gray-300 rounded p-2 shadow z-10">
-          <img src={item?.image} alt="Popup Image" className="w-48 h-48 object-cover" />
+          <img
+            src={item?.image}
+            alt="Popup Image"
+            className="w-48 h-48 object-cover"
+            onError={(e) => {
+              (e.target as any).src = default_image
+            }}
+          />
         </div>
       )}
     </div>

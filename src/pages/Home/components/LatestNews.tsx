@@ -33,6 +33,7 @@ const cards = [
 
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
+import { default_image } from '@/constant/constant';
 
 const LatestNews = () => {
   return (
@@ -54,10 +55,24 @@ const LatestNews = () => {
       >
         {cards.map((item, index) => (
           <SwiperSlide key={index} className='relative font-bold'>
-            <img src={item.image} alt="" className="brightness-50 h-full w-full object-cover" />
+            <img
+              src={item.image}
+              alt=""
+              className="brightness-50 h-full w-full object-cover"
+              onError={(e) => {
+                (e.target as any).src = default_image
+              }}
+            />
 
             <div className='absolute top-44 right-50 flex flex-col md:flex-row justify-center items-center gap-5 w-[70%]'>
-              <img src={item.image} alt="" className='h-[200px] w-[600px] md:h-[400px] md:w-[600px] object-cover' />
+              <img
+                src={item.image}
+                alt=""
+                className='h-[200px] w-[600px] md:h-[400px] md:w-[600px] object-cover'
+                onError={(e) => {
+                  (e.target as any).src = default_image
+                }}
+              />
               <div className="text-white text-start flex flex-col gap-5">
                 <div className=''>{item.date}</div>
                 <div className='text-4xl'>{item.name}</div>

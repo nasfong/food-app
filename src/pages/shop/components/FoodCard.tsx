@@ -1,4 +1,5 @@
 // import { Rating } from "@material-tailwind/react"
+import { default_image } from "@/constant/constant"
 import { formatMoney } from "@/lib/utils"
 import { useState } from "react"
 
@@ -12,7 +13,10 @@ const FoodCard = ({ data, handleAddCard }: any) => {
           <img
             src={data?.image}
             alt="card-image"
-            className="object-cover "
+            className="object-cover"
+            onError={(e) => {
+              (e.target as any).src = default_image
+            }}
           />
         </div>
         <div className="p-6 relative w-full">

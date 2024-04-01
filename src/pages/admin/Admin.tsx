@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import { default_image } from '@/constant/constant';
 
 interface Food {
   _id: string;
@@ -130,7 +131,14 @@ const Admin = () => {
           {data?.map((item, index) => (
             <div key={index} className="w-[250px] border border-gray-200 bg-[#efefef] text-center rounded-xl relative my-5 mx-2">
               <Link to="/shop/salad/detail" className="w-full h-64 rounded overflow-hidden shadow-lg flex flex-col relative">
-                <img className="w-full h-full object-cover" src={item.image} alt="Sunset in the mountains" />
+                <img
+                  className="w-full h-full object-cover"
+                  src={item.image}
+                  alt="Sunset in the mountains"
+                  onError={(e) => {
+                    (e.target as any).src = default_image
+                  }}
+                />
                 <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>${item.price}</div>
               </Link>
               <div className="px-8 flex-grow py-2">

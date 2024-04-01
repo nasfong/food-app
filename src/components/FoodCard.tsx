@@ -1,4 +1,4 @@
-import { admin } from '@/constant/constant'
+import { admin, default_image } from '@/constant/constant'
 import { formatMoney, truncateDescription } from '@/lib/utils'
 import { Check } from '@mui/icons-material'
 import { Button, CircularProgress } from '@mui/material'
@@ -13,7 +13,14 @@ const FoodCard = ({ item, index, handleButtonClick, cardStates, handleEdit, hand
       style={{ minHeight: "300px" }} // Set a minimum height for each item
     >
       <Link to={`/shop/${item._id}/${item.foodType}/detail`}>
-        <img className="w-full h-52 object-cover" src={item.image} alt="Food" />
+        <img
+          className="w-full h-52 object-cover"
+          src={item.image}
+          alt="Food"
+          onError={(e) => {
+            (e.target as any).src = default_image
+          }}
+        />
         <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>
           {formatMoney(item.price)}
         </div>

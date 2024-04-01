@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view'
 import { LoadingButton } from '@mui/lab'
 import 'react-photo-view/dist/react-photo-view.css';
+import { default_image } from '@/constant/constant';
 interface FormData {
   _id: string
   image: string
@@ -122,6 +123,9 @@ const GalleryList = () => {
                   src={item.image}
                   alt=""
                   className='object-cover h-full max-w-full'
+                  onError={(e) => {
+                    (e.target as any).src = default_image
+                  }}
                 />
               </PhotoView>
               <div className='mt-3'>
@@ -158,7 +162,13 @@ const GalleryList = () => {
           }}>
             <input type="file" name='image' onChange={handleChangeImage} />
             {ImagePreview && (
-              <img src={ImagePreview} className='h-full w-full' alt="" />
+              <img
+                src={ImagePreview}
+                className='h-full w-full' alt=""
+                onError={(e) => {
+                  (e.target as any).src = default_image
+                }}
+              />
             )}
             <div className='text-red-700'>
               {mutation.isError && (mutation.error as any).response.data.message}

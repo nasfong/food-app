@@ -24,6 +24,7 @@ const cards = [
 
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
+import { default_image } from '@/constant/constant';
 // import { useRef } from 'react';
 
 const Promotion = () => {
@@ -48,7 +49,14 @@ const Promotion = () => {
       >
         {cards.map((item, index) => (
           <SwiperSlide key={index}>
-            <img src={item.image} alt="" className='promotion object-cover' />
+            <img
+              src={item.image}
+              alt=""
+              className='promotion object-cover'
+              onError={(e) => {
+                (e.target as any).src = default_image
+              }}
+            />
             <div className='absolute bg-white bg-opacity-95 p-5'>
               <div className='font-bold text-[32px]'>{item.name}</div>
               <div className='text-[16px]'>{item.detail}</div>

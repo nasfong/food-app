@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import '../assets/styles/image-animation.css'
+import { default_image } from "@/constant/constant";
 
 type Props = {
   // data: {
@@ -31,6 +32,9 @@ const Background = ({ data }: Props) => {
         brightness-75 bg-black ${imageLoaded ? 'fadeIn' : ''}
         `}
         onLoad={handleImageLoad}
+        onError={(e) => {
+          (e.target as any).src = default_image
+        }}
       />
       <div className="inner-shadow"></div>
       <div className="absolute inset-0 flex justify-center items-center text-center text-white">

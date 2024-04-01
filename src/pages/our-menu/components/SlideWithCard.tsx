@@ -5,6 +5,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import './../../../promoition.css';
+import { default_image } from '@/constant/constant';
 type Props = {
   data: { image: string, title: string, description: string }
 }
@@ -17,6 +18,9 @@ const SlideWithCard = ({ data }: Props) => {
         src={data.image}
         alt=""
         className='w-full h-full object-cover absolute'
+        onError={(e) => {
+          (e.target as any).src = default_image
+        }}
       />
       <div className='absolute bg-white bg-opacity-90 p-10 text-center max-w-[800px]'>
         <div className='title'>{data.title}</div>

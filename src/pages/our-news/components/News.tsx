@@ -1,3 +1,4 @@
+import { default_image } from "@/constant/constant";
 import { Box, Button, Modal, TextField, useMediaQuery } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -108,7 +109,14 @@ const News = ({ data, refetch }: any) => {
           key={index}
           className={`my-20 relative flex ${index % 2 && 'flex-row-reverse'} ${matches ? '' : 'flex-col'}`}
         >
-          <img src={item.image} alt="" className="object-cover h-80 w-full md:w-[600px] rounded-sm" />
+          <img
+            src={item.image}
+            alt=""
+            className="object-cover h-80 w-full md:w-[600px] rounded-sm"
+            onError={(e) => {
+              (e.target as any).src = default_image
+            }}
+          />
           <div
             className={`
             ${matches ? `absolute ${index % 2 ? 'top-1/2 right-1/2 translate-x-24' : 'top-1/2 left-1/2 '}

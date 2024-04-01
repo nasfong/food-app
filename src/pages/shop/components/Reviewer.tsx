@@ -1,3 +1,4 @@
+import { default_image } from '@/constant/constant';
 import { Rating } from '@material-tailwind/react'
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -28,9 +29,9 @@ const Reviewer = ({ data, dataFood }: any) => {
     setFormInput({ ...formInput, [name]: value })
   }
 
-  const handleChangeStar  = (val: any) => {
+  const handleChangeStar = (val: any) => {
     console.log(val)
-    setFormInput({...formInput, star: val})
+    setFormInput({ ...formInput, star: val })
   }
 
   const onSubmit = (e: any) => {
@@ -50,6 +51,9 @@ const Reviewer = ({ data, dataFood }: any) => {
                   src="https://secure.gravatar.com/avatar/1fb2221f429981d3c12d69bb86d269a2?s=60&d=mm&r=g"
                   alt=""
                   className='rounded-full'
+                  onError={(e) => {
+                    (e.target as any).src = default_image
+                  }}
                 />
                 <div>
                   <div>{item.name}</div>
