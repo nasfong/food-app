@@ -9,6 +9,7 @@ import { admin } from '@/constant/constant';
 import Background from '@/components/Background';
 import Swal from 'sweetalert2'
 import FoodCard from '@/components/FoodCard';
+import { LoadingButton } from '@mui/lab';
 
 interface Food {
   _id: string;
@@ -96,23 +97,46 @@ const Body = () => {
 
   const mutation = useMutation({
     mutationFn: (formData: FormData) => {
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('image', formData.image); // Access the first file in the FileList
-      formDataToSend.append('star', formData.star.toString());
-      formDataToSend.append('price', formData.price.toString());
-      formDataToSend.append('description', formData.description);
-      formDataToSend.append('foodType', formData.foodType);
-      formDataToSend.append('chef', formData.chef.toString());
-      return axios.post('/food', formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+      if (formData._id) {
+        const formDataToSend = new FormData();
+        formDataToSend.append('name', formData.name);
+        if (formData.image) {
+          formDataToSend.append('image', formData.image)
         }
-      }).then(() => {
-        refetch()
-        handleClose()
-        setFormInput(initState)
-      })
+        formDataToSend.append('star', formData.star.toString());
+        formDataToSend.append('price', formData.price.toString());
+        formDataToSend.append('description', formData.description);
+        formDataToSend.append('foodType', formData.foodType);
+        formDataToSend.append('chef', formData.chef.toString());
+        formDataToSend.append('_method', 'PUT')
+        return axios.put(`/food/${formData._id}`, formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        }).then(() => {
+          refetch();
+          handleClose();
+          setFormInput(initState);
+        })
+      } else {
+        const formDataToSend = new FormData();
+        formDataToSend.append('name', formData.name);
+        formDataToSend.append('image', formData.image); // Access the first file in the FileList
+        formDataToSend.append('star', formData.star.toString());
+        formDataToSend.append('price', formData.price.toString());
+        formDataToSend.append('description', formData.description);
+        formDataToSend.append('foodType', formData.foodType);
+        formDataToSend.append('chef', formData.chef.toString());
+        return axios.post('/food', formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        }).then(() => {
+          refetch()
+          handleClose()
+          setFormInput(initState)
+        })
+      }
     },
   })
 
@@ -145,31 +169,6 @@ const Body = () => {
     });
   }
 
-  const updateMutation = useMutation({
-    mutationFn: (formData: FormData) => {
-      console.log({ formData })
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', formData.name);
-      if (formData.image) {
-        formDataToSend.append('image', formData.image)
-      }
-      formDataToSend.append('star', formData.star.toString());
-      formDataToSend.append('price', formData.price.toString());
-      formDataToSend.append('description', formData.description);
-      formDataToSend.append('foodType', formData.foodType);
-      formDataToSend.append('chef', formData.chef.toString());
-      formDataToSend.append('_method', 'PUT')
-      return axios.put(`/food/${formData._id}`, formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-      }).then(() => {
-        refetch();
-        handleClose();
-        setFormInput(initState);
-      })
-    },
-  })
   const handleEdit = (data: any) => {
     setFormInput({ ...data })
     setImagePreview(data.image)
@@ -228,12 +227,7 @@ const Body = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    console.log(formInput)
-    if (formInput._id) {
-      updateMutation.mutate({ ...formInput });
-    } else {
-      mutation.mutate(formInput);
-    }
+    mutation.mutate(formInput);
   };
 
   return (
@@ -295,6 +289,9 @@ const Body = () => {
               {ImagePreview && (
                 <img src={ImagePreview} className='h-full w-full' alt="" />
               )}
+              <div className='text-red-700'>
+                {mutation.isError && (mutation.error as any).response.data.message}
+              </div>
               <div>
                 <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Name
@@ -367,9 +364,13 @@ const Body = () => {
                 </label>
               </div>
 
-              <Button variant='contained' type='submit'>
+              <LoadingButton
+                loading={mutation.isPending}
+                variant='contained'
+                type='submit'
+              >
                 Create
-              </Button>
+              </LoadingButton>
             </Box>
           </form>
         </Modal>
