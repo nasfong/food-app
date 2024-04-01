@@ -44,7 +44,7 @@ const ShopDetail = () => {
   return (
     <div>
       <BackgroundBlur image={data?.data.find(item => item._id === foodId)?.image} />
-      <FoodCard data={data?.data.find(item => item._id === foodId)} handleAddCard={handleAddCard} />
+      <FoodCard data={data?.data?.find(item => item._id === foodId)} handleAddCard={handleAddCard} />
       <RelateProduct
         data={data?.data.filter(item => item.foodType === foodType && item._id !== foodId)}
         handleAddCard={handleAddCard}

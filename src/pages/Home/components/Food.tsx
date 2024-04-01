@@ -7,19 +7,10 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 
 import './../../../food.css'
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Food = () => {
+const Food = ({data}: any) => {
   const navigate = useNavigate()
-  const { data } = useQuery<any[]>({
-    queryKey: ['food-type'],
-    queryFn: () =>
-      axios.get('/food-type').then((res) =>
-        res.data,
-      ),
-  })
 
   const handleClick = (foodType: string) => {
     navigate(`shop/${foodType}`)
