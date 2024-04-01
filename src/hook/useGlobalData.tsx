@@ -31,6 +31,7 @@ const reducer = (state: State, { type, payload }: Action) => {
 
 const DataContext = createContext<{ card: Friend[]; addCard: (friend: Friend, quantity: number) => void, removeCard: (id: number) => void } | null>(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useGlobalData = () => {
   const context = useContext(DataContext);
   if (!context) {
