@@ -9,7 +9,7 @@ import { Badge, Button, Divider, Drawer, IconButton, List, ListItem, ListItemBut
 import { LocalGroceryStore, Menu } from '@mui/icons-material';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
-import { admin, default_image } from '@/constant/constant';
+import { address, admin, default_image, phone } from '@/constant/constant';
 
 const reload = () => window.location.reload()
 
@@ -130,7 +130,7 @@ export default function ElevateAppBar(props: Props) {
                     }}
                   />
                   <div>
-                    123 Main Street, Uni 21, New York City
+                    {address}
                   </div>
                 </div>
                 <div className='flex align-middle items-center'>
@@ -143,11 +143,11 @@ export default function ElevateAppBar(props: Props) {
                     }}
                   />
                   <div>
-                    +38 (012) 34 56 789
+                    {phone}
                   </div>
                 </div>
               </div>
-              <div className='flex align-middle'>
+              <div className='flex align-middle' onClick={() => navigate('contact-us')}>
                 <div>Contact Us</div>
                 <img
                   src="/svg/facebook.svg"

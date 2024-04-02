@@ -1,9 +1,9 @@
 import { default_image } from "@/constant/constant";
-import { Box, Button, Modal, TextField, useMediaQuery } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Box, Button, Modal, useMediaQuery } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 
 interface FormData {
   _id: string
@@ -27,36 +27,80 @@ const style = {
 
 const News = ({ data, refetch }: any) => {
   const matches = useMediaQuery('(min-width:768px)')
-  const { handleSubmit, register, formState: { errors }, reset } = useForm<FormData>();
+  const initState = {
+    _id: '',
+    image: '',
+    name: '',
+    content: '',
+  }
+  const [formInput, setFormInput] = useState<any>(initState)
+  const [ImagePreview, setImagePreview] = useState<any>('')
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
-    reset({})
     setOpen(true)
   }
   const handleClose = () => {
     setOpen(false)
-    reset({})
+    setFormInput(initState)
+    setImagePreview('')
   }
+
+  const handleChangeImage = (e: any) => {
+    let files = e.target.files || e.dataTransfer.files
+    if (!files.length) return
+
+    const file = files[0]
+    setFormInput({ ...formInput, image: file })
+    const reader = new FileReader()
+    reader.onloadend = function (e) {
+      setImagePreview(e.target?.result)
+    }
+    reader.readAsDataURL(file)
+  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    const inputValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
+    setFormInput({ ...formInput, [name]: inputValue });
+  };
 
   const mutation = useMutation({
     mutationFn: (formData: FormData) => {
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('image', formData.image[0]); // Access the first file in the FileList
-      formDataToSend.append('content', formData.content);
-      formDataToSend.append('date', formData.date);
-      return axios.post('/our-new', formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+      if (formData._id) {
+        const formDataToSend = new FormData();
+        formDataToSend.append('name', formData.name);
+        if (formData.image) {
+          formDataToSend.append('image', formData.image)
         }
-      }).then(() => {
-        refetch()
-        handleClose()
-        reset()
-      })
+        formDataToSend.append('content', formData.content);
+        formDataToSend.append('date', formData.date);
+        formDataToSend.append('_method', 'PUT')
+        return axios.put(`/our-new/${formData._id}`, formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        }).then(() => {
+          refetch()
+          handleClose()
+          setFormInput(initState)
+        })
+      } else {
+        const formDataToSend = new FormData();
+        formDataToSend.append('name', formData.name);
+        formDataToSend.append('image', formData.image); // Access the first file in the FileList
+        formDataToSend.append('content', formData.content);
+        formDataToSend.append('date', formData.date);
+        return axios.post('/our-new', formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        }).then(() => {
+          refetch()
+          handleClose()
+          setFormInput(initState)
+        })
+      }
     },
   })
-
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => {
@@ -65,40 +109,22 @@ const News = ({ data, refetch }: any) => {
       })
     },
   })
+
+
+
+  const handleEdit = (data: any) => {
+    setFormInput({ ...data })
+    setImagePreview(data.image)
+    handleOpen()
+  }
   const handleDelete = (id: string) => {
     deleteMutation.mutate(id)
   }
-
-  const updateMutation = useMutation({
-    mutationFn: (formData: FormData) => {
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('image', formData.image[0]); // Access the first file in the FileList
-      formDataToSend.append('content', formData.content);
-      formDataToSend.append('date', formData.date);
-      formDataToSend.append('_method', 'PUT')
-      return axios.put(`/our-new/${formData._id}`, formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-      }).then(() => {
-        refetch();
-        handleClose();
-        reset();
-      })
-    },
-  })
-  const handleEdit = (data: any) => {
-    reset({ ...data })
-    handleOpen()
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    mutation.mutate(formInput);
   }
 
-  const onSubmit = (data: any) => {
-    const image = data.image[0] ? data.image : null
-    if (data._id) updateMutation.mutate({ ...data, image }, data._id)
-    else mutation.mutate(data)
-  }
-  console.log(matches)
   return (
     <div className="container">
       <div className='text-end mt-3'>
@@ -145,39 +171,58 @@ const News = ({ data, refetch }: any) => {
         open={open}
         onClose={handleClose}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <Box sx={style}>
-            <input type="file" {...register('image')} />
-            <TextField
-              {...register('name', { required: true })}
-              label="Name"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              error={!!errors.name}
-              helperText={errors.name ? "First Name is required" : ""}
-            />
-            <TextField
-              {...register('content', { required: true })}
-              label="Content"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              error={!!errors.content}
-              helperText={errors.content ? "First Name is required" : ""}
-            />
-            <TextField
-              {...register('date', { required: true })}
-              label="Date"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              error={!!errors.date}
-              helperText={errors.date ? "First Name is required" : ""}
-            />
-            <Button variant='contained' type='submit'>
+            <input type="file" name='image' onChange={handleChangeImage} />
+            {ImagePreview && (
+              <img
+                src={ImagePreview}
+                className='h-[200px] w-full'
+                alt=""
+                onError={(e) => {
+                  (e.target as any).src = default_image
+                }}
+              />
+            )}
+            <div className='text-red-700'>
+              {mutation.isError && (mutation.error as any).response.data.message}
+            </div>
+            <div className='mb-3'>
+              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Name
+              </label>
+              <input
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                name="name"
+                onChange={handleChange}
+                value={formInput.name}
+                placeholder="John"
+                required
+              />
+            </div>
+            <div className='mb-3'>
+              <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Content
+              </label>
+              <textarea
+                id="content"
+                rows={4}
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Write your thoughts here..."
+                name='content'
+                onChange={handleChange}
+                value={formInput.content}
+                required
+              ></textarea>
+            </div>
+            <LoadingButton
+              loading={mutation.isPending}
+              variant='contained'
+              type='submit'
+            >
               Create
-            </Button>
+            </LoadingButton>
           </Box>
         </form>
       </Modal>

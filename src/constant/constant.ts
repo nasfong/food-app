@@ -10,6 +10,7 @@ export const admin = !!localStorage.getItem('admin')
 export const default_image = '/image/default-image.jpg'
 
 export const sign_in = {
-  username: 'maom@maomkhmercuisine.com',
+  username: 'admin@maomkhmercuisine.com',
   password: '12345'
 }
+// .6o@VA[k-}ip

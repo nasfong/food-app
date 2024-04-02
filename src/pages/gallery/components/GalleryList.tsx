@@ -150,7 +150,7 @@ const GalleryList = () => {
       >
         <form onSubmit={onSubmit}>
           <Box sx={{
-            position: 'absolute' as 'absolute',
+            position: 'absolute' as const,
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
@@ -159,6 +159,9 @@ const GalleryList = () => {
             border: '2px solid #000',
             boxShadow: 24,
             p: 4,
+            overflow: 'scroll',
+            height: '60vh',
+            display: 'block'
           }}>
             <input type="file" name='image' onChange={handleChangeImage} />
             {ImagePreview && (

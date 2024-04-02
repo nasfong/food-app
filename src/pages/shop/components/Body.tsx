@@ -55,6 +55,7 @@ const style = {
 };
 
 const Body = () => {
+  const { foodType } = useParams()
   const [ImagePreview, setImagePreview] = useState<any>('')
   const [currentPage, setCurrentPage] = useState(1)
   const initState = {
@@ -76,7 +77,6 @@ const Body = () => {
         res.data,
       ),
   })
-  const { foodType } = useParams()
   const { data, refetch, isLoading, error } = useQuery<FoodQuery>({
     queryKey: ['food', { foodType: foodType, pageSize: 3, page: currentPage }],
     queryFn: () =>
@@ -238,6 +238,19 @@ const Body = () => {
       <Background data={foodTypeList?.find(item => item._id === foodType) || { image: 'https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg', title: 'Shop' }} />
       <div className='container text-center my-20'>
         <div className='mb-10 flex flex-wrap justify-start md:justify-center gap-3'>
+          <NavLink
+            to={`/shop/shop`}
+            onClick={() => setCurrentPage(1)}
+            className={`
+            uppercase mx-5 
+            hover:border-b border-[#CB933D] 
+            hover:text-[#CB933D]
+            transition-colors duration-500 ease-in-out
+            ${'shop' === foodType ? 'text-[#CB933D] text-xl border-b border-[#CB933D]' : ''}
+            `}
+          >
+            All
+          </NavLink>
           {foodTypeList?.map((item, index) => (
             <NavLink
               key={index}
