@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import './../../../promoition.css';
 import { default_image } from '@/constant/constant';
 type Props = {
-  data: { image: string, title: string, description: string }
+  data: { image: string, name: string, description: string }
 }
 
 const SlideWithCard = ({ data }: Props) => {
@@ -23,7 +23,7 @@ const SlideWithCard = ({ data }: Props) => {
         }}
       />
       <div className='absolute bg-white bg-opacity-90 p-10 text-center max-w-[800px]'>
-        <div className='title'>{data.title}</div>
+        <div className='title'>{data.name}</div>
         <div className='mt-5'>
           {data.description}
         </div>

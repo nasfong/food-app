@@ -149,14 +149,14 @@ export default function ElevateAppBar(props: Props) {
               </div>
               <div className='flex align-middle' onClick={() => navigate('contact-us')}>
                 <div>Contact Us</div>
-                <img
+                {/* <img
                   src="/svg/facebook.svg"
                   alt=""
                   style={{ height: 20 }}
                   onError={(e) => {
                     (e.target as any).src = default_image
                   }}
-                />
+                /> */}
               </div>
             </div>
           </AppBar>

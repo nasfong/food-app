@@ -8,7 +8,7 @@ import { Pagination } from 'swiper/modules';
 
 import './../../../food.css'
 import { useNavigate } from 'react-router-dom';
-import { default_image } from '@/constant/constant';
+import { admin, default_image } from '@/constant/constant';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -113,35 +113,37 @@ const Food = ({ data, refetch }: any) => {
     },
   })
 
-  const deleteMutation = useMutation({
-    mutationFn: (id: string) => {
-      return axios.delete(`/food-type/${id}`).then(() => {
-        refetch()
-      })
-    },
-  })
+  // const deleteMutation = useMutation({
+  //   mutationFn: (id: string) => {
+  //     return axios.delete(`/food-type/${id}`).then(() => {
+  //       refetch()
+  //     })
+  //   },
+  // })
 
-  const handleEdit = (data: any) => {
-    setFormInput({ ...data })
-    setImagePreview(data.image)
-    handleOpen()
-  }
-  const handleDelete = (id: string) => {
-    deleteMutation.mutate(id)
-  }
+  // const handleEdit = (data: any) => {
+  //   setFormInput({ ...data })
+  //   setImagePreview(data.image)
+  //   handleOpen()
+  // }
+  // const handleDelete = (id: string) => {
+  //   deleteMutation.mutate(id)
+  // }
   const onSubmit = (e: any) => {
     e.preventDefault();
     mutation.mutate(formInput);
   }
   return (
-    <div className="h-[400px] mt-10 mb-28 bg-gray container mx-auto text-center">
+    <div className="h-[400px] my-10 mb-20 bg-gray container mx-auto text-center">
       <div>
         <div className='form-to'>From 11:00am to 10:00pm</div>
         <div className='title'>ORDER ONLINE</div>
       </div>
-      <div className='text-end mt-3'>
-        <Button variant='contained' onClick={handleOpen}>Add Food-Type</Button>
-      </div>
+      {admin && (
+        <div className='text-end mt-3'>
+          <Button variant='contained' onClick={handleOpen}>Add Food-Type</Button>
+        </div>
+      )}
       <Swiper
         slidesPerView={1}
         spaceBetween={10}
@@ -185,16 +187,19 @@ const Food = ({ data, refetch }: any) => {
               {item.name}
             </div>
             <div className="inner-shadow-footer"></div>
-            <Button
-              variant='contained'
-              color='primary'
-              onClick={() => handleEdit(item)}
-            >Edit</Button>
-            <Button
-              variant='contained'
-              color='error'
-              onClick={() => handleDelete(item._id)}
-            >Delete</Button>
+            {/* <div className='absolute bottom-0'>
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={() => handleEdit(item)}
+              >Edit</Button>
+              <Button
+                variant='contained'
+                color='error'
+                onClick={() => handleDelete(item._id)}
+              >Delete</Button>
+            </div> */}
+
           </SwiperSlide>
         ))}
       </Swiper>
@@ -235,7 +240,7 @@ const Food = ({ data, refetch }: any) => {
             </div>
             <div className='mb-3'>
               <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Content
+                Description
               </label>
               <textarea
                 id="content"

@@ -44,7 +44,7 @@ const Home = () => {
     queryFn: () =>
       axios.get('/food/random/6').then((res) => res.data),
   })
-  const { data: dataFoodType } = useQuery<any[]>({
+  const { data: dataFoodType, refetch } = useQuery<any[]>({
     queryKey: ['food-type'],
     queryFn: () =>
       axios.get('/food-type').then((res) =>
@@ -59,7 +59,7 @@ const Home = () => {
   return (
     <div>
       <Slider />
-      <Food data={dataFoodType} />
+      <Food data={dataFoodType} refetch={refetch} />
       <Promotion />
       <RadomDish data={dataRandom} />
       <CallUs />
