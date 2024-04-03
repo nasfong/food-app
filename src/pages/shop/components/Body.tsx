@@ -239,14 +239,14 @@ const Body = () => {
       <div className='container text-center my-20'>
         <div className='mb-10 flex flex-wrap justify-start md:justify-center gap-3'>
           <NavLink
-            to={`/shop/shop`}
+            to={`/shop`}
             onClick={() => setCurrentPage(1)}
             className={`
             uppercase mx-5 
             hover:border-b border-[#CB933D] 
             hover:text-[#CB933D]
             transition-colors duration-500 ease-in-out
-            ${'shop' === foodType ? 'text-[#CB933D] text-xl border-b border-[#CB933D]' : ''}
+            ${foodType === undefined ? 'text-[#CB933D] border-b border-[#CB933D]' : ''}
             `}
           >
             All
@@ -261,7 +261,7 @@ const Body = () => {
             hover:border-b border-[#CB933D] 
             hover:text-[#CB933D]
             transition-colors duration-500 ease-in-out
-            ${item._id === foodType ? 'text-[#CB933D] text-xl border-b border-[#CB933D]' : ''}
+            ${item._id === foodType ? 'text-[#CB933D] border-b border-[#CB933D]' : ''}
             `}
             >
               {item.name}
@@ -326,7 +326,7 @@ const Body = () => {
                   name="name"
                   onChange={handleChange}
                   value={formInput.name}
-                  placeholder="John"
+                  placeholder="name"
                   required
                 />
               </div>
@@ -340,7 +340,7 @@ const Body = () => {
                   name="description"
                   onChange={handleChange}
                   value={formInput.description}
-                  placeholder="John"
+                  placeholder="description"
                   required
                 />
               </div>
@@ -354,7 +354,7 @@ const Body = () => {
                   name="price"
                   onChange={handleChange}
                   value={formInput.price}
-                  placeholder="John"
+                  placeholder="0"
                   required
                 />
               </div>

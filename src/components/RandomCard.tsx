@@ -1,5 +1,5 @@
 import { default_image } from '@/constant/constant';
-import { truncateDescription } from '@/lib/utils';
+import { formatMoney, truncateDescription } from '@/lib/utils';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ const RandomCard = ({ item, index }: any) => {
   const navigate = useNavigate()
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   return (
-    <div className="relative flex" onClick={() => navigate(`/shop/${item._id}/${item.foodType}/detail`)}>
+    <div className="relative flex cursor-pointer" onClick={() => navigate(`/shop/${item._id}/${item.foodType}/detail`)}>
       <img
         src={item?.image}
         className='rounded-corner-img'
@@ -20,7 +20,7 @@ const RandomCard = ({ item, index }: any) => {
       <div className='ml-2 w-[100%]'>
         <div className="flex justify-between border-b-2 border-dashed">
           <div className='text-xl'>{item?.name}</div>
-          <div className='text-lg text-[var(--color)]'>${item?.price}</div>
+          <div className='text-lg text-[var(--color)]'>{formatMoney(item.price)}</div>
         </div>
         <div className="mt-1 flex items-start text-sm">{truncateDescription(item.description, 70)}</div>
       </div>

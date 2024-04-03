@@ -134,7 +134,7 @@ const Food = ({ data, refetch }: any) => {
     mutation.mutate(formInput);
   }
   return (
-    <div className="h-[400px] my-10 mb-20 bg-gray container mx-auto text-center">
+    <div className="h-[400px] my-10 mb-40 bg-gray container mx-auto text-center">
       <div>
         <div className='form-to'>From 11:00am to 10:00pm</div>
         <div className='title'>ORDER ONLINE</div>
@@ -234,7 +234,7 @@ const Food = ({ data, refetch }: any) => {
                 name="name"
                 onChange={handleChange}
                 value={formInput.name}
-                placeholder="John"
+                placeholder="name"
                 required
               />
             </div>

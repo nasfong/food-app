@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
 import { Badge, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme } from '@mui/material';
-import { LocalGroceryStore, Menu } from '@mui/icons-material';
+import { FacebookOutlined, LocalGroceryStore, Menu, Telegram } from '@mui/icons-material';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
 import { address, admin, default_image, phone } from '@/constant/constant';
@@ -147,8 +147,11 @@ export default function ElevateAppBar(props: Props) {
                   </div>
                 </div>
               </div>
-              <div className='flex align-middle' onClick={() => navigate('contact-us')}>
+              <div className='flex align-middle gap-3' onClick={() => navigate('contact-us')}>
                 <div>Contact Us</div>
+                <FacebookOutlined sx={{ color: '#fff' }} fontSize='small' />
+                <Telegram sx={{ color: '#fff' }} fontSize='small' />
+                <img src="/svg/tiktok.svg" alt="" className='w-[20px] h-[20px]' />
                 {/* <img
                   src="/svg/facebook.svg"
                   alt=""

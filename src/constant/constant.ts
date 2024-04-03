@@ -13,4 +13,10 @@ export const sign_in = {
   username: 'admin@maomkhmercuisine.com',
   password: '12345'
 }
+
+
+export const location = {
+  lat: 11.562108,
+  lng: 104.888535
+};
 // .6o@VA[k-}ip

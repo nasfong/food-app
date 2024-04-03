@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view'
 import { LoadingButton } from '@mui/lab'
 import 'react-photo-view/dist/react-photo-view.css';
-import { default_image } from '@/constant/constant';
+import { admin, default_image } from '@/constant/constant';
 interface FormData {
   _id: string
   image: string
@@ -111,9 +111,11 @@ const GalleryList = () => {
   };
   return (
     <div className='container my-20'>
-      <div className='text-end mb-6'>
-        <Button variant='contained' onClick={handleOpen}>Add Food</Button>
-      </div>
+      {admin && (
+        <div className='text-end mb-6'>
+          <Button variant='contained' onClick={handleOpen}>Add Food</Button>
+        </div>
+      )}
       <PhotoProvider>
         <div className="flex flex-wrap justify-center gap-3">
           {data?.map((item, index) => (

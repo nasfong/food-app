@@ -1,10 +1,27 @@
 // import { Rating } from "@material-tailwind/react"
 import { default_image } from "@/constant/constant"
 import { formatMoney } from "@/lib/utils"
+import { Check } from "@mui/icons-material"
+import { CircularProgress } from "@mui/material"
 import { useState } from "react"
 
 const FoodCard = ({ data, handleAddCard }: any) => {
   const [count, setCount] = useState(1)
+  const [cardStates, setCardStates] = useState<{ loading: boolean; checked: boolean; }>({
+    loading: false,
+    checked: false
+  });
+
+  const handleButtonClick = (item: any) => {
+    setCardStates({ ...cardStates, loading: true })
+    setTimeout(() => {
+      setCardStates({ loading: false, checked: true })
+      handleAddCard(item, 1);
+      setTimeout(() => {
+        setCardStates({ loading: false, checked: false })
+      }, 3000);
+    }, 1500);
+  };
   return (
     <div className='container flex justify-center'>
       {/* Card */}
@@ -36,13 +53,15 @@ const FoodCard = ({ data, handleAddCard }: any) => {
           <div className="flex gap-3">
             <button
               className="text-white bg-[#d1a054] 
-              hover:bg-black focus:ring-4 focus:outline-none 
-              focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 
-              text-center dark:bg-blue-600 dark:hover:bg-blue-700 
-              dark:focus:ring-blue-800"
-              onClick={() => handleAddCard(data, count)}
+               font-medium rounded-lg text-sm px-5 py-2.5  
+              text-center flex justify-center align-middle gap-3"
+              onClick={() => handleButtonClick(data)}
             >
-              Add to cart
+              <span>Add to cart</span>
+              {cardStates?.loading && (
+                <CircularProgress size="1rem" color='inherit' />
+              )}
+              {cardStates?.checked && <Check fontSize='small' />}
             </button>
             {/* count */}
             <div className="relative flex items-center max-w-[8rem]">

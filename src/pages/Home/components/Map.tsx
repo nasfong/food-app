@@ -1,3 +1,4 @@
+import { location } from '@/constant/constant';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
 
@@ -6,10 +7,6 @@ const containerStyle = {
   height: '400px'
 };
 
-const center = {
-  lat: 11.562108,
-  lng: 104.888535
-}; // Phnom Penh
 
 const Map = () => {
 
@@ -22,7 +19,7 @@ const Map = () => {
 
   const onLoad = useCallback(function callback(map: any) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
+    const bounds = new window.google.maps.LatLngBounds(location);
     map.fitBounds(bounds);
 
     setMap(map)
@@ -34,15 +31,15 @@ const Map = () => {
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={center}
+      center={location}
       zoom={10}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-      
-      <Marker position={center}></Marker>
+
+      <Marker position={location}></Marker>
     </GoogleMap>
-) : <></>
+  ) : <></>
 }
 
 export default Map

@@ -37,8 +37,8 @@ const ShopDetail = () => {
       axios.get('/comment', { params: { food: foodId } }).then((res) => res.data),
   })
 
-  const handleAddCard = async (data: any, quantity: number) => {
-    await addCard(data, quantity)
+  const handleAddCard = (data: any, quantity: number) => {
+    addCard(data, quantity)
   }
 
   return (
