@@ -1,4 +1,3 @@
-import { FacebookOutlined, Telegram } from '@mui/icons-material';
 import '../styles/footer.css'
 import { IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';

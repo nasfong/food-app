@@ -6,10 +6,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
 import { Badge, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme } from '@mui/material';
-import { FacebookOutlined, LocalGroceryStore, Menu, Telegram } from '@mui/icons-material';
+import { LocalGroceryStore, Menu } from '@mui/icons-material';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
-import { address, admin, default_image, phone } from '@/constant/constant';
+import { address, admin, phone } from '@/constant/constant';
 import { address_icon, facebook_icon, phone_icon, telegram_icon, tiktok_icon } from '@/constant/data';
 
 const reload = () => window.location.reload()
