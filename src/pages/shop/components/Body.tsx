@@ -78,9 +78,9 @@ const Body = () => {
       ),
   })
   const { data, refetch, isLoading, error } = useQuery<FoodQuery>({
-    queryKey: ['food', { foodType: foodType, pageSize: 3, page: currentPage }],
+    queryKey: ['food', { foodType: foodType, pageSize: 6, page: currentPage }],
     queryFn: () =>
-      axios.get('/food', { params: { foodType: foodType, pageSize: 3, page: currentPage } }).then((res) => res.data),
+      axios.get('/food', { params: { foodType: foodType, pageSize: 6, page: currentPage } }).then((res) => res.data),
   })
   const [open, setOpen] = useState(false)
   const handleOpen = () => {

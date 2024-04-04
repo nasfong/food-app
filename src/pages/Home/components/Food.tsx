@@ -34,7 +34,7 @@ const style = {
   p: 4,
 };
 
-const Food = ({ data, refetch }: any) => {
+const Food = ({ data, refetch, isLoading }: any) => {
   const navigate = useNavigate()
   const handleClick = (foodType: string) => {
     navigate(`shop/${foodType}`)
@@ -144,50 +144,53 @@ const Food = ({ data, refetch }: any) => {
           <Button variant='contained' onClick={handleOpen}>Add Food-Type</Button>
         </div>
       )}
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={10}
-        pagination={{
-          clickable: true,
-        }}
-        breakpoints={{
-          380: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-          1024: {
-            slidesPerView: 5,
-            spaceBetween: 50,
-          },
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        {data?.map((item, index) => (
-          <SwiperSlide key={index} onClick={() => handleClick(item._id)}>
-            <img
-              src={item.image || 'https://www.invoicera.com/wp-content/uploads/2023/11/default-image.jpg'}
-              alt={`Slide 1s`}
-              className='img rounded-lg'
-              onError={(e) => {
-                (e.target as any).src = default_image
-              }}
-            />
-            <div className=' border border-white absolute top-[10px] bottom-[10px] left-[5px] right-[5px]'></div>
-            <div className="inner-shadow-food"></div>
-            <div className='absolute bottom-16 text-white uppercase font-bold'>
-              {item.name}
-            </div>
-            <div className="inner-shadow-footer"></div>
-            {/* <div className='absolute bottom-0'>
+      {isLoading ? (
+        <div>Loading</div>
+      ) : (
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={10}
+          pagination={{
+            clickable: true,
+          }}
+          breakpoints={{
+            380: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 50,
+            },
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+        >
+          {data?.map((item, index) => (
+            <SwiperSlide key={index} onClick={() => handleClick(item._id)}>
+              <img
+                src={item.image || 'https://www.invoicera.com/wp-content/uploads/2023/11/default-image.jpg'}
+                alt={`Slide 1s`}
+                className='img rounded-lg'
+                onError={(e) => {
+                  (e.target as any).src = default_image
+                }}
+              />
+              <div className=' border border-white absolute top-[10px] bottom-[10px] left-[5px] right-[5px]'></div>
+              <div className="inner-shadow-food"></div>
+              <div className='absolute bottom-16 text-white uppercase font-bold'>
+                {item.name}
+              </div>
+              <div className="inner-shadow-footer"></div>
+              {/* <div className='absolute bottom-0'>
               <Button
                 variant='contained'
                 color='primary'
@@ -200,9 +203,10 @@ const Food = ({ data, refetch }: any) => {
               >Delete</Button>
             </div> */}
 
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
 
       <Modal
         open={open}

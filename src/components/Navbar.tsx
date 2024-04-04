@@ -7,7 +7,7 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
 import { Badge, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import { FacebookOutlined, LocalGroceryStore, Menu, Telegram } from '@mui/icons-material';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
 import { address, admin, default_image, phone } from '@/constant/constant';
 
@@ -152,14 +152,6 @@ export default function ElevateAppBar(props: Props) {
                 <FacebookOutlined sx={{ color: '#fff' }} fontSize='small' />
                 <Telegram sx={{ color: '#fff' }} fontSize='small' />
                 <img src="/svg/tiktok.svg" alt="" className='w-[20px] h-[20px]' />
-                {/* <img
-                  src="/svg/facebook.svg"
-                  alt=""
-                  style={{ height: 20 }}
-                  onError={(e) => {
-                    (e.target as any).src = default_image
-                  }}
-                /> */}
               </div>
             </div>
           </AppBar>
@@ -185,32 +177,43 @@ export default function ElevateAppBar(props: Props) {
             >
               <Menu />
             </IconButton>
-            <Typography variant="h6" component="div">
+            <Typography variant="h6" component="div" className='cursor-pointer' onClick={() => navigate('/')}>
               <img src="/image/logo-menu.png" alt="" className='h-[40px] w-[40px]' />
             </Typography>
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                {navItems.map((item) => (
+                {navItems.map((item, index) => (
                   item.url === '/sign-in' ? (
-                    <Button
-                      key={item.label}
-                      sx={{ color: '#fff', fontFamily: '"Gideon Roman", serif', fontWeight: 500 }}
-                      onMouseEnter={() => handleMouseEnter(item)}
-                      onMouseLeave={handleMouseLeave}
+                    <NavLink
+                      key={index}
+                      to={admin ? null : item.url}
+                      className={`
+                    text-sm
+                    uppercase mx-5 
+                    hover:border-b border-[#CB933D] 
+                    hover:text-[#CB933D]
+                    font-bold
+                    ${location.pathname === item.url ? 'text-[#CB933D] border-b border-[#CB933D]' : ''}
+                    `}
                       onClick={() => admin ? logout() : handleClick(item.url)}
                     >
                       {admin ? 'Logout' : item.label}
-                    </Button>
+                    </NavLink>
                   ) : (
-                    <Button
-                      key={item.label}
-                      sx={{ color: '#fff', fontFamily: '"Gideon Roman", serif', fontWeight: 500 }}
-                      onMouseEnter={() => handleMouseEnter(item)}
-                      onMouseLeave={handleMouseLeave}
-                      onClick={() => handleClick(item.url)}
+                    <NavLink
+                      key={index}
+                      to={item.url}
+                      className={`
+                      text-sm
+                      uppercase mx-5 
+                      hover:border-b border-[#CB933D] 
+                      hover:text-[#CB933D]
+                      font-bold
+                      ${location.pathname === item.url ? 'text-[#CB933D] border-b border-[#CB933D]' : ''}
+                      `}
                     >
                       {item.label}
-                    </Button>
+                    </NavLink>
                   )
                 ))}
               </Box>

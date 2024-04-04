@@ -26,7 +26,7 @@ const FoodCard = ({ item, index, handleButtonClick, cardStates, handleEdit, hand
         </div>
       </Link>
       <div className="relative flex-grow px-8 py-6 flex flex-col items-center justify-between">
-        <div className='border-dashed border border-gray-400 absolute top-[10px] bottom-[10px] left-[10px] right-[10px]'></div>
+        <div className='border-dashed border border-gray-300 absolute top-[5px] bottom-[5px] left-[5px] right-[5px]'></div>
         <div>
           <div className="font-bold text-xl mb-2">{item.name}</div>
           <p className="text-gray-700 text-base">
