@@ -10,6 +10,7 @@ import { FacebookOutlined, LocalGroceryStore, Menu, Telegram } from '@mui/icons-
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
 import { address, admin, default_image, phone } from '@/constant/constant';
+import { address_icon, facebook_icon, phone_icon, telegram_icon, tiktok_icon } from '@/constant/data';
 
 const reload = () => window.location.reload()
 
@@ -69,10 +70,6 @@ export default function ElevateAppBar(props: Props) {
 
   const [_, setHoveredItem] = React.useState(null);
 
-  const handleMouseEnter = (item: any) => {
-    setHoveredItem(item);
-  };
-
   const handleMouseLeave = () => {
     setHoveredItem(null);
   };
@@ -118,40 +115,43 @@ export default function ElevateAppBar(props: Props) {
               transform: trigger ? "translateY(-100%)" : "translateY(0)",
             }}
           >
-            <div className='flex justify-between items-center p-2'>
+            <div className='flex justify-between items-center p-2 container'>
               <div className='flex gap-x-10'>
-                <div className='flex align-middle items-center'>
-                  <img
-                    src="/svg/map.svg"
-                    alt=""
-                    style={{ height: 15 }}
-                    onError={(e) => {
-                      (e.target as any).src = default_image
-                    }}
+                <div className='flex align-middle items-center gap-2'>
+                  <div
+                    className='icon'
+                    dangerouslySetInnerHTML={{ __html: address_icon }}
                   />
-                  <div>
+                  <div className='font-bold'>
                     {address}
                   </div>
                 </div>
-                <div className='flex align-middle items-center'>
-                  <img
-                    src="/svg/phone.svg"
-                    alt=""
-                    style={{ height: 15 }}
-                    onError={(e) => {
-                      (e.target as any).src = default_image
-                    }}
+                <div className='flex align-middle items-center gap-2 hover:text-[--color] icon-hover cursor-pointer'>
+                  <div
+                    className='icon'
+                    dangerouslySetInnerHTML={{ __html: phone_icon }}
                   />
-                  <div>
+                  <div className='font-bold'>
                     {phone}
                   </div>
                 </div>
               </div>
-              <div className='flex align-middle gap-3' onClick={() => navigate('contact-us')}>
-                <div>Contact Us</div>
-                <FacebookOutlined sx={{ color: '#fff' }} fontSize='small' />
-                <Telegram sx={{ color: '#fff' }} fontSize='small' />
-                <img src="/svg/tiktok.svg" alt="" className='w-[20px] h-[20px]' />
+              <div className='flex align-middle gap-3'>
+                <div className='font-bold cursor-pointer hover:text-[--color]' onClick={() => navigate('contact-us')}>
+                  Contact Us
+                </div>
+                <div
+                  className='icon icon-hover cursor-pointer'
+                  dangerouslySetInnerHTML={{ __html: facebook_icon }}
+                />
+                <div
+                  className='icon icon-hover cursor-pointer'
+                  dangerouslySetInnerHTML={{ __html: telegram_icon }}
+                />
+                <div
+                  className='icon icon-hover cursor-pointer'
+                  dangerouslySetInnerHTML={{ __html: tiktok_icon }}
+                />
               </div>
             </div>
           </AppBar>
@@ -164,10 +164,11 @@ export default function ElevateAppBar(props: Props) {
             backgroundColor: trigger || location.pathname === '/store' || location.pathname === '/sign-in' ? "#1A2124" : "transparent",
             transition: "background-color 0.5s ease, transform 0.5s ease",
             boxShadow: 0,
-            transform: isMobile || trigger ? "translateY(0)" : "translateY(30%)"
+            transform: isMobile || trigger ? "translateY(0)" : "translateY(30%)",
+            px: 0,
           }}
         >
-          <Toolbar className='py-6 flex justify-between'>
+          <Toolbar className='py-6 flex justify-between container' style={{ paddingLeft: 0, paddingRight: 0 }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"

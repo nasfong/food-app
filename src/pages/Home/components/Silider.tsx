@@ -32,8 +32,8 @@ const Slider = () => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
-    const offsetX = (mouseX - textCenterX) / textRect.width * (-20); // Adjust this value for the distance of the shadow effect
-    const offsetY = (mouseY - textCenterY) / textRect.height * (-20); // Adjust this value for the distance of the shadow effect
+    const offsetX = (mouseX - textCenterX) / textRect.width * (-40); // Adjust this value for the distance of the shadow effect
+    const offsetY = (mouseY - textCenterY) / textRect.height * (-40); // Adjust this value for the distance of the shadow effect
 
     const distance = Math.sqrt(offsetX ** 2 + offsetY ** 2); // Euclidean distance from center
 
@@ -60,6 +60,9 @@ const Slider = () => {
             key={idx} className=''
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
+            style={{
+              backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.25) 60%,rgba(0,0,0,1) 100%), url(${image})`
+            }}
           >
             <img
               key={idx}
@@ -70,8 +73,9 @@ const Slider = () => {
               onError={(e) => {
                 (e.target as any).src = default_image
               }}
+             
             />
-            <div className="inner-shadow"></div>
+            <div className="gradient-overlay" />
             <div className='absolute inset-0 flex flex-col justify-center items-center text-center text-white'>
               <h1
                 id="animated-text"

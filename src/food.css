@@ -5,9 +5,7 @@ body {
   margin: 0;
   padding: 0;
 }
-:root {
-  --color: #d1a054;
-}
+
 
 .swiper {
   width: 100%;

@@ -3,6 +3,7 @@ import '../styles/footer.css'
 import { IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { address, facebook, holiday, phone, telegram, tiktok, weekday } from '@/constant/constant';
+import { facebook_icon, telegram_icon, tiktok_icon } from '@/constant/data';
 
 const Footer = () => {
   const navigate = useNavigate()
@@ -25,13 +26,22 @@ const Footer = () => {
           <div className='text-2xl text-[#CB933D] mb-3'>Follow Us</div>
           <div>Join us on social networks</div>
           <IconButton size="large" onClick={() => handleSocial(facebook)}>
-            <FacebookOutlined sx={{ color: '#fff' }} fontSize='large' />
+            <div
+              className='icon-footer icon-hover'
+              dangerouslySetInnerHTML={{ __html: facebook_icon }}
+            />
           </IconButton>
           <IconButton size="large" onClick={() => handleSocial(telegram)}>
-            <Telegram sx={{ color: '#fff' }} fontSize='large' />
+            <div
+              className='icon-footer icon-hover'
+              dangerouslySetInnerHTML={{ __html: telegram_icon }}
+            />
           </IconButton>
           <IconButton size="large" onClick={() => handleSocial(tiktok)}>
-            <img src="/svg/tiktok.svg" alt="" />
+            <div
+              className='icon-footer icon-hover'
+              dangerouslySetInnerHTML={{ __html: tiktok_icon }}
+            />
           </IconButton>
         </div>
       </div>
