@@ -39,7 +39,7 @@ const Slider = () => {
 
     const maxDistance = 20; // Maximum distance for full blur
     const blurRatio = Math.min(distance / maxDistance, 1); // Ratio of current distance to maximum distance (clamped between 0 and 1)
-    const maxBlur = 10; // Maximum blur radius
+    const maxBlur = 20; // Maximum blur radius
     const blur = Math.round(blurRatio * maxBlur); // Apply blur ratio to maximum blur
 
     setShadowOffsetX(offsetX);

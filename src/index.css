@@ -152,8 +152,8 @@
 }
 
 .icon svg {
-  width: 20px; /* Specify the width */
-  height: 20px; /* Specify the height */
+  width: 15px; /* Specify the width */
+  height: 15px; /* Specify the height */
 }
 .icon-footer svg {
   width: 35px; /* Specify the width */
@@ -180,4 +180,14 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(to top, rgba(0,0,0,0.25) 60%,rgba(0,0,0,1) 100%);
+}
+
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinners {
+  -moz-appearance: textfield;
 }

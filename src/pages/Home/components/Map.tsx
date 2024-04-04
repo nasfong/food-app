@@ -17,13 +17,13 @@ const Map = () => {
 
   const [_, setMap] = useState(null)
 
-  const onLoad = useCallback(function callback(map: any) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(location);
-    map.fitBounds(bounds);
+  // const onLoad = useCallback(function callback(map: any) {
+  //   // This is just an example of getting and using the map instance!!! don't just blindly copy!
+  //   const bounds = new window.google.maps.LatLngBounds(location);
+  //   map.fitBounds(bounds);
 
-    setMap(map)
-  }, [])
+  //   setMap(map)
+  // }, [])
 
   const onUnmount = useCallback(function callback(_: any) {
     setMap(null)
@@ -32,8 +32,8 @@ const Map = () => {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={location}
-      zoom={10}
-      onLoad={onLoad}
+      zoom={15}
+      // onLoad={onLoad}
       onUnmount={onUnmount}
     >
 

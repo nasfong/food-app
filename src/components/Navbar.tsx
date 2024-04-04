@@ -12,7 +12,6 @@ import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } fr
 import { address, admin, phone } from '@/constant/constant';
 import { address_icon, facebook_icon, phone_icon, telegram_icon, tiktok_icon } from '@/constant/data';
 
-const reload = () => window.location.reload()
 
 const navItems = [
   { label: 'Home', url: '/' },
@@ -32,6 +31,14 @@ interface Props {
   window?: () => Window;
   children?: any;
 }
+
+function logout() {
+  localStorage.removeItem('admin')
+  setTimeout(() => {
+    window.location.reload()
+  }, 500)
+}
+
 
 
 function ElevationScroll(props: Props) {
@@ -78,12 +85,6 @@ export default function ElevateAppBar(props: Props) {
     navigate(url)
   }
 
-  function logout() {
-    localStorage.removeItem('admin')
-    setTimeout(() => {
-      reload()
-    }, 500)
-  }
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', bgcolor: '#1a2124', color: '#fff', minHeight: '100%' }}>
@@ -115,14 +116,14 @@ export default function ElevateAppBar(props: Props) {
               transform: trigger ? "translateY(-100%)" : "translateY(0)",
             }}
           >
-            <div className='flex justify-between items-center p-2 container'>
+            <div className='flex justify-between items-center px-2 py-2 container text-sm font-medium'>
               <div className='flex gap-x-10'>
                 <div className='flex align-middle items-center gap-2'>
                   <div
                     className='icon'
                     dangerouslySetInnerHTML={{ __html: address_icon }}
                   />
-                  <div className='font-bold'>
+                  <div className=''>
                     {address}
                   </div>
                 </div>
@@ -131,27 +132,29 @@ export default function ElevateAppBar(props: Props) {
                     className='icon'
                     dangerouslySetInnerHTML={{ __html: phone_icon }}
                   />
-                  <div className='font-bold'>
+                  <div className=''>
                     {phone}
                   </div>
                 </div>
               </div>
-              <div className='flex align-middle gap-3'>
-                <div className='font-bold cursor-pointer hover:text-[--color]' onClick={() => navigate('contact-us')}>
+              <div className='flex align-middle gap-8'>
+                <div className=' cursor-pointer hover:text-[--color]' onClick={() => navigate('contact-us')}>
                   Contact Us
                 </div>
-                <div
-                  className='icon icon-hover cursor-pointer'
-                  dangerouslySetInnerHTML={{ __html: facebook_icon }}
-                />
-                <div
-                  className='icon icon-hover cursor-pointer'
-                  dangerouslySetInnerHTML={{ __html: telegram_icon }}
-                />
-                <div
-                  className='icon icon-hover cursor-pointer'
-                  dangerouslySetInnerHTML={{ __html: tiktok_icon }}
-                />
+                <div className='flex align-middle gap-3'>
+                  <div
+                    className='icon icon-hover cursor-pointer'
+                    dangerouslySetInnerHTML={{ __html: facebook_icon }}
+                  />
+                  <div
+                    className='icon icon-hover cursor-pointer'
+                    dangerouslySetInnerHTML={{ __html: telegram_icon }}
+                  />
+                  <div
+                    className='icon icon-hover cursor-pointer'
+                    dangerouslySetInnerHTML={{ __html: tiktok_icon }}
+                  />
+                </div>
               </div>
             </div>
           </AppBar>
@@ -164,17 +167,17 @@ export default function ElevateAppBar(props: Props) {
             backgroundColor: trigger || location.pathname === '/store' || location.pathname === '/sign-in' ? "#1A2124" : "transparent",
             transition: "background-color 0.5s ease, transform 0.5s ease",
             boxShadow: 0,
-            transform: isMobile || trigger ? "translateY(0)" : "translateY(30%)",
+            transform: isMobile ? trigger ? "translateY(-100%)" : "translateY(0)" : trigger ? "translateY(0)" : "translateY(40%)",
             px: 0,
           }}
         >
-          <Toolbar className='py-6 flex justify-between container' style={{ paddingLeft: 0, paddingRight: 0 }}>
+          <Toolbar className='py-6 flex justify-between container'>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { md: 'none' } }}
+              sx={{ display: { md: 'none' } }}
             >
               <Menu />
             </IconButton>
@@ -191,10 +194,8 @@ export default function ElevateAppBar(props: Props) {
                       className={`
                     text-sm
                     uppercase mx-5 
-                    hover:border-b border-[#CB933D] 
-                    hover:text-[#CB933D]
-                    font-bold
-                    ${location.pathname === item.url ? 'text-[#CB933D] border-b border-[#CB933D]' : ''}
+                    font-serif
+                    ${location.pathname === item.url ? 'text-[#CB933D]' : ''}
                     `}
                       onClick={() => admin ? logout() : handleClick(item.url)}
                     >
@@ -207,10 +208,8 @@ export default function ElevateAppBar(props: Props) {
                       className={`
                       text-sm
                       uppercase mx-5 
-                      hover:border-b border-[#CB933D] 
-                      hover:text-[#CB933D]
-                      font-bold
-                      ${location.pathname === item.url ? 'text-[#CB933D] border-b border-[#CB933D]' : ''}
+                      font-serif
+                      ${location.pathname === item.url ? 'text-[#CB933D]' : ''}
                       `}
                     >
                       {item.label}
@@ -223,7 +222,7 @@ export default function ElevateAppBar(props: Props) {
                 onMouseLeave={handleMouseLeave}
                 onClick={() => handleClick('/store')}
               >
-                <Badge badgeContent={card.length} color="secondary" >
+                <Badge badgeContent={card.length} color='success'>
                   <LocalGroceryStore />
                 </Badge>
               </Button>

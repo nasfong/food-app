@@ -35,8 +35,7 @@ body {
     width 0.3s ease,
     height 0.3s ease;
   --tw-brightness: brightness(0.75);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate)
-    var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  /* filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow); */
 }
 
 .swiper-slide:hover .img {
@@ -44,8 +43,7 @@ body {
   width: 100%;
   height: 85%;
   --tw-brightness: brightness(1);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate)
-    var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  /* filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow); */
 }
 
 .inner-shadow-food {
@@ -54,13 +52,14 @@ body {
   left: 0;
   width: 100%;
   height: 80%;
-  box-shadow:
+  /* box-shadow:
     inset 0 30px 20px -10px rgba(24, 24, 24, 0.9),
-    inset 0 -80px 20px -10px rgba(24, 24, 24, 18%);
+    inset 0 -80px 20px -10px rgba(24, 24, 24, 18%); */
   transition:
     transform 0.3s ease,
     width 0.3s ease,
     height 0.3s ease;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .4) 100%);
 }
 
 .swiper-slide:hover .inner-shadow-food {
@@ -69,9 +68,9 @@ body {
   left: 0;
   width: 100%;
   height: 85%;
-  box-shadow:
+  /* box-shadow:
     inset 0 30px 20px -10px rgba(24, 24, 24, 0.9),
-    inset 0 -40px 20px -10px rgba(24, 24, 24, 18%);
+    inset 0 -40px 20px -10px rgba(24, 24, 24, 18%); */
 }
 
 .form-to {

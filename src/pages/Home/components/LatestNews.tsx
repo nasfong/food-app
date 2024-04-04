@@ -54,7 +54,7 @@ const LatestNews = () => {
         className="mySwiper z-0"
       >
         {cards.map((item, index) => (
-          <SwiperSlide key={index} className='relative font-bold'>
+          <SwiperSlide key={index} className='relative'>
             <img
               src={item.image}
               alt=""
@@ -64,7 +64,7 @@ const LatestNews = () => {
               }}
             />
 
-            <div className='absolute top-44 right-50 flex flex-col md:flex-row justify-center items-center gap-5 w-[70%]'>
+            <div className='absolute top-44 right-50 flex flex-col md:flex-row justify-center items-center gap-5  w-[70%] md:w-[90%]'>
               <img
                 src={item.image}
                 alt=""

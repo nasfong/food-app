@@ -25,8 +25,8 @@ const FoodCard = ({ data, handleAddCard }: any) => {
   return (
     <div className='container flex justify-center'>
       {/* Card */}
-      <div className="mt-28 md:mt-[200px] relative bg-clip-border font-bold bg-white bg-opacity-50 text-gray-700 shadow-md w-full flex flex-col md:flex-row">
-        <div className="relative w-full md:w-3/5 m-0 overflow-hidden text-gray-700 bg-white bg-clip-border shrink-0">
+      <div className="rounded mt-28 md:mt-[200px] relative bg-clip-border bg-white bg-opacity-50 text-gray-700 shadow-md w-full flex flex-col md:flex-row items-center">
+        <div className="relative w-full md:w-1/2 m-0 overflow-hidden text-gray-700 bg-white bg-clip-border shrink-0">
           <img
             src={data?.image}
             alt="card-image"
@@ -36,10 +36,11 @@ const FoodCard = ({ data, handleAddCard }: any) => {
             }}
           />
         </div>
-        <div className="p-6 relative w-full">
-          <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>
-            {formatMoney(data?.price)}
-          </div>
+        <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75 rounded-se'>
+          {formatMoney(data?.price)}
+        </div>
+        <div className="p-6 md:p-16 relative w-full">
+          {/* <div className='border-dashed border border-gray-300 absolute top-[5px] bottom-[5px] left-[5px] right-[5px]'></div> */}
           <h6
             className="block mb-4  text-base antialiased leading-relaxed tracking-normal text-gray-700 uppercase">
             {/* <Rating value={5} placeholder={undefined} /> */}
@@ -52,8 +53,8 @@ const FoodCard = ({ data, handleAddCard }: any) => {
           </p>
           <div className="flex gap-3">
             <button
-              className="text-white bg-[#d1a054] 
-               font-medium rounded-lg text-sm px-5 py-2.5  
+              className="text-white bg-[#d1a054]  hover:bg-black transition duration-500
+               font-medium  text-sm px-5 py-2.5  
               text-center flex justify-center align-middle gap-3"
               onClick={() => handleButtonClick(data)}
             >
@@ -69,13 +70,11 @@ const FoodCard = ({ data, handleAddCard }: any) => {
                 type="button"
                 id="decrement-button"
                 data-input-counter-decrement="quantity-input"
-                className="bg-gray-100 
-                dark:bg-gray-700 dark:hover:bg-gray-600 
-                dark:border-gray-600 hover:bg-gray-200 border 
+                className="bg-transparent
+               border 
                 border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 
                 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
-                onClick={() => setCount(c => c - 1)}
-                disabled={count <= 1}
+                onClick={() => (count > 1) && setCount(c => c - 1)}
               >
                 <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
@@ -85,7 +84,13 @@ const FoodCard = ({ data, handleAddCard }: any) => {
                 type="number"
                 id="quantity-input"
                 data-input-counter aria-describedby="helper-text-explanation"
-                className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border-x-0 
+                border-gray-300 h-11 text-center text-gray-900 text-sm 
+                focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 
+                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+                no-spinners
+                "
                 value={count}
                 onChange={(e) => setCount(Number(e.target.value))}
                 required
@@ -94,7 +99,10 @@ const FoodCard = ({ data, handleAddCard }: any) => {
                 type="button"
                 id="increment-button"
                 data-input-counter-increment="quantity-input"
-                className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                className="bg-transparent 
+                border border-gray-300 rounded-e-lg p-3 h-11 
+                focus:ring-gray-100 dark:focus:ring-gray-700 
+                focus:ring-2 focus:outline-none"
                 onClick={() => setCount(c => c + 1)}
               >
                 <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
