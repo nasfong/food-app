@@ -1,136 +1,149 @@
 import { default_image } from "@/constant/constant";
-import { LoadingButton } from "@mui/lab";
-import { Box, Button, Modal, useMediaQuery } from "@mui/material";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { useState } from "react";
+import { readMore } from "@/constant/readmore";
+import { truncateDescription } from "@/lib/utils";
+// import { LoadingButton } from "@mui/lab";
+import {
+  // Box, 
+  // Button, 
+  // Modal, 
+  useMediaQuery
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+// import { useMutation } from "@tanstack/react-query";
+// import axios from "axios";
+// import { useState } from "react";
 
-interface FormData {
-  _id: string
-  name: string;
-  image: string
-  content: string
-  date: string
-}
+// interface FormData {
+//   _id: string
+//   name: string;
+//   image: string
+//   content: string
+//   date: string
+// }
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+// const style = {
+//   position: 'absolute' as 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 400,
+//   bgcolor: 'background.paper',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
+// };
 
-const News = ({ data, refetch }: any) => {
+const News = (
+  // { data, refetch }: any
+) => {
+  const navigate = useNavigate();
   const matches = useMediaQuery('(min-width:768px)')
-  const initState = {
-    _id: '',
-    image: '',
-    name: '',
-    content: '',
-  }
-  const [formInput, setFormInput] = useState<any>(initState)
-  const [ImagePreview, setImagePreview] = useState<any>('')
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => {
-    setOpen(true)
-  }
-  const handleClose = () => {
-    setOpen(false)
-    setFormInput(initState)
-    setImagePreview('')
-  }
+  // const initState = {
+  //   _id: '',
+  //   image: '',
+  //   name: '',
+  //   content: '',
+  // }
+  // const [formInput, setFormInput] = useState<any>(initState)
+  // const [ImagePreview, setImagePreview] = useState<any>('')
+  // const [open, setOpen] = useState(false)
+  // const handleOpen = () => {
+  //   setOpen(true)
+  // }
+  // const handleClose = () => {
+  //   setOpen(false)
+  //   setFormInput(initState)
+  //   setImagePreview('')
+  // }
 
-  const handleChangeImage = (e: any) => {
-    let files = e.target.files || e.dataTransfer.files
-    if (!files.length) return
+  // const handleChangeImage = (e: any) => {
+  //   let files = e.target.files || e.dataTransfer.files
+  //   if (!files.length) return
 
-    const file = files[0]
-    setFormInput({ ...formInput, image: file })
-    const reader = new FileReader()
-    reader.onloadend = function (e) {
-      setImagePreview(e.target?.result)
-    }
-    reader.readAsDataURL(file)
-  }
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target;
-    const inputValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
-    setFormInput({ ...formInput, [name]: inputValue });
-  };
+  //   const file = files[0]
+  //   setFormInput({ ...formInput, image: file })
+  //   const reader = new FileReader()
+  //   reader.onloadend = function (e) {
+  //     setImagePreview(e.target?.result)
+  //   }
+  //   reader.readAsDataURL(file)
+  // }
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  //   const { name, value, type } = e.target;
+  //   const inputValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
+  //   setFormInput({ ...formInput, [name]: inputValue });
+  // };
 
-  const mutation = useMutation({
-    mutationFn: (formData: FormData) => {
-      if (formData._id) {
-        const formDataToSend = new FormData();
-        formDataToSend.append('name', formData.name);
-        if (formData.image) {
-          formDataToSend.append('image', formData.image)
-        }
-        formDataToSend.append('content', formData.content);
-        formDataToSend.append('date', formData.date);
-        formDataToSend.append('_method', 'PUT')
-        return axios.put(`/our-new/${formData._id}`, formDataToSend, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          }
-        }).then(() => {
-          refetch()
-          handleClose()
-          setFormInput(initState)
-        })
-      } else {
-        const formDataToSend = new FormData();
-        formDataToSend.append('name', formData.name);
-        formDataToSend.append('image', formData.image); // Access the first file in the FileList
-        formDataToSend.append('content', formData.content);
-        formDataToSend.append('date', formData.date);
-        return axios.post('/our-new', formDataToSend, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          }
-        }).then(() => {
-          refetch()
-          handleClose()
-          setFormInput(initState)
-        })
-      }
-    },
-  })
+  // const mutation = useMutation({
+  //   mutationFn: (formData: FormData) => {
+  //     if (formData._id) {
+  //       const formDataToSend = new FormData();
+  //       formDataToSend.append('name', formData.name);
+  //       if (formData.image) {
+  //         formDataToSend.append('image', formData.image)
+  //       }
+  //       formDataToSend.append('content', formData.content);
+  //       formDataToSend.append('date', formData.date);
+  //       formDataToSend.append('_method', 'PUT')
+  //       return axios.put(`/our-new/${formData._id}`, formDataToSend, {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //         }
+  //       }).then(() => {
+  //         refetch()
+  //         handleClose()
+  //         setFormInput(initState)
+  //       })
+  //     } else {
+  //       const formDataToSend = new FormData();
+  //       formDataToSend.append('name', formData.name);
+  //       formDataToSend.append('image', formData.image); // Access the first file in the FileList
+  //       formDataToSend.append('content', formData.content);
+  //       formDataToSend.append('date', formData.date);
+  //       return axios.post('/our-new', formDataToSend, {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //         }
+  //       }).then(() => {
+  //         refetch()
+  //         handleClose()
+  //         setFormInput(initState)
+  //       })
+  //     }
+  //   },
+  // })
 
-  const deleteMutation = useMutation({
-    mutationFn: (id: string) => {
-      return axios.delete(`/our-new/${id}`).then(() => {
-        refetch()
-      })
-    },
-  })
+  // const deleteMutation = useMutation({
+  //   mutationFn: (id: string) => {
+  //     return axios.delete(`/our-new/${id}`).then(() => {
+  //       refetch()
+  //     })
+  //   },
+  // })
 
 
 
-  const handleEdit = (data: any) => {
-    setFormInput({ ...data })
-    setImagePreview(data.image)
-    handleOpen()
-  }
-  const handleDelete = (id: string) => {
-    deleteMutation.mutate(id)
-  }
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-    mutation.mutate(formInput);
-  }
+  // const handleEdit = (data: any) => {
+  //   setFormInput({ ...data })
+  //   setImagePreview(data.image)
+  //   handleOpen()
+  // }
+  // const handleDelete = (id: string) => {
+  //   deleteMutation.mutate(id)
+  // }
+  // const onSubmit = (e: any) => {
+  //   e.preventDefault();
+  //   mutation.mutate(formInput);
+  // }
 
   return (
     <div className="container">
-      <div className='text-end mt-3'>
-        <Button variant='contained' onClick={handleOpen}>Add Our-New</Button>
-      </div>
-      {data?.map((item: any, index: any) => (
+      {/* {admin && (
+        <div className='text-end mt-3'>
+          <Button variant='contained' onClick={handleOpen}>Add Our-New</Button>
+        </div>
+      )} */}
+      {readMore?.map((item, index: any) => (
         <div
           key={index}
           className={`my-20 relative flex ${index % 2 && 'flex-row-reverse'} ${matches ? '' : 'flex-col'}`}
@@ -153,21 +166,31 @@ const News = ({ data, refetch }: any) => {
           >
             <div>{item.date}</div>
             <div className='font-bold text-2xl'>{item.name}</div>
-            <div>{item.content}</div>
-            <Button
-              variant='contained'
-              color='primary'
-              onClick={() => handleEdit(item)}
-            >Edit</Button>
-            <Button
-              variant='contained'
-              color='error'
-              onClick={() => handleDelete(item._id)}
-            >Delete</Button>
+            <div>{truncateDescription(item.description, 200)}</div>
+            <button
+              className='button5 mt-5 p-2 font-light'
+              onClick={() => navigate(`/read-more/${item.id}`)}
+            >
+              READ MORE
+            </button>
+            {/* {admin && (
+              <>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  onClick={() => handleEdit(item)}
+                >Edit</Button>
+                <Button
+                  variant='contained'
+                  color='error'
+                  onClick={() => handleDelete(item._id)}
+                >Delete</Button>
+              </>
+            )} */}
           </div>
         </div>
       ))}
-      <Modal
+      {/* <Modal
         open={open}
         onClose={handleClose}
       >
@@ -225,7 +248,7 @@ const News = ({ data, refetch }: any) => {
             </LoadingButton>
           </Box>
         </form>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }

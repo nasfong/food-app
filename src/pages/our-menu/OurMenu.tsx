@@ -13,7 +13,7 @@ const OurMenu = () => {
 
   return (
     <div>
-      <Background data={{ image: 'https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg', title: 'Our Menu' }} />
+      <Background data={{ image: 'https://wallpapers.com/images/hd/food-4k-1vrcb0mw76zcg4qf.jpg', title: 'Our Menu' }} />
       {data?.map((item: any, index: any) => (
         <div key={index}>
           <FoodList data={item.child} />

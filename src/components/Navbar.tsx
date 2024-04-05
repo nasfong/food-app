@@ -116,7 +116,7 @@ export default function ElevateAppBar(props: Props) {
               transform: trigger ? "translateY(-100%)" : "translateY(0)",
             }}
           >
-            <div className='flex justify-between items-center px-2 py-2 container text-sm font-medium'>
+            <div className='flex justify-between items-center py-2 container text-sm font-medium'>
               <div className='flex gap-x-10'>
                 <div className='flex align-middle items-center gap-2'>
                   <div
@@ -196,6 +196,7 @@ export default function ElevateAppBar(props: Props) {
                     uppercase mx-5 
                     font-serif
                     ${location.pathname === item.url ? 'text-[#CB933D]' : ''}
+                    hover:text-[#CB933D]
                     `}
                       onClick={() => admin ? logout() : handleClick(item.url)}
                     >
@@ -210,6 +211,7 @@ export default function ElevateAppBar(props: Props) {
                       uppercase mx-5 
                       font-serif
                       ${location.pathname === item.url ? 'text-[#CB933D]' : ''}
+                      hover:text-[#CB933D]
                       `}
                     >
                       {item.label}
@@ -251,7 +253,6 @@ export default function ElevateAppBar(props: Props) {
       <Toolbar />
 
       <Box sx={{ mt: -8 }}>
-        {props.children}
         <Outlet />
         <Footer />
       </Box>

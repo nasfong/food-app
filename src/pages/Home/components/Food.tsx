@@ -145,7 +145,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
         </div>
       )}
       {isLoading ? (
-        <div>Loading</div>
+        <div>Loading...</div>
       ) : (
         <Swiper
           slidesPerView={1}

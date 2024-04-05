@@ -1,5 +1,6 @@
+import { address, holiday, phone, weekday } from "@/constant/constant"
+
 const VisitUs = () => {
-  const phoneNumber = "+855 93 292 931";
   return (
     <div className='my-20'>
       <div className="text-center mb-6">
@@ -9,8 +10,8 @@ const VisitUs = () => {
       <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
         <div className="bg-[#f5f5f5] py-16 px-6 relative text-center">
           <div className='text-xl mb-2 font-bold'>PHONE</div>
-          <a href={`tel:${phoneNumber}`} className="relative z-10">
-            {phoneNumber}
+          <a href={`tel:${phone}`} className="relative z-10">
+            {phone}
           </a>
           <div className="h-14 w-14 bg-[var(--color)] absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-full z-10">
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4">
@@ -22,7 +23,7 @@ const VisitUs = () => {
         <div className="bg-[#f5f5f5] py-16 px-6 relative text-center">
           <div className='text-xl mb-2 font-bold'>Address</div>
           <div className="relative z-10">
-            123 Main Street, Uni 21, New York City
+            {address}
           </div>
           <div className="h-14 w-14 bg-[var(--color)] absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-full z-10">
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4">
@@ -34,10 +35,10 @@ const VisitUs = () => {
         <div className="bg-[#f5f5f5] py-16 px-6 relative text-center">
           <div className='text-xl mb-2 font-bold'>Working Hours</div>
           <div>
-            Mon - Fri: 08:00 - 22:00
+            {weekday}
           </div>
           <div>
-            Sat - Sun: 10:00 - 23:00
+            {holiday}
           </div>
           <div className="h-14 w-14 bg-[var(--color)] absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-full z-10">
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4">

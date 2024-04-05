@@ -151,6 +151,62 @@
   color: grey;
 }
 
+.button4 {
+  /* background-color: #eee; */
+  font-size: 0.9rem;
+  width: 10em;
+  border-bottom: 2px solid;
+  border-radius: 12px;
+  color: white;
+  /* box-shadow: 0 0.2rem #ffffff; */
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.button4:active {
+  color: white;
+  border-bottom: 2px solid var(--color);
+  transform: translateY(0.2rem);
+}
+
+.button4:hover:not(:disabled) {
+  color: var(--color);
+  border-bottom: 2px solid var(--color);
+}
+
+.button4:disabled {
+  cursor: auto;
+  color: grey;
+}
+
+.button5 {
+  /* background-color: #eee; */
+  font-size: 0.9rem;
+  width: 10em;
+  border-bottom: 2px solid var(--color);
+  border-radius: 12px;
+  color: var(--color);
+  /* box-shadow: 0 0.2rem #ffffff; */
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.button5:active {
+  color: white;
+  border-bottom: 2px solid #ffffff;
+  transform: translateY(0.2rem);
+}
+
+.button5:hover:not(:disabled) {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
+.button5:disabled {
+  cursor: auto;
+  color: grey;
+}
+
 .icon svg {
   width: 15px; /* Specify the width */
   height: 15px; /* Specify the height */
@@ -160,6 +216,15 @@
   height: 35px; /* Specify the height */
 }
 
+.icon-link svg {
+  width: 10px; /* Specify the width */
+  height: 10px; /* Specify the height */
+}
+
+.icon-hover .active svg path {
+  fill: var(--color);
+  stroke: var(--color);
+}
 
 .icon svg path {
   fill: #FFFFFF;

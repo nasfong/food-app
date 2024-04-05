@@ -1,7 +1,10 @@
 .slider {
   overflow: hidden;
   position: relative; /* Add this to establish a positioning context */
-
+  -webkit-mask:
+    linear-gradient(white, white) no-repeat center/100% calc(100% - 1 * 50px),
+    url("/image/white.png") left top/auto 100px repeat-x,
+    url("/image/zmylJ.png") right bottom/auto 50px repeat-x;
 }
 
 .slider img {

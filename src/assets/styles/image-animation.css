@@ -1,12 +1,26 @@
 .fadeIn {
-  animation: fadeInAnimation 1s ease-in-out forwards;
+  animation: fadeInAnimation 1.5s cubic-bezier(0.42, 0, 0.58, 1) forwards;
 }
 
 @keyframes fadeInAnimation {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  100% {
     opacity: 1;
   }
+}
+
+/* -webkit-mask:
+    url("/image/top.png")  top / auto 50px
+      repeat-x,
+    linear-gradient(white, white) no-repeat center/100% calc(100% - 2 * 50px),
+    url("/image/zmylJ.png")
+      bottom/auto 50px repeat-x; */
+
+.ripped-paper {
+  -webkit-mask:
+    linear-gradient(white, white) no-repeat center/100% calc(100% - 1 * 50px),
+    url("/image/white.png") left top/auto 100px repeat-x,
+    url("/image/zmylJ.png") right bottom/auto 50px repeat-x;
 }

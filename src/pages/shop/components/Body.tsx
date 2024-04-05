@@ -274,7 +274,7 @@ const Body = () => {
           )}
         </div>
         <div className="flex flex-wrap justify-center">
-          {error ? (<div className='py-32'>Something went wrong!</div>)
+          {error ? (<div className='py-32'>Sorry something went wrong!</div>)
             : isLoading ? <div className='py-32'>Loading...</div>
               : !data?.data.length ? <div className='py-32'>No Food</div> :
                 <>

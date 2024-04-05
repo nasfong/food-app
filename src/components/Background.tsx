@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import '../assets/styles/image-animation.css'
 import { default_image } from "@/constant/constant";
 
@@ -12,14 +12,14 @@ type Props = {
 
 const Background = ({ data }: Props) => {
 
-  const [imageLoaded, setImageLoaded] = useState(false);
+  // const [imageLoaded, setImageLoaded] = useState(false);
 
-  useEffect(() => {
-    setImageLoaded(false); // Reset the state when data.image changes
-  }, [data.image]);
+  // useEffect(() => {
+  //   setImageLoaded(false); // Reset the state when data.image changes
+  // }, [data.image]);
 
   const handleImageLoad = () => {
-    setImageLoaded(true); // Set the state to true when the image has loaded
+    // setImageLoaded(true); // Set the state to true when the image has loaded
   };
 
   const [shadowOffsetX, setShadowOffsetX] = useState(0);
@@ -55,7 +55,7 @@ const Background = ({ data }: Props) => {
   };
   return (
     <div
-      className="relative"
+      className="relative ripped-paper"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -64,8 +64,8 @@ const Background = ({ data }: Props) => {
         alt=""
         className={`
         relative object-cover w-full 
-        h-auto md:h-[80vh]
-        brightness-75 bg-black ${imageLoaded ? 'fadeIn' : ''}
+        h-[60vh]
+        brightness-75 bg-black 
         `}
         onLoad={handleImageLoad}
         onError={(e) => {
@@ -79,7 +79,7 @@ const Background = ({ data }: Props) => {
           id="animated-text"
           style={{ textShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px rgba(0, 0, 0, 0.9)` }}
         >
-          <div className="text-4xl md:text-6xl font-bold">{data?.title || data?.name}</div>
+          <div className="text-4xl md:text-6xl uppercase">{data?.title || data?.name}</div>
         </h1>
       </div>
     </div>

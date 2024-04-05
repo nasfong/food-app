@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import './../../../promoition.css';
+import { double_quote_icon } from '@/constant/data';
 
 const message = [
   {
@@ -31,12 +32,12 @@ const Testimonials = () => {
     (progressContent.current as any).textContent = `${Math.ceil(time / 1000)}s`;
   };
   return (
-    <div className='h-[600px] my-10'>
-      <div className='mb-12 text-center'>
+    <div className='h-[350px] my-10'>
+      <div className='text-center'>
         <div className='form-to'>What Our Clients Say</div>
         <div className='title'>TESTIMONIALS</div>
       </div>
-      <div className='h-[400px] mt-10 bg-gray'>
+      <div className='h-[300px] bg-gray'>
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -52,9 +53,13 @@ const Testimonials = () => {
         >
           {message.map((item, index) => (
             <SwiperSlide key={index}>
-              <div>
-                <div>{item.feedback} </div>
-                <div>{item.name}</div>
+              <div className='px-8 flex flex-col justify-center items-center'>
+                <div
+                  className='icon-footer icon-hover cursor-pointer mb-6'
+                  dangerouslySetInnerHTML={{ __html: double_quote_icon }}
+                />
+                <div className='text-sm mb-3'>{item.feedback} </div>
+                <div className='text-[--color] font-thin'>{item.name}</div>
               </div>
             </SwiperSlide>
           ))}

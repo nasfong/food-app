@@ -12,6 +12,7 @@ import Store from "./pages/store/Store"
 import { useLayoutEffect } from "react"
 import ContactUs from "./pages/contact-us/ContactUs"
 import SignIn from "./pages/sign-in/SignIn"
+import ReadMore from "./pages/read-more/ReadMore"
 
 
 const BackToTop = ({ children }: any) => {
@@ -44,6 +45,7 @@ function App() {
                 <Route path="contact-us" element={<ContactUs />} />
                 <Route path="store" element={<Store />} />
                 <Route path="sign-in" element={<SignIn />} />
+                <Route path="read-more/:id" element={<ReadMore />} />
               </Route>
             </Routes>
           </BackToTop>

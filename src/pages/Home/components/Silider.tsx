@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './../../../slider.css'
-import { default_image } from '@/constant/constant';
+import { address, default_image, restaurant_name } from '@/constant/constant';
 
 const images =
   [
@@ -81,8 +81,8 @@ const Slider = () => {
                 id="animated-text"
                 style={{ textShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px rgba(0, 0, 0, 0.9)` }}
               >
-                <div className='text-4xl md:text-6xl'>Meom Restaurant</div>
-                <div className='text-[ßß14px] md:text-xl'>123 Main Street, Uni 21, New York City</div>
+                <div className='text-4xl md:text-6xl'>{restaurant_name}</div>
+                <div className='text-[ßß14px] md:text-xl'>{address}</div>
               </h1>
             </div>
           </span>
