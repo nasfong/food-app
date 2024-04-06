@@ -1,12 +1,14 @@
 // import { Rating } from "@material-tailwind/react"
 import { default_image } from "@/constant/constant"
 import { formatMoney } from "@/lib/utils"
+import { Rating } from "@material-tailwind/react"
 import { Check } from "@mui/icons-material"
 import { CircularProgress } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const FoodCard = ({ data, handleAddCard }: any) => {
   const [count, setCount] = useState(1)
+  const [resetStar, setResetStar] = useState(false)
   const [cardStates, setCardStates] = useState<{ loading: boolean; checked: boolean; }>({
     loading: false,
     checked: false
@@ -22,6 +24,14 @@ const FoodCard = ({ data, handleAddCard }: any) => {
       }, 3000);
     }, 1500);
   };
+
+  useEffect(() => {
+    setResetStar(false)
+    setTimeout(() => {
+      setResetStar(true)
+    }, 10)
+  }, [data])
+
   return (
     <div className='container flex justify-center'>
       {/* Card */}
@@ -42,8 +52,15 @@ const FoodCard = ({ data, handleAddCard }: any) => {
         <div className="p-6 md:p-16 relative w-full">
           {/* <div className='border-dashed border border-gray-300 absolute top-[5px] bottom-[5px] left-[5px] right-[5px]'></div> */}
           <h6
-            className="block mb-4  text-base antialiased leading-relaxed tracking-normal text-gray-700 uppercase">
-            {/* <Rating value={5} placeholder={undefined} /> */}
+            className="block mb-4  
+            text-base antialiased leading-relaxed 
+            tracking-normal text-gray-700 uppercase
+            min-h-5
+            "
+            >
+            {resetStar && (
+              <Rating value={data?.star} placeholder={undefined} readonly />
+            )}
           </h6>
           <h4 className="block mb-2  text-[30px] antialiased leading-snug tracking-normal text-blue-gray-900">
             {data?.name}
