@@ -34,11 +34,10 @@ const FoodCard = ({ item, index, handleButtonClick, cardStates, handleEdit, hand
           </p>
         </div>
         <button
-          className='button2 mt-5 p-2 relative z-10 flex justify-center align-middle gap-3'
-          style={{ boxShadow: "0 0.2rem #e6bb65" }}
+          className='button2 mt-5 py-2  relative z-10 flex justify-center align-middle gap-3'
           onClick={() => handleButtonClick(index, item)}
         >
-          <span>Add Card</span>
+          <span className='uppercase'>Add To Cart</span>
           {cardStates[index]?.loading && (
             <CircularProgress size="1rem" color='inherit' />
           )}

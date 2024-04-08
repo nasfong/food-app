@@ -73,7 +73,7 @@ const Slider = () => {
               onError={(e) => {
                 (e.target as any).src = default_image
               }}
-             
+
             />
             <div className="gradient-overlay" />
             <div className='absolute inset-0 flex flex-col justify-center items-center text-center text-white'>
@@ -81,8 +81,8 @@ const Slider = () => {
                 id="animated-text"
                 style={{ textShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px rgba(0, 0, 0, 0.9)` }}
               >
-                <div className='text-4xl md:text-6xl'>{restaurant_name}</div>
-                <div className='text-[14px] md:text-xl'>{address}</div>
+                <div className='text-4xl md:text-8xl mb-3 uppercase'>{restaurant_name}</div>
+                <div className='text-[14px] md:text-[14px] font-mono'>{address}</div>
               </h1>
             </div>
           </span>

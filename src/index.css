@@ -85,30 +85,26 @@
 
 .button2 {
   /* background-color: #eee; */
-  border: none;
-  font-size: 0.8rem;
+  font-size: 13px;
   width: 10em;
-  border-radius: 1rem;
+  border-bottom: 2px solid var(--color);
+  border-radius: 12px;
   color: var(--color);
-  box-shadow: 0 0.2rem #ffffff;
+  /* box-shadow: 0 0.2rem #ffffff; */
   cursor: pointer;
 }
 
 .button2:active {
-  color: var(--color);
-  box-shadow: 0 0.2rem var(--color);
+  color: white;
+  border-bottom: 2px solid #ffffff;
   transform: translateY(0.2rem);
 }
 
 .button2:hover:not(:disabled) {
-  color: var(--color);
-  box-shadow: 0 0.2rem var(--color);
+  color: #000;
+  border-bottom: 2px solid #000;
 }
 
-.button2:disabled {
-  cursor: auto;
-  color: grey;
-}
 
 .button3 {
   /* background-color: #eee; */
