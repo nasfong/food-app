@@ -180,7 +180,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
           {data?.map((item, index) => (
             <SwiperSlide key={index} onClick={() => handleClick(item._id)}>
               <img
-                src={item.image || 'https://www.invoicera.com/wp-content/uploads/2023/11/default-image.jpg'}
+                src={item.image || default_image}
                 alt={`Slide 1s`}
                 className='img rounded-lg'
                 onError={(e) => {

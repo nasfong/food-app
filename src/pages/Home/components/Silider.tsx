@@ -82,7 +82,7 @@ const Slider = () => {
                 style={{ textShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px rgba(0, 0, 0, 0.9)` }}
               >
                 <div className='text-4xl md:text-6xl'>{restaurant_name}</div>
-                <div className='text-[ßß14px] md:text-xl'>{address}</div>
+                <div className='text-[14px] md:text-xl'>{address}</div>
               </h1>
             </div>
           </span>

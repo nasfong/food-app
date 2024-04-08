@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
 
-const Reviewer = ({ data, dataFood }: any) => {
+const Reviewer = ({ data, dataFood, refetch }: any) => {
   const initState = {
     comment: '',
     name: '',
@@ -15,11 +15,9 @@ const Reviewer = ({ data, dataFood }: any) => {
 
   const mutation = useMutation({
     mutationFn: (formData: any) => {
-      console.log(formData)
       return axios.post('/comment', formData).then(() => {
-        // refetch()
-        // handleClose()
-        // reset()
+        refetch()
+        setFormInput(initState)
       })
     },
   })

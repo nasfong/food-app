@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 
 import './../../../promoition.css';
 import { double_quote_icon } from '@/constant/data';
+import { Autoplay } from 'swiper/modules';
 
 const message = [
   {
@@ -48,6 +49,7 @@ const Testimonials = () => {
           pagination={{
             clickable: true,
           }}
+          modules={[Autoplay]}
           onAutoplayTimeLeft={onAutoplayTimeLeft}
           className="mySwiper"
         >

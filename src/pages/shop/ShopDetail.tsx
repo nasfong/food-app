@@ -31,7 +31,7 @@ const ShopDetail = () => {
     queryFn: () =>
       axios.get('/food').then((res) => res.data),
   })
-  const { data: dataComment } = useQuery<any[]>({
+  const { data: dataComment, refetch } = useQuery<any[]>({
     queryKey: ['comment', { food: foodId }],
     queryFn: () =>
       axios.get('/comment', { params: { food: foodId } }).then((res) => res.data),
@@ -52,6 +52,7 @@ const ShopDetail = () => {
       <Reviewer
         data={dataComment}
         dataFood={data?.data.find(item => item._id === foodId)}
+        refetch={refetch}
       />
 
     </div>
