@@ -35,7 +35,7 @@ const Promotion = () => {
   //   (progressContent.current as any).textContent = `${Math.ceil(time / 1000)}s`;
   // };
   return (
-    <div className='h-[500px] my-10 bg-gray'>
+    <section className='h-[500px] my-10 bg-gray'>
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -64,7 +64,7 @@ const Promotion = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   )
 }
 

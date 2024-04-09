@@ -122,7 +122,7 @@ const Admin = () => {
   }
 
   return (
-    <div className='mt-52'>
+    <section className='mt-52'>
       <div className='container'>
         <div className='text-end'>
           <Button variant='contained' onClick={handleOpen}>Add Food</Button>
@@ -220,7 +220,7 @@ const Admin = () => {
           </Box>
         </form>
       </Modal>
-    </div>
+    </section>
   )
 }
 

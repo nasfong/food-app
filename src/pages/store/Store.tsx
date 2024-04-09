@@ -12,7 +12,7 @@ const Store = () => {
 
   const sum = card.reduce((accumulator, currentValue) => accumulator + (Number(currentValue.price) * currentValue.quantity), 0);
   return (
-    <div>
+    <section>
       <div className='h-[100px]'></div>
       <div className='bg-gray-100 p-8 mb-20 text-2xl'>
         CARD
@@ -49,7 +49,7 @@ const Store = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

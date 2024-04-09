@@ -2,9 +2,9 @@ import Body from './components/Body'
 
 const Shop = () => {
   return (
-    <div>
+    <section>
       <Body />
-    </div>
+    </section>
   )
 }
 

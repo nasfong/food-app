@@ -10,13 +10,13 @@ const OurNews = () => {
   //     axios.get('/our-new').then((res) => res.data),
   // })
   return (
-    <div>
+    <section>
       <Background data={{ image: 'https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg', title: 'Our News' }} />
       <News
       // data={data}
       // refetch={refetch} 
       />
-    </div>
+    </section>
   )
 }
 

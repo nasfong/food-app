@@ -33,7 +33,7 @@ const Testimonials = () => {
     (progressContent.current as any).textContent = `${Math.ceil(time / 1000)}s`;
   };
   return (
-    <div className='h-[350px] my-10'>
+    <section className='h-[350px] my-10'>
       <div className='text-center'>
         <div className='form-to'>What Our Clients Say</div>
         <div className='title'>TESTIMONIALS</div>
@@ -73,7 +73,7 @@ const Testimonials = () => {
           </div>
         </Swiper>
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -53,7 +53,7 @@ const Slider = () => {
     setShadowBlur(0);
   };
   return (
-    <>
+    <article>
       <div className="slider w-[100%] h-[50vh] md:h-[100vh] ">
         {images.map((image, idx) => (
           <span
@@ -77,18 +77,18 @@ const Slider = () => {
             />
             <div className="gradient-overlay" />
             <div className='absolute inset-0 flex flex-col justify-center items-center text-center text-white'>
-              <h1
+              <div
                 id="animated-text"
                 style={{ textShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px rgba(0, 0, 0, 0.9)` }}
               >
-                <div className='text-4xl md:text-8xl mb-3 uppercase'>{restaurant_name}</div>
-                <div className='text-[14px] md:text-[14px] font-mono'>{address}</div>
-              </h1>
+                <h1 className='text-4xl md:text-8xl mb-3 uppercase'>{restaurant_name}</h1>
+                <h2 className='text-[14px] md:text-[14px] font-mono'>{address}</h2>
+              </div>
             </div>
           </span>
         ))}
       </div>
-    </>
+    </article>
   );
 };
 

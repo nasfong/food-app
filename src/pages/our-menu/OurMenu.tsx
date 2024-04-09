@@ -12,7 +12,7 @@ const OurMenu = () => {
   })
 
   return (
-    <div>
+    <section>
       <Background data={{ image: 'https://wallpapers.com/images/hd/food-4k-1vrcb0mw76zcg4qf.jpg', title: 'Our Menu' }} />
       {data?.map((item: any, index: any) => (
         <div key={index}>
@@ -20,7 +20,7 @@ const OurMenu = () => {
           <SlideWithCard data={item.parent} />
         </div>
       ))}
-    </div>
+    </section>
   )
 }
 

@@ -43,7 +43,7 @@ import { truncateDescription } from '@/lib/utils';
 const LatestNews = () => {
   const navigate = useNavigate();
   return (
-    <div className='relative h-[750px] mt-10 bg-gray'>
+    <section className='relative h-[750px] mt-10 bg-gray'>
       <div className='absolute top-10 left-0 right-0 text-center z-10'>
         <div className='form-to text-xl'>From Our Blog</div>
         <div className='title text-white text-4xl border-white'>LATEST NEWS</div>
@@ -94,7 +94,7 @@ const LatestNews = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   )
 }
 

@@ -45,7 +45,7 @@ const ChefRecommend = ({ data, handleAddCard }: { data?: Food[]; handleAddCard: 
   };
 
   return (
-    <div className="my-20">
+    <section className="my-20">
       <div className="text-center mb-6">
         <div className='form-to'>Should to Try</div>
         <div className='title'>CHEF RECOMMENDS</div>
@@ -55,7 +55,7 @@ const ChefRecommend = ({ data, handleAddCard }: { data?: Food[]; handleAddCard: 
           <FoodCard key={index} item={item} index={index} handleButtonClick={handleButtonClick} cardStates={cardStates} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

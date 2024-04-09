@@ -47,7 +47,7 @@ const SignIn = () => {
     }
   }
   return (
-    <div className='container'>
+    <section className='container'>
       <div className='h-[100px]'></div>
       <div className="flex items-center justify-center my-20">
         {!localStorage.getItem('admin') ? (
@@ -102,7 +102,7 @@ const SignIn = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -253,8 +253,12 @@ export default function ElevateAppBar(props: Props) {
       <Toolbar />
 
       <Box sx={{ mt: -8 }}>
-        <Outlet />
-        <Footer />
+        <main>
+          <Outlet />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </Box>
     </React.Fragment >
   );

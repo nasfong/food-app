@@ -42,7 +42,7 @@ const ShopDetail = () => {
   }
 
   return (
-    <div>
+    <section>
       <BackgroundBlur image={data?.data.find(item => item._id === foodId)?.image} />
       <FoodCard data={data?.data?.find(item => item._id === foodId)} handleAddCard={handleAddCard} />
       <RelateProduct
@@ -55,7 +55,7 @@ const ShopDetail = () => {
         refetch={refetch}
       />
 
-    </div>
+    </section>
   )
 }
 

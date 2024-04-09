@@ -137,7 +137,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
     mutation.mutate(formInput);
   }
   return (
-    <div className="h-[400px] my-10 mb-40 bg-gray container mx-auto text-center">
+    <section className="h-[400px] my-10 mb-40 bg-gray container mx-auto text-center">
       <div>
         <div className='form-to'>From 11:00am to 10:00pm</div>
         <div className='title'>ORDER ONLINE</div>
@@ -278,7 +278,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
           </Box>
         </form>
       </Modal>
-    </div>
+    </section>
   )
 }
 

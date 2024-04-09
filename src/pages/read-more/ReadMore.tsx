@@ -12,7 +12,7 @@ const ReadMore = () => {
     setData(readMore.find(item => item.id === id))
   }, [id])
   return (
-    <div>
+    <section>
       <Background data={{ image: data?.image, title: data?.name }} />
       <div className="container my-10 flex flex-col md:flex-row gap-10">
         <div className="w-full md:w-3/4">
@@ -45,7 +45,7 @@ const ReadMore = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
