@@ -11,7 +11,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
 import { address, admin, phone } from '@/constant/constant';
 import { address_icon, facebook_icon, phone_icon, telegram_icon, tiktok_icon } from '@/constant/data';
-
+import { Analytics } from '@vercel/analytics/react'
 
 const navItems = [
   { label: 'Home', url: '/' },
@@ -255,7 +255,8 @@ export default function ElevateAppBar(props: Props) {
       <Box sx={{ mt: -8 }}>
         <main>
           <Outlet />
-        </main>
+          <Analytics mode={'production'} />
+          </main>
         <footer>
           <Footer />
         </footer>
