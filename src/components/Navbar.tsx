@@ -181,8 +181,8 @@ export default function ElevateAppBar(props: Props) {
             >
               <Menu />
             </IconButton>
-            <Typography variant="h6" component="div" className='cursor-pointer' onClick={() => navigate('/')}>
-              <img src="/image/logo-menu.png" alt="" className='h-[40px] w-[40px]' />
+            <Typography variant="h6" component="div" className="cursor-pointer relative w-[60px] md:w-[70px]" onClick={() => navigate('/')}>
+              <img src="/image/logo-menu.png" alt="" className="absolute top-[-35px] left-5 h-100 w-100" />
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Box sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -256,7 +256,7 @@ export default function ElevateAppBar(props: Props) {
         <main>
           <Outlet />
           <Analytics mode={'production'} />
-          </main>
+        </main>
         <footer>
           <Footer />
         </footer>
