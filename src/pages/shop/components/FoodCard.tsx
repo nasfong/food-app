@@ -14,11 +14,11 @@ const FoodCard = ({ data, handleAddCard }: any) => {
     checked: false
   });
 
-  const handleButtonClick = (item: any) => {
+  const handleButtonClick = (item: any, quantity: number) => {
     setCardStates({ ...cardStates, loading: true })
     setTimeout(() => {
       setCardStates({ loading: false, checked: true })
-      handleAddCard(item, 1);
+      handleAddCard(item, quantity);
       setTimeout(() => {
         setCardStates({ loading: false, checked: false })
       }, 3000);
@@ -73,7 +73,7 @@ const FoodCard = ({ data, handleAddCard }: any) => {
               className="text-white bg-[#d1a054]  hover:bg-black transition duration-500
                font-medium  text-sm px-5 py-2.5  
               text-center flex justify-center align-middle gap-3"
-              onClick={() => handleButtonClick(data)}
+              onClick={() => handleButtonClick(data, count)}
             >
               <span>Add to cart</span>
               {cardStates?.loading && (
