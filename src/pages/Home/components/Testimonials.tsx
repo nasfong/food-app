@@ -35,8 +35,8 @@ const Testimonials = () => {
   return (
     <section className='h-[350px] my-10'>
       <div className='text-center'>
-        <div className='form-to'>What Our Clients Say</div>
-        <div className='title'>TESTIMONIALS</div>
+        <h2 className='form-to'>What Our Clients Say</h2>
+        <h3 className='title'>TESTIMONIALS</h3>
       </div>
       <div className='h-[300px] bg-gray'>
         <Swiper
@@ -60,8 +60,8 @@ const Testimonials = () => {
                   className='icon-footer icon-hover cursor-pointer mb-6'
                   dangerouslySetInnerHTML={{ __html: double_quote_icon }}
                 />
-                <div className='text-sm mb-3'>{item.feedback} </div>
-                <div className='text-[--color] font-thin'>{item.name}</div>
+                <h4 className='text-sm mb-3'>{item.feedback} </h4>
+                <h5 className='text-[--color] font-thin'>{item.name}</h5>
               </div>
             </SwiperSlide>
           ))}

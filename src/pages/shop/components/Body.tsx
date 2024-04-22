@@ -319,7 +319,7 @@ const Body = () => {
                 <img
                   src={ImagePreview}
                   className='h-[200px] w-full'
-                  alt=""
+                  alt={ImagePreview}
                   onError={(e) => {
                     (e.target as any).src = default_image
                   }}

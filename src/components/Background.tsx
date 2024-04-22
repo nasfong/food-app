@@ -61,7 +61,6 @@ const Background = ({ data }: Props) => {
     >
       <img
         src={data?.image}
-        alt=""
         className={`
         relative object-cover w-full 
         h-[60vh]
@@ -71,6 +70,7 @@ const Background = ({ data }: Props) => {
         onError={(e) => {
           (e.target as any).src = default_image
         }}
+        alt={data?.image}
       />
       {/* <div className="inner-shadow"></div> */}
       <div className="gradient-overlay" />

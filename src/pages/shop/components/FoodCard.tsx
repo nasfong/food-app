@@ -39,7 +39,7 @@ const FoodCard = ({ data, handleAddCard }: any) => {
         <div className="relative w-full md:w-1/2 m-0 overflow-hidden text-gray-700 bg-white bg-clip-border shrink-0">
           <img
             src={data?.image}
-            alt="card-image"
+            alt={data?.image}
             className="object-cover"
             onError={(e) => {
               (e.target as any).src = default_image

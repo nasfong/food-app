@@ -16,7 +16,7 @@ const FoodCard = ({ item, index, handleButtonClick, cardStates, handleEdit, hand
         <img
           className="w-full h-52 object-cover"
           src={item.image}
-          alt="Food"
+          alt={item.image}
           onError={(e) => {
             (e.target as any).src = default_image
           }}

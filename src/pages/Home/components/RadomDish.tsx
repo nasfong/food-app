@@ -12,8 +12,8 @@ const RadomDish = ({ data }: any) => {
   return (
     <div className="container my-20">
       <div className='mb-12 text-center'>
-        <div className='form-to'>Random Dishes</div>
-        <div className='title'>FROM OUR MENU</div>
+        <h2 className='form-to'>Random Dishes</h2>
+        <h3 className='title'>FROM OUR MENU</h3>
       </div>
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8'>
         {data?.map((item: any, index: any) => (

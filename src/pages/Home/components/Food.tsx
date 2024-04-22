@@ -139,8 +139,8 @@ const Food = ({ data, refetch, isLoading }: any) => {
   return (
     <section className="h-[400px] my-10 mb-40 bg-gray container mx-auto text-center">
       <div>
-        <div className='form-to'>From 11:00am to 10:00pm</div>
-        <div className='title'>ORDER ONLINE</div>
+        <h3 className='form-to'>From 11:00am to 10:00pm</h3>
+        <h4 className='title'>ORDER ONLINE</h4>
       </div>
       {admin && (
         <div className='text-end mt-3'>
@@ -181,7 +181,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
             <SwiperSlide key={index} onClick={() => handleClick(item._id)}>
               <img
                 src={item.image || default_image}
-                alt={`Slide 1s`}
+                alt={item.image || default_image}
                 className='img rounded-lg'
                 onError={(e) => {
                   (e.target as any).src = default_image
@@ -230,7 +230,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
               <img
                 src={ImagePreview}
                 className='h-[200px] w-full'
-                alt=""
+                alt={ImagePreview}
                 onError={(e) => {
                   (e.target as any).src = default_image
                 }}

@@ -150,7 +150,7 @@ const News = (
         >
           <img
             src={item.image}
-            alt=""
+            alt={item.image}
             className="object-cover h-80 w-full md:w-[600px] rounded-sm"
             onError={(e) => {
               (e.target as any).src = default_image

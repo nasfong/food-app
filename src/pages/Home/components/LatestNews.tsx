@@ -45,8 +45,8 @@ const LatestNews = () => {
   return (
     <section className='relative h-[750px] mt-10 bg-gray'>
       <div className='absolute top-10 left-0 right-0 text-center z-10'>
-        <div className='form-to text-xl'>From Our Blog</div>
-        <div className='title text-white text-4xl border-white'>LATEST NEWS</div>
+        <h2 className='form-to text-xl'>From Our Blog</h2>
+        <h3 className='title text-white text-4xl border-white'>LATEST NEWS</h3>
       </div>
       <Swiper
         slidesPerView={1}
@@ -63,7 +63,7 @@ const LatestNews = () => {
           <SwiperSlide key={index} className='relative'>
             <img
               src={item.image}
-              alt=""
+              alt={item.image}
               className="brightness-50 h-full w-full object-cover"
               onError={(e) => {
                 (e.target as any).src = default_image
@@ -73,7 +73,7 @@ const LatestNews = () => {
             <div className='absolute top-44 right-50 flex flex-col md:flex-row justify-center items-center gap-5  w-[70%] md:w-[90%]'>
               <img
                 src={item.image}
-                alt=""
+                alt={item.image}
                 className='h-[200px] w-[600px] md:h-[400px] md:w-[600px] object-cover'
                 onError={(e) => {
                   (e.target as any).src = default_image
@@ -81,8 +81,8 @@ const LatestNews = () => {
               />
               <div className="text-white text-start flex flex-col gap-5">
                 <div className=''>{item.date}</div>
-                <div className='text-4xl'>{item.name}</div>
-                <div className=''>{truncateDescription(item.detail, 80)}</div>
+                <h4 className='text-4xl'>{item.name}</h4>
+                <h5 className=''>{truncateDescription(item.detail, 80)}</h5>
                 <button
                   className='button4 mt-5 p-2 relative z-10 flex justify-center align-middle gap-3 font-light'
                   onClick={() => navigate(`read-more/${item.id}`)}

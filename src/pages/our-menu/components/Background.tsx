@@ -6,7 +6,7 @@ const Background = () => {
     <div className="relative">
       <img
         src="https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg"
-        alt=""
+        alt="https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg"
         className="relative object-cover w-full brightness-75"
         style={{ maxHeight: '80vh' }}
         onError={(e) => {

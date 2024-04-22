@@ -67,7 +67,7 @@ const Slider = () => {
             <img
               key={idx}
               src={image}
-              alt={`Slide ${idx}`}
+              alt={`${image} ${idx}`}
               className={(idx === index ? 'active' : 'inactive') + ''}
               loading='lazy'
               onError={(e) => {

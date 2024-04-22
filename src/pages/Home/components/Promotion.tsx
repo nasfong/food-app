@@ -51,15 +51,15 @@ const Promotion = () => {
           <SwiperSlide key={index}>
             <img
               src={item.image}
-              alt=""
+              alt={item.image}
               className='promotion object-cover'
               onError={(e) => {
                 (e.target as any).src = default_image
               }}
             />
             <div className='absolute bg-white bg-opacity-95 p-5'>
-              <div className='font-bold text-[32px]'>{item.name}</div>
-              <div className='text-[16px]'>{item.detail}</div>
+              <h5 className='font-bold text-[32px]'>{item.name}</h5>
+              <h6 className='text-[16px]'>{item.detail}</h6>
             </div>
           </SwiperSlide>
         ))}

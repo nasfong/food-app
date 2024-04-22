@@ -16,7 +16,7 @@ const SlideWithCard = ({ data }: Props) => {
     <div className='relative h-[500px] my-10 bg-gray flex justify-center items-center'>
       <img
         src={data.image}
-        alt=""
+        alt={data.image}
         className='w-full h-full object-cover absolute'
         onError={(e) => {
           (e.target as any).src = default_image

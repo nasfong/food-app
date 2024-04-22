@@ -8,7 +8,7 @@ const BackgroundImage = ({ data }: any) => {
     <div className="relative">
       <img
         src={data?.image || defaults}
-        alt=""
+        alt={data?.image || defaults}
         className="relative object-cover w-full transition-opacity duration-1000 ease-in-out bg-black brightness-75"
         style={{ height: '60vh' }}
         loading='lazy'

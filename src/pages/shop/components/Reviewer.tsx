@@ -47,7 +47,7 @@ const Reviewer = ({ data, dataFood, refetch }: any) => {
               <div className='flex gap-3'>
                 <img
                   src="https://secure.gravatar.com/avatar/1fb2221f429981d3c12d69bb86d269a2?s=60&d=mm&r=g"
-                  alt=""
+                  alt="https://secure.gravatar.com/avatar/1fb2221f429981d3c12d69bb86d269a2?s=60&d=mm&r=g"
                   className='rounded-full'
                   onError={(e) => {
                     (e.target as any).src = default_image

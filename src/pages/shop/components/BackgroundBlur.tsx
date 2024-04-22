@@ -6,7 +6,7 @@ const BackgroundBlur = ({ image }: any) => {
       {/* Background Image */}
       <img
         src={image}
-        alt=""
+        alt={image}
         className="absolute inset-0 object-cover w-full h-full blur-xl opacity-80 brightness-50"
         style={{ height: '60vh' }}
         onError={(e) => {

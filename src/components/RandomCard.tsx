@@ -16,6 +16,7 @@ const RandomCard = ({ item, index }: any) => {
         onError={(e) => {
           (e.target as any).src = default_image
         }}
+        alt={item?.image}
       />
       <div className='ml-2 w-[100%]'>
         <div className="flex justify-between border-b-2 border-dashed">
@@ -28,7 +29,7 @@ const RandomCard = ({ item, index }: any) => {
         <div className="absolute top-[-230px] left-20 bg-white border-2 border-gray-300 rounded p-2 shadow z-10">
           <img
             src={item?.image}
-            alt="Popup Image"
+            alt={item?.image}
             className="w-48 h-48 object-cover"
             onError={(e) => {
               (e.target as any).src = default_image

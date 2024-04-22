@@ -5,7 +5,7 @@ const BackgroundImage = () => {
     <div className="relative">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Barbieri_-_ViaSophia25668.jpg/1200px-Barbieri_-_ViaSophia25668.jpg"
-        alt=""
+        alt="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Barbieri_-_ViaSophia25668.jpg/1200px-Barbieri_-_ViaSophia25668.jpg"
         className="relative object-cover w-full"
         style={{ height: '60vh' }}
         onError={(e) => {

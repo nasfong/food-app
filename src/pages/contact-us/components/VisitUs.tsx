@@ -15,7 +15,7 @@ const VisitUs = () => {
           </a>
           <div className="h-14 w-14 bg-[var(--color)] absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-full z-10">
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4">
-              <img src="/svg/map.svg" alt="" style={{ height: 15 }} />
+              <img src="/svg/map.svg" alt="svg1" style={{ height: 15 }} />
             </div>
           </div>
           <div className='border-dashed border border-gray-400 absolute top-[10px] bottom-[10px] left-[10px] right-[10px]'></div>
@@ -27,7 +27,7 @@ const VisitUs = () => {
           </div>
           <div className="h-14 w-14 bg-[var(--color)] absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-full z-10">
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4">
-              <img src="/svg/map.svg" alt="" style={{ height: 15 }} />
+              <img src="/svg/map.svg" alt="svg2" style={{ height: 15 }} />
             </div>
           </div>
           <div className='border-dashed border border-gray-400 absolute top-[10px] bottom-[10px] left-[10px] right-[10px]'></div>
@@ -42,7 +42,7 @@ const VisitUs = () => {
           </div>
           <div className="h-14 w-14 bg-[var(--color)] absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-full z-10">
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4">
-              <img src="/svg/map.svg" alt="" style={{ height: 15 }} />
+              <img src="/svg/map.svg" alt="svg3" style={{ height: 15 }} />
             </div>
           </div>
           <div className='border-dashed border border-gray-400 absolute top-[10px] bottom-[10px] left-[10px] right-[10px]'></div>

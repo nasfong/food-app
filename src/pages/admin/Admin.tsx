@@ -134,7 +134,7 @@ const Admin = () => {
                 <img
                   className="w-full h-full object-cover"
                   src={item.image}
-                  alt="Sunset in the mountains"
+                  alt={item.image}
                   onError={(e) => {
                     (e.target as any).src = default_image
                   }}

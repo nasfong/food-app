@@ -123,7 +123,7 @@ const GalleryList = () => {
               <PhotoView src={item.image}>
                 <img
                   src={item.image}
-                  alt=""
+                  alt={item.image}
                   className='object-cover h-full max-w-full'
                   onError={(e) => {
                     (e.target as any).src = default_image
@@ -178,7 +178,7 @@ const GalleryList = () => {
               <img
                 src={ImagePreview}
                 className='h-[200px] w-full'
-                alt=""
+                alt={ImagePreview}
                 onError={(e) => {
                   (e.target as any).src = default_image
                 }}
