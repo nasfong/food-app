@@ -1,13 +1,11 @@
 import '../styles/footer.css'
 import { IconButton } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { address, facebook, holiday, phone, telegram, tiktok, weekday } from '@/constant/constant';
 import { facebook_icon, telegram_icon, tiktok_icon } from '@/constant/data';
 
 const Footer = () => {
-  const navigate = useNavigate()
   function handleSocial(url: string) {
-    navigate(url)
+    window.open(url, '_blank')
   }
   return (
     <div className="flex flex-col md:flex-row">
