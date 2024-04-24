@@ -252,3 +252,36 @@
 .no-spinners {
   -moz-appearance: textfield;
 }
+
+.swiper-button-next {
+  background-color: #1b202497;
+  right: 0; /* Added */
+  padding: 35px 25px;
+  color: #fff !important;
+  fill: black !important;
+  stroke: black !important;
+  &:after {
+    position: relative;
+    left: -1px;
+    font-size: 24px;
+  }
+}
+
+.swiper-button-prev {
+  background-color: #1b202497;
+  left: 0; /* Added */
+  padding: 35px 25px;
+  color: #fff !important;
+  fill: black !important;
+  stroke: black !important;
+  &:after {
+    position: relative;
+    left: -1px;
+    font-size: 24px;
+  }
+}
+
+.mySwiper {
+  padding: 0;
+  margin: 0;
+}

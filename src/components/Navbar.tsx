@@ -9,7 +9,7 @@ import { Badge, Button, Divider, Drawer, IconButton, List, ListItem, ListItemBut
 import { LocalGroceryStore, Menu } from '@mui/icons-material';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
-import { address, admin, phone } from '@/constant/constant';
+import { address, admin, facebook, phone, telegram, tiktok } from '@/constant/constant';
 import { address_icon, facebook_icon, phone_icon, telegram_icon, tiktok_icon } from '@/constant/data';
 import { Analytics } from '@vercel/analytics/react'
 
@@ -39,7 +39,9 @@ function logout() {
   }, 500)
 }
 
-
+function handleSocial(url: string) {
+  window.open(url, '_blank')
+}
 
 function ElevationScroll(props: Props) {
   const { children, window } = props;
@@ -145,14 +147,17 @@ export default function ElevateAppBar(props: Props) {
                   <div
                     className='icon icon-hover cursor-pointer'
                     dangerouslySetInnerHTML={{ __html: facebook_icon }}
+                    onClick={() => handleSocial(facebook)}
                   />
                   <div
                     className='icon icon-hover cursor-pointer'
                     dangerouslySetInnerHTML={{ __html: telegram_icon }}
+                    onClick={() => handleSocial(telegram)}
                   />
                   <div
                     className='icon icon-hover cursor-pointer'
                     dangerouslySetInnerHTML={{ __html: tiktok_icon }}
+                    onClick={() => handleSocial(tiktok)}
                   />
                 </div>
               </div>
@@ -186,6 +191,7 @@ export default function ElevateAppBar(props: Props) {
                 src="/image/logo-menu.png"
                 alt={`logo - menu.png`}
                 className="absolute top-[-35px] left-5 h-100 w-100"
+                loading="lazy"
               />
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>

@@ -18,7 +18,7 @@ const ReadMore = () => {
         <div className="w-full md:w-3/4">
           <div className="flex gap-3 text-gray-500 mb-6 text-sm">
             <div>{data?.date}</div>
-            <div>{1} Comment</div>
+            {/* <div>{1} Comment</div> */}
           </div>
           <div>
             {data?.description}

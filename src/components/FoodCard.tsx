@@ -20,7 +20,8 @@ const FoodCard = ({ item, index, handleButtonClick, cardStates, handleEdit, hand
           onError={(e) => {
             (e.target as any).src = default_image
           }}
-        />
+          loading="lazy"
+          />
         <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75'>
           {formatMoney(item.price)}
         </div>

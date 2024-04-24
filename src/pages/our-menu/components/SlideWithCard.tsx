@@ -21,6 +21,7 @@ const SlideWithCard = ({ data }: Props) => {
         onError={(e) => {
           (e.target as any).src = default_image
         }}
+        loading="lazy"
       />
       <div className='absolute bg-white bg-opacity-90 p-10 text-center max-w-[800px]'>
         <div className='title'>{data.name}</div>

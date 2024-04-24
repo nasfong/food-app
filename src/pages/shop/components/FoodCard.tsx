@@ -44,6 +44,7 @@ const FoodCard = ({ data, handleAddCard }: any) => {
             onError={(e) => {
               (e.target as any).src = default_image
             }}
+            loading="lazy"
           />
         </div>
         <div className='absolute top-0 right-0 text-white bg-black p-4 bg-opacity-75 rounded-se'>
@@ -57,7 +58,7 @@ const FoodCard = ({ data, handleAddCard }: any) => {
             tracking-normal text-gray-700 uppercase
             min-h-5
             "
-            >
+          >
             {resetStar && (
               <Rating value={data?.star} placeholder={undefined} readonly />
             )}

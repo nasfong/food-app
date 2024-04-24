@@ -68,6 +68,7 @@ const LatestNews = () => {
               onError={(e) => {
                 (e.target as any).src = default_image
               }}
+              loading="lazy"
             />
 
             <div className='absolute top-44 right-50 flex flex-col md:flex-row justify-center items-center gap-5  w-[70%] md:w-[90%]'>
@@ -78,6 +79,7 @@ const LatestNews = () => {
                 onError={(e) => {
                   (e.target as any).src = default_image
                 }}
+                loading="lazy"
               />
               <div className="text-white text-start flex flex-col gap-5">
                 <div className=''>{item.date}</div>

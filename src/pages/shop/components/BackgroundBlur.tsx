@@ -12,6 +12,7 @@ const BackgroundBlur = ({ image }: any) => {
         onError={(e) => {
           (e.target as any).src = default_image
         }}
+        loading="lazy"
       />
       <div className="absolute inset-0 bg-black opacity-50"></div>
     </div>

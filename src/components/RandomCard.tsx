@@ -17,6 +17,7 @@ const RandomCard = ({ item, index }: any) => {
           (e.target as any).src = default_image
         }}
         alt={item?.image}
+        loading="lazy"
       />
       <div className='ml-2 w-[100%]'>
         <div className="flex justify-between border-b-2 border-dashed">
@@ -34,6 +35,7 @@ const RandomCard = ({ item, index }: any) => {
             onError={(e) => {
               (e.target as any).src = default_image
             }}
+            loading="lazy"
           />
         </div>
       )}

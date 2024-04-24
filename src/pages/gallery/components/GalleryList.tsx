@@ -128,6 +128,7 @@ const GalleryList = () => {
                   onError={(e) => {
                     (e.target as any).src = default_image
                   }}
+                  loading="lazy"
                 />
               </PhotoView>
               <div className='mt-3'>
@@ -182,6 +183,7 @@ const GalleryList = () => {
                 onError={(e) => {
                   (e.target as any).src = default_image
                 }}
+                loading="lazy"
               />
             )}
             <div className='text-red-700'>

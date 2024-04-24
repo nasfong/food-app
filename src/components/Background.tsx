@@ -71,6 +71,7 @@ const Background = ({ data }: Props) => {
           (e.target as any).src = default_image
         }}
         alt={data?.image}
+        loading="lazy"
       />
       {/* <div className="inner-shadow"></div> */}
       <div className="gradient-overlay" />

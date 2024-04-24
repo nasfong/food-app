@@ -42,6 +42,7 @@ export function TableWithStripedRows({ data, handleDelete }: any) {
                   onError={(e) => {
                     (e.target as any).src = default_image;
                   }}
+                  loading="lazy"
                 />
               </td>
               <td className="p-4">

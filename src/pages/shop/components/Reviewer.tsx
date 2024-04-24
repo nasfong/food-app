@@ -52,6 +52,7 @@ const Reviewer = ({ data, dataFood, refetch }: any) => {
                   onError={(e) => {
                     (e.target as any).src = default_image
                   }}
+                  loading="lazy"
                 />
                 <div>
                   <div>{item.name}</div>

@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 
 import './../../../food.css'
 import { useNavigate } from 'react-router-dom';
@@ -156,6 +156,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
           pagination={{
             clickable: true,
           }}
+          navigation={true}
           breakpoints={{
             380: {
               slidesPerView: 2,
@@ -174,7 +175,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
               spaceBetween: 50,
             },
           }}
-          modules={[Pagination]}
+          modules={[Pagination, Navigation]}
           className="mySwiper"
         >
           {data?.map((item, index) => (
@@ -186,6 +187,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
                 onError={(e) => {
                   (e.target as any).src = default_image
                 }}
+                loading="lazy"
               />
               <div className=' border border-white absolute top-[10px] bottom-[10px] left-[5px] right-[5px]'></div>
               <div className="inner-shadow-food"></div>
@@ -234,6 +236,7 @@ const Food = ({ data, refetch, isLoading }: any) => {
                 onError={(e) => {
                   (e.target as any).src = default_image
                 }}
+                loading="lazy"
               />
             )}
             <div className='text-red-700'>

@@ -56,6 +56,7 @@ const Promotion = () => {
               onError={(e) => {
                 (e.target as any).src = default_image
               }}
+              loading="lazy"
             />
             <div className='absolute bg-white bg-opacity-95 p-5'>
               <h5 className='font-bold text-[32px]'>{item.name}</h5>
