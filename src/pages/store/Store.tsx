@@ -23,27 +23,29 @@ const Store = () => {
         <hr className='my-3' />
         <div className='flex flex-row justify-end'>
           <div className='mb-6 w-96'>
-            <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <div className='text-4xl my-6'>
+            <div className="max-w-sm p-">
+              <div className='text-4xl my-6 uppercase'>
                 Cart totals
               </div>
+              <hr className='' />
               <div className='flex gap-20  my-6'>
-                <div className='text-xl'>
-                  Subtotal
+                <div className='text-xl uppercase'>
+                  TOTAL
                 </div>
                 <div className='font-bold'>
                   {formatMoney(sum)}
                 </div>
               </div>
+              <hr className='mt-3 mb-8' />
               <button
                 className="text-white bg-[#d1a054] 
               hover:bg-black focus:ring-4 focus:outline-none 
-              focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 
+              focus:ring-blue-300 font-medium text-sm px-5 py-2.5 
               text-center dark:bg-blue-600 dark:hover:bg-blue-700 
               dark:focus:ring-blue-800"
                 onClick={() => navigate('/contact-us')}
               >
-                Contact for order
+                CONTACT FOR ORDER
               </button>
             </div>
           </div>

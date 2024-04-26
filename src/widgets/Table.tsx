@@ -1,4 +1,4 @@
-import { Card, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { IconButton } from "@mui/material";
 import { Clear } from '@mui/icons-material'
 import { formatMoney } from "@/lib/utils";
@@ -9,7 +9,7 @@ const TABLE_HEAD = ["", "", "Product", "Price", "Quantity", "Subtotal"];
 
 export function TableWithStripedRows({ data, handleDelete }: any) {
   return (
-    <Card className="h-full w-full overflow-scroll" placeholder={undefined}>
+    <div className="h-full w-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
@@ -69,6 +69,6 @@ export function TableWithStripedRows({ data, handleDelete }: any) {
           ))}
         </tbody>
       </table>
-    </Card>
+    </div>
   );
 }

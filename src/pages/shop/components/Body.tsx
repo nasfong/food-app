@@ -149,6 +149,11 @@ const Body = () => {
     mutationFn: (id: string) => {
       return axios.delete(`/food/${id}`).then(() => {
         refetch()
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
       })
     },
   })
@@ -164,11 +169,7 @@ const Body = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteMutation.mutate(id)
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
+       
       }
     });
   }

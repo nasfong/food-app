@@ -37,7 +37,7 @@ const style = {
   display: 'block'
 };
 
-const Food = ({ data, refetch, isLoading }: any) => {
+const Food = ({ data, refetch, isLoading, error }: any) => {
   const navigate = useNavigate()
   const handleClick = (foodType: string) => {
     navigate(`shop/${foodType}`)
@@ -147,55 +147,55 @@ const Food = ({ data, refetch, isLoading }: any) => {
           <Button variant='contained' onClick={handleOpen}>Add Food-Type</Button>
         </div>
       )}
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <Swiper
-          slidesPerView={1}
-          spaceBetween={10}
-          pagination={{
-            clickable: true,
-          }}
-          navigation={true}
-          breakpoints={{
-            380: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 40,
-            },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 50,
-            },
-          }}
-          modules={[Pagination, Navigation]}
-          className="mySwiper"
-        >
-          {data?.map((item, index) => (
-            <SwiperSlide key={index} onClick={() => handleClick(item._id)}>
-              <img
-                src={item.image || default_image}
-                alt={item.image || default_image}
-                className='img rounded-lg'
-                onError={(e) => {
-                  (e.target as any).src = default_image
-                }}
-                loading="lazy"
-              />
-              <div className=' border border-white absolute top-[10px] bottom-[10px] left-[5px] right-[5px]'></div>
-              <div className="inner-shadow-food"></div>
-              <div className='absolute bottom-16 text-white uppercase'>
-                {item.name}
-              </div>
-              <div className="inner-shadow-footer"></div>
-              {/* <div className='absolute bottom-0'>
+      {error ? (<div className='py-32'>Sorry something went wrong!</div>)
+        : isLoading ? <div className='py-32'>Loading...</div>
+          : !data.length ? <div className='py-32'>No Food</div> : (
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={10}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              breakpoints={{
+                380: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 4,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 5,
+                  spaceBetween: 50,
+                },
+              }}
+              modules={[Pagination, Navigation]}
+              className="mySwiper"
+            >
+              {data?.map((item, index) => (
+                <SwiperSlide key={index} onClick={() => handleClick(item._id)}>
+                  <img
+                    src={item.image || default_image}
+                    alt={item.image || default_image}
+                    className='img rounded-lg'
+                    onError={(e) => {
+                      (e.target as any).src = default_image
+                    }}
+                    loading="lazy"
+                  />
+                  <div className=' border border-white absolute top-[10px] bottom-[10px] left-[5px] right-[5px]'></div>
+                  <div className="inner-shadow-food"></div>
+                  <div className='absolute bottom-16 text-white uppercase'>
+                    {item.name}
+                  </div>
+                  <div className="inner-shadow-footer"></div>
+                  {/* <div className='absolute bottom-0'>
               <Button
                 variant='contained'
                 color='primary'
@@ -208,10 +208,10 @@ const Food = ({ data, refetch, isLoading }: any) => {
               >Delete</Button>
             </div> */}
 
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
 
       <Modal
         open={open}
