@@ -1,4 +1,4 @@
-import { address, holiday, phone, weekday } from "@/constant/constant"
+import { address, phone, weekday } from "@/constant/constant"
 
 const VisitUs = () => {
   return (
@@ -37,9 +37,9 @@ const VisitUs = () => {
           <div>
             {weekday}
           </div>
-          <div>
+          {/* <div>
             {holiday}
-          </div>
+          </div> */}
           <div className="h-14 w-14 bg-[var(--color)] absolute top-0 left-1/2 transform -translate-x-1/2 rounded-b-full z-10">
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4">
               <img src="/svg/map.svg" alt="svg3" style={{ height: 15 }} />

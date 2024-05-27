@@ -1,6 +1,6 @@
 import '../styles/footer.css'
 import { IconButton } from '@mui/material';
-import { address, facebook, holiday, phone, telegram, tiktok, weekday } from '@/constant/constant';
+import { address, facebook, phone, telegram, tiktok, weekday } from '@/constant/constant';
 import { facebook_icon, telegram_icon, tiktok_icon } from '@/constant/data';
 
 const Footer = () => {
@@ -15,7 +15,7 @@ const Footer = () => {
           <div>{address}</div>
           <div>{phone}</div>
           <div>{weekday}</div>
-          <div>{holiday}</div>
+          {/* <div>{holiday}</div> */}
         </div>
       </div>
       <div className="md:w-1/2 text-center bg-[#1A2124] p-12 text-white relative">

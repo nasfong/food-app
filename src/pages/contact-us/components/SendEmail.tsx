@@ -31,7 +31,10 @@ const SendEmail = () => {
   };
   return (
     <div className="w-full">
-      <div className="uppercase text-4xl">Billing details</div>
+      <div className="text-center mb-6">
+        <div className='form-to'>Send us a message</div>
+        <div className='title'>CONTACT FORM</div>
+      </div>
       {open && (
         <div className="bg-teal-100 border-t-4 border-teal-500 text-teal-900 px-4 py-3 rounded relative" role="alert">
           <strong className="font-bold">{message}</strong>
