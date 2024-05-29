@@ -1,4 +1,4 @@
-export const restaurant_name = 'Maom Restaurant'
+export const restaurant_name = 'Maom Khmer Cuisine'
 export const address = 'Komai Road, Tropeng Ses Village, Kok Chok Commune, Krong Siem Reap'
 export const phone = '+855 93 315 841'
 export const weekday = 'Mon - Sun: 11:00am - 10:30pm'
