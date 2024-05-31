@@ -9,7 +9,7 @@ import './../../../promoition.css';
 
 const cards = [
   {
-    image: 'https://s1.1zoom.me/b5353/683/Fast_food_Hamburger_Vegetables_Bottle_530823_1920x1080.jpg',
+    image: 'https://clicklovegrow.com/wp-content/uploads/2020/03/Naomi-Sherman-Advanced-Graduate4.jpg',
     name: 'Roast Duck Breast',
     price: '14.50',
     detail: 'Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce',
