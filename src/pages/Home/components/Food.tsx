@@ -68,12 +68,14 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
     if (!files.length) return
 
     const file = files[0]
-    const maxFileSize = 300 * 1024; // 300KB in bytes
+
+    const maxFileSize = 3 * 1024 * 1024; // 3MB in bytes
     if (file.size > maxFileSize) {
-      setFormInput({ ...formInput, image: '' })
-      setRequireImage("File size exceeds the maximum limit of 300KB")
+      setFormInput({ ...formInput, image: '' });
+      setRequireImage("File size exceeds the maximum limit of 3MB");
       return;
     }
+
     setRequireImage("")
     setFormInput({ ...formInput, image: file })
     const reader = new FileReader()
