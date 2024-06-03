@@ -51,6 +51,7 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
   }
   const [formInput, setFormInput] = useState<any>(initState)
   const [ImagePreview, setImagePreview] = useState<any>('')
+  const [requireImage, setRequireImage] = useState("")
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
@@ -59,6 +60,7 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
     setOpen(false)
     setFormInput(initState)
     setImagePreview('')
+    setRequireImage('')
   }
 
   const handleChangeImage = (e: any) => {
@@ -66,6 +68,13 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
     if (!files.length) return
 
     const file = files[0]
+    const maxFileSize = 300 * 1024; // 300KB in bytes
+    if (file.size > maxFileSize) {
+      setFormInput({ ...formInput, image: '' })
+      setRequireImage("File size exceeds the maximum limit of 300KB")
+      return;
+    }
+    setRequireImage("")
     setFormInput({ ...formInput, image: file })
     const reader = new FileReader()
     reader.onloadend = function (e) {
@@ -240,6 +249,7 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
               />
             )}
             <div className='text-red-700'>
+              {requireImage}
               {mutation.isError && (mutation.error as any).response.data.message}
             </div>
             <div className='mb-3'>

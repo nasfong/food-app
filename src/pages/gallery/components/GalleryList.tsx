@@ -18,6 +18,7 @@ interface IGallery {
 
 const GalleryList = () => {
   const [ImagePreview, setImagePreview] = useState<any>('')
+  const [requireImage, setRequireImage] = useState("")
   const initState = {
     _id: '',
     image: '',
@@ -39,6 +40,7 @@ const GalleryList = () => {
     setFormInput(initState)
     setImagePreview('')
     mutation.reset()
+    setRequireImage('')
   }
 
   const deleteMutation = useMutation({
@@ -91,6 +93,14 @@ const GalleryList = () => {
     if (!files.length) return
 
     const file = files[0]
+
+    const maxFileSize = 300 * 1024; // 300KB in bytes
+    if (file.size > maxFileSize) {
+      setFormInput({ ...formInput, image: '' })
+      setRequireImage("File size exceeds the maximum limit of 300KB")
+      return;
+    }
+    setRequireImage("")
     setFormInput({ ...formInput, image: file })
     const reader = new FileReader()
     reader.onloadend = function (e) {
@@ -187,6 +197,7 @@ const GalleryList = () => {
               />
             )}
             <div className='text-red-700'>
+              {requireImage}
               {mutation.isError && (mutation.error as any).response.data.message}
             </div>
             <div className='mt-10'>

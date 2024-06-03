@@ -70,6 +70,7 @@ const Body = () => {
     chef: false,
   }
   const [formInput, setFormInput] = useState<any>(initState)
+  const [requireImage, setRequireImage] = useState("")
 
   const { data: foodTypeList } = useQuery<Food[]>({
     queryKey: ['food-type'],
@@ -91,6 +92,7 @@ const Body = () => {
     setOpen(false)
     setFormInput(initState)
     setImagePreview('')
+    setRequireImage('')
   }
 
   const handleChange = (e: any) => {
@@ -169,7 +171,7 @@ const Body = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteMutation.mutate(id)
-       
+
       }
     });
   }
@@ -222,6 +224,14 @@ const Body = () => {
     if (!files.length) return
 
     const file = files[0]
+
+    const maxFileSize = 300 * 1024; // 300KB in bytes
+    if (file.size > maxFileSize) {
+      setFormInput({ ...formInput, image: '' })
+      setRequireImage("File size exceeds the maximum limit of 300KB")
+      return;
+    }
+    setRequireImage("")
     setFormInput({ ...formInput, image: file })
     const reader = new FileReader()
     reader.onloadend = function (e) {
@@ -328,6 +338,7 @@ const Body = () => {
                 />
               )}
               <div className='text-red-700'>
+                {requireImage}
                 {mutation.isError && (mutation.error as any).response.data.message}
               </div>
               <div className='mb-3'>
