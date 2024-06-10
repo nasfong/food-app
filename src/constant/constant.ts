@@ -29,17 +29,3 @@ export const sliders =
     "/image/slider/DSCF2459.jpg",
   ]
 
-export const promotions = [
-  {
-    image: '/image/promotion/DSCF2290.jpg',
-    name: 'ណែមសាច់ជ្រូក​ និង បង្គា | Fresh Spring Roll with Pork and Shrimp',
-    price: '6.50',
-    detail: 'Sliced porks, shrimps, rice noodle, cucumbers, lettuce, mix herbs wrapped in rice paper and sweet sour peanut dipping sauce.'
-  },
-  {
-    image: '/image/promotion/DSCF2315.jpg',
-    name: 'ចាយ៉បំពង សាច់ជ្រូក ឬ សាច់មាន់ | Deep Fried Spring Rolls with Pork / Chicken',
-    price: '5.00',
-    detail: 'Grounded pork or chicken, khmer sweet potato, dried mushrooms, taro, carrot, black paper, wrapped deep fried and sweet sour peanut dipping sauce.'
-  },
-]
