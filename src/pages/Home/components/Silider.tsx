@@ -1,13 +1,7 @@
 import { useState, useEffect } from 'react';
 import './../../../slider.css'
-import { address, default_image, restaurant_name } from '@/constant/constant';
+import { address, default_image, restaurant_name, sliders } from '@/constant/constant';
 
-const images =
-  [
-    "https://drurybuildings.com/wp-content/uploads/2023/02/DRURY-BUILDINGS-20-1450x750.jpg",
-    "https://images.communicatorcloud.com/cloud/imagecontainer/f6954784-b534-4604-b458-98d6856a5878.jpg?maxWidth=1280&format=jpg&quality=90",
-    "https://glamadelaide.com.au/wp-content/uploads/2023/10/trak-5.jpg"
-  ]
 const interval = 7000
 
 const Slider = () => {
@@ -15,10 +9,10 @@ const Slider = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setIndex((prevIndex) => (prevIndex + 1) % sliders.length);
     }, interval);
     return () => clearInterval(intervalId);
-  }, [images, interval]);
+  }, [interval]);
 
   const [shadowOffsetX, setShadowOffsetX] = useState(0);
   const [shadowOffsetY, setShadowOffsetY] = useState(0);
@@ -55,7 +49,7 @@ const Slider = () => {
   return (
     <article>
       <div className="slider w-[100%] h-[50vh] md:h-[100vh] ">
-        {images.map((image, idx) => (
+        {sliders.map((image, idx) => (
           <span
             key={idx} className=''
             onMouseMove={handleMouseMove}

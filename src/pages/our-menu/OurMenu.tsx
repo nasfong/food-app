@@ -16,7 +16,7 @@ const OurMenu = () => {
       <Background data={{ image: 'https://wallpapers.com/images/hd/food-4k-1vrcb0mw76zcg4qf.jpg', title: 'Our Menu' }} />
       {error ? (<div className='py-32'>Sorry something went wrong!</div>)
         : isLoading ? <div className='py-32 text-center'>Loading...</div>
-          : !data.length ? <div className='py-32'>No Food</div> :
+          : !data.length ? <div className='py-32 text-center'>No Food</div> :
             <>
               {data?.map((item: any, index: any) => (
                 <div key={index}>
