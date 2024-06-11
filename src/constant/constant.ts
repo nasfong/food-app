@@ -24,8 +24,8 @@ export const location = {
 // )bRhg4-Tr@P;
 export const sliders =
   [
-    "/image/slider/DSCF2290.jpg",
-    "/image/slider/DSCF2428.jpg",
-    "/image/slider/DSCF2459.jpg",
+    "/image/slider/one.jpg",
+    "/image/slider/two.jpg",
+    "/image/slider/three.jpg",
   ]
 
