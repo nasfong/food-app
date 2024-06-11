@@ -38,7 +38,7 @@ import './../../../promoition.css';
 import { Pagination, Navigation } from 'swiper/modules';
 import { default_image } from '@/constant/constant';
 import { useNavigate } from 'react-router-dom';
-import { truncateDescription } from '@/lib/utils';
+// import { truncateDescription } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -91,9 +91,9 @@ const LatestNews = () => {
                 loading="lazy"
               />
               <div className="text-white text-start flex flex-col gap-5">
-                <div className=''>{item.description}</div>
                 <h4 className='text-4xl'>{item.name}</h4>
-                <h5 className=''>{truncateDescription(item.description, 80)}</h5>
+                <div className=''>{item.description}</div>
+                {/* <h5 className=''>{truncateDescription(item.description, 80)}</h5> */}
                 <button
                   className='button4 mt-5 p-2 relative z-10 flex justify-center align-middle gap-3 font-light'
                   onClick={() => navigate(`read-more/1`)}
