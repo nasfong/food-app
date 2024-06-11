@@ -124,7 +124,7 @@ const GalleryList = () => {
     <div className='container my-20'>
       {admin && (
         <div className='text-end mb-6'>
-          <Button variant='contained' onClick={handleOpen}>Add Food</Button>
+          <Button variant='contained' onClick={handleOpen}>Add Gallery</Button>
         </div>
       )}
       <PhotoProvider>

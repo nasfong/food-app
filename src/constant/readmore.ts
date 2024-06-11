@@ -1,7 +1,7 @@
 export const readMore = [
   {
     id: '1',
-    image: 'https://i.redd.it/3ifouekjqajb1.jpg',
+    image: '/image/slider/three.jpg',
     name: 'About MAOM',
     date: '10 06, 2024',
     description: `
@@ -24,18 +24,18 @@ export const readMore = [
 
     `
   },
-  {
-    id: '2',
-    image: 'https://i.pinimg.com/originals/9c/7b/e4/9c7be43979a736a8695361a544630b97.jpg',
-    name: 'Where does it come from?',
-    date: 'August 5, 2016',
-    description: `Pellentesque nulla justo, auctor ac maximus sed, tempus sed nibh. Ut elit sapien, ornare et diam ac, efficitur luctus elit. Proin ut nulla consequat, elementum lacus eu, cursus ipsum. Fusce efficitur lectus ante, quis egestas nisl tristique eu. Curabitur tincidunt dapibus augue non fringilla. Cras lorem urna, gravida in velit vitae, varius egestas enim. Proin facilisis nibh a justo egestas elementum. Mauris ac ipsum accumsan, luctus quam sit amet, rhoncus risus. Vivamus semper, magna vel porta interdum, odio mi molestie turpis, eget accumsan tellus orci sed dolor. Donec imperdiet commodo metus, eget ultricies orci sodales at. Sed tincidunt commodo nisi, et varius nulla ullamcorper eget.`
-  },
-  {
-    id: '3',
-    image: 'https://s1.1zoom.me/b5050/596/Evening_Forests_Mountains_Firewatch_Campo_Santo_549147_1920x1080.jpg',
-    name: 'What is Lorem Ipsum?',
-    date: 'March 6, 2018',
-    description: `Pellentesque nulla justo, auctor ac maximus sed, tempus sed nibh. Ut elit sapien, ornare et diam ac, efficitur luctus elit. Proin ut nulla consequat, elementum lacus eu, cursus ipsum. Fusce efficitur lectus ante, quis egestas nisl tristique eu. Curabitur tincidunt dapibus augue non fringilla. Cras lorem urna, gravida in velit vitae, varius egestas enim. Proin facilisis nibh a justo egestas elementum. Mauris ac ipsum accumsan, luctus quam sit amet, rhoncus risus. Vivamus semper, magna vel porta interdum, odio mi molestie turpis, eget accumsan tellus orci sed dolor. Donec imperdiet commodo metus, eget ultricies orci sodales at. Sed tincidunt commodo nisi, et varius nulla ullamcorper eget.`
-  },
+  // {
+  //   id: '2',
+  //   image: 'https://i.pinimg.com/originals/9c/7b/e4/9c7be43979a736a8695361a544630b97.jpg',
+  //   name: 'Where does it come from?',
+  //   date: 'August 5, 2016',
+  //   description: `Pellentesque nulla justo, auctor ac maximus sed, tempus sed nibh. Ut elit sapien, ornare et diam ac, efficitur luctus elit. Proin ut nulla consequat, elementum lacus eu, cursus ipsum. Fusce efficitur lectus ante, quis egestas nisl tristique eu. Curabitur tincidunt dapibus augue non fringilla. Cras lorem urna, gravida in velit vitae, varius egestas enim. Proin facilisis nibh a justo egestas elementum. Mauris ac ipsum accumsan, luctus quam sit amet, rhoncus risus. Vivamus semper, magna vel porta interdum, odio mi molestie turpis, eget accumsan tellus orci sed dolor. Donec imperdiet commodo metus, eget ultricies orci sodales at. Sed tincidunt commodo nisi, et varius nulla ullamcorper eget.`
+  // },
+  // {
+  //   id: '3',
+  //   image: 'https://s1.1zoom.me/b5050/596/Evening_Forests_Mountains_Firewatch_Campo_Santo_549147_1920x1080.jpg',
+  //   name: 'What is Lorem Ipsum?',
+  //   date: 'March 6, 2018',
+  //   description: `Pellentesque nulla justo, auctor ac maximus sed, tempus sed nibh. Ut elit sapien, ornare et diam ac, efficitur luctus elit. Proin ut nulla consequat, elementum lacus eu, cursus ipsum. Fusce efficitur lectus ante, quis egestas nisl tristique eu. Curabitur tincidunt dapibus augue non fringilla. Cras lorem urna, gravida in velit vitae, varius egestas enim. Proin facilisis nibh a justo egestas elementum. Mauris ac ipsum accumsan, luctus quam sit amet, rhoncus risus. Vivamus semper, magna vel porta interdum, odio mi molestie turpis, eget accumsan tellus orci sed dolor. Donec imperdiet commodo metus, eget ultricies orci sodales at. Sed tincidunt commodo nisi, et varius nulla ullamcorper eget.`
+  // },
 ]
