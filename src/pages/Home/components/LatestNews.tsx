@@ -96,7 +96,7 @@ const LatestNews = () => {
                 <h5 className=''>{truncateDescription(item.description, 80)}</h5>
                 <button
                   className='button4 mt-5 p-2 relative z-10 flex justify-center align-middle gap-3 font-light'
-                  onClick={() => navigate(`read-more/${index + 1}`)}
+                  onClick={() => navigate(`read-more/1`)}
                 >
                   READ MORE
                 </button>
