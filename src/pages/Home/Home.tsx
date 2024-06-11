@@ -11,7 +11,7 @@ import { useQuery, } from '@tanstack/react-query'
 import axios from 'axios'
 import { useGlobalData } from '@/hook/useGlobalData'
 import { useCallback } from 'react'
-interface Food {
+interface IFood {
   _id: string;
   name: string;
   image: string
@@ -22,7 +22,7 @@ interface Food {
   chef: boolean
 }
 interface FoodQuery {
-  data: Food[]
+  data: IFood[]
   totalPages: number
   currentPage: number
 }

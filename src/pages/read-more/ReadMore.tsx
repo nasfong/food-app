@@ -20,9 +20,9 @@ const ReadMore = () => {
             <div>{data?.date}</div>
             {/* <div>{1} Comment</div> */}
           </div>
-          <div>
-            {data?.description}
-          </div>
+          <div
+            dangerouslySetInnerHTML={{ __html: data?.description }}
+          />
         </div>
         <div className="bg-[#fafafa] p-[30px] shadow">
           <div className='mb-6'>RECENT POSTS</div>

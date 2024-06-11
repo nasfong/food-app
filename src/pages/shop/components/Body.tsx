@@ -21,6 +21,7 @@ interface Food {
   description: string;
   foodType: string;
   chef: boolean;
+  promotion: boolean
 }
 
 interface FoodQuery {
@@ -38,6 +39,7 @@ interface FormData {
   description: string;
   foodType: string;
   chef: boolean;
+  promotion: boolean
 }
 
 const style = {
@@ -68,6 +70,7 @@ const Body = () => {
     star: 0,
     foodType: '',
     chef: false,
+    promotion: false,
   }
   const [formInput, setFormInput] = useState<any>(initState)
   const [requireImage, setRequireImage] = useState("")
@@ -114,6 +117,7 @@ const Body = () => {
         formDataToSend.append('description', formData.description);
         formDataToSend.append('foodType', formData.foodType);
         formDataToSend.append('chef', formData.chef.toString());
+        formDataToSend.append('promotion', formData.promotion.toString());
         formDataToSend.append('_method', 'PUT')
         return axios.put(`/food/${formData._id}`, formDataToSend, {
           headers: {
@@ -133,6 +137,7 @@ const Body = () => {
         formDataToSend.append('description', formData.description);
         formDataToSend.append('foodType', formData.foodType);
         formDataToSend.append('chef', formData.chef.toString());
+        formDataToSend.append('promotion', formData.promotion.toString());
         return axios.post('/food', formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -418,6 +423,20 @@ const Body = () => {
                 />
                 <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                   Chef Recommend
+                </label>
+              </div>
+
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  onChange={handleChange}
+                  checked={formInput.promotion}
+                  name='promotion'
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Promotion
                 </label>
               </div>
 

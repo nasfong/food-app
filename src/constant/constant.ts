@@ -21,3 +21,11 @@ export const location = {
   lng: 103.8599097
 };
 // .6o@VA[k-}ip
+// )bRhg4-Tr@P;
+export const sliders =
+  [
+    "/image/slider/DSCF2290.jpg",
+    "/image/slider/DSCF2428.jpg",
+    "/image/slider/DSCF2459.jpg",
+  ]
+

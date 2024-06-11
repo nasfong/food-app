@@ -142,18 +142,20 @@ const GalleryList = () => {
                   loading="lazy"
                 />
               </PhotoView>
-              <div className='mt-3'>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  onClick={() => handleEdit(item)}
-                >Edit</Button> {' '}
-                <Button
-                  variant='contained'
-                  color='error'
-                  onClick={() => handleDelete(item._id)}
-                >Delete</Button>
-              </div>
+              {admin && (
+                <div className='mt-3'>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={() => handleEdit(item)}
+                  >Edit</Button> {' '}
+                  <Button
+                    variant='contained'
+                    color='error'
+                    onClick={() => handleDelete(item._id)}
+                  >Delete</Button>
+                </div>
+              )}
             </div>
           ))}
         </div>
