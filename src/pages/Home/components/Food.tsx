@@ -124,11 +124,11 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
   //   },
   // })
 
-  // const handleEdit = (data: any) => {
-  //   setFormInput({ ...data })
-  //   setImagePreview(data.image)
-  //   handleOpen()
-  // }
+  const handleEdit = (data: any) => {
+    setFormInput({ ...data })
+    setImagePreview(data.image)
+    handleOpen()
+  }
   // const handleDelete = (id: string) => {
   //   deleteMutation.mutate(id)
   // }
@@ -195,19 +195,19 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
                     {item.name}
                   </div>
                   <div className="inner-shadow-footer"></div>
-                  {/* <div className='absolute bottom-0'>
-              <Button
-                variant='contained'
-                color='primary'
-                onClick={() => handleEdit(item)}
-              >Edit</Button>
-              <Button
-                variant='contained'
-                color='error'
-                onClick={() => handleDelete(item._id)}
-              >Delete</Button>
-            </div> */}
 
+                  <div className='absolute bottom-0'>
+                    {/* <Button
+                      variant='contained'
+                      color='primary'
+                      onClick={() => handleEdit(item)}
+                    >Edit</Button> */}
+                    {/* <Button
+                      variant='contained'
+                      color='error'
+                      onClick={() => handleDelete(item._id)}
+                    >Delete</Button> */}
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
