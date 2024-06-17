@@ -209,7 +209,7 @@ const GalleryList = () => {
                 variant='contained'
                 type='submit'
               >
-                Create
+                {!formInput._id ? 'Create' : 'Update'}
               </LoadingButton>
             </div>
           </Box>

@@ -236,7 +236,7 @@ const Body = () => {
       setRequireImage("File size exceeds the maximum limit of 3MB");
       return;
     }
-    
+
     setRequireImage("")
     setFormInput({ ...formInput, image: file })
     const reader = new FileReader()
@@ -445,11 +445,16 @@ const Body = () => {
                 variant='contained'
                 type='submit'
               >
-                Create
+                {!formInput._id ? 'Create' : 'Update'}
               </LoadingButton>
             </Box>
           </form>
         </Modal>
+        {/* <div className="toast toast-bottom toast-end z-10">
+          <div className="alert alert-success text-white">
+            <span>Message sent successfully.</span>
+          </div>
+        </div> */}
       </div>
     </>
   )
