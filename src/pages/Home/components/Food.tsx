@@ -150,7 +150,7 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
   return (
     <section className="h-[400px] my-10 mb-40 bg-gray container mx-auto text-center">
       <div>
-        <h3 className='form-to'>From 11:00am to 10:00pm</h3>
+        <h3 className='form-to'>From 11:00am to 10:30pm</h3>
         <h4 className='title'>ORDER ONLINE</h4>
       </div>
       {admin && (
