@@ -11,7 +11,7 @@ const OurNews = () => {
   // })
   return (
     <section>
-      <Background data={{ image: 'https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg', title: 'Our News' }} />
+      <Background data={{ image: '/image/slider/two.jpg', title: 'Our News' }} />
       <News
       // data={data}
       // refetch={refetch} 

@@ -37,7 +37,15 @@ const Map = () => {
       onUnmount={onUnmount}
     >
 
-      <Marker position={location}></Marker>
+      <Marker
+        position={location}
+        label={{
+          text: "Maom Khmer Cuisine", // Change this to your desired label text
+          color: "#34a854", // Optional: change the color of the label text
+          fontSize: "16px", // Optional: change the font size of the label text
+          fontWeight: "bold" // Optional: change the font weight of the label text
+        }}
+      ></Marker>
     </GoogleMap>
   ) : <></>
 }

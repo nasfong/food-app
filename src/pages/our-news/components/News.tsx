@@ -167,7 +167,9 @@ const News = (
           >
             <div>{item.date}</div>
             <div className='font-bold text-2xl'>{item.name}</div>
-            <div>{truncateDescription(item.description, 200)}</div>
+            <div
+              dangerouslySetInnerHTML={{ __html: truncateDescription(item.description, 200) }}
+            />
             <button
               className='button5 mt-5 p-2 font-light'
               onClick={() => navigate(`/read-more/${item.id}`)}
