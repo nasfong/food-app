@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 import FoodCard from '@/components/FoodCard';
 import { LoadingButton } from '@mui/lab';
 import { Rating } from '@material-tailwind/react';
+import DrinkCard from './DrinkCard';
 
 interface Food {
   _id: string;
@@ -57,6 +58,8 @@ const style = {
   display: 'block'
 };
 
+const drinkId = '65faeeee5960607a1d29e8f9'
+
 const Body = () => {
   const { foodType } = useParams()
   const [ImagePreview, setImagePreview] = useState<any>('')
@@ -75,6 +78,8 @@ const Body = () => {
   const [formInput, setFormInput] = useState<any>(initState)
   const [requireImage, setRequireImage] = useState("")
 
+  const isDrink = drinkId === foodType
+
   const { data: foodTypeList } = useQuery<Food[]>({
     queryKey: ['food-type'],
     queryFn: () =>
@@ -86,7 +91,21 @@ const Body = () => {
     queryKey: ['food', { foodType: foodType, pageSize: 6, page: currentPage }],
     queryFn: () =>
       axios.get('/food', { params: { foodType: foodType, pageSize: 6, page: currentPage } }).then((res) => res.data),
+    enabled: !isDrink
   })
+
+  const {
+    data: drinkData,
+    isLoading: drinkLoading,
+    error: drinkError,
+    refetch: drinkRefetch
+  } = useQuery<any[]>({
+    queryKey: ['drink',],
+    queryFn: () =>
+      axios.get('/drink').then((res) => res.data),
+    enabled: isDrink
+  })
+
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
@@ -294,27 +313,52 @@ const Body = () => {
             }}>Add Food</Button>
           )}
         </div>
-        <div className="flex flex-wrap justify-center">
-          {error ? (<div className='py-32'>Sorry something went wrong!</div>)
-            : isLoading ? <div className='py-32'>Loading...</div>
-              : !data?.data.length ? <div className='py-32'>No Food</div> :
-                <>
-                  {data?.data.map((item, index) => (
-                    <FoodCard
-                      key={index}
-                      item={item}
-                      index={index}
-                      handleButtonClick={handleButtonClick}
-                      cardStates={cardStates}
-                      handleEdit={handleEdit}
-                      handleDelete={handleDelete}
-                    />
-                  ))}
-                </>
-          }
-        </div>
+        {!isDrink ? (
+          <div>
+            <div className="flex flex-wrap justify-center">
+              {error ? (<div className='py-32'>Sorry something went wrong!</div>)
+                : isLoading ? <div className='py-32'>Loading...</div>
+                  : !data?.data.length ? <div className='py-32'>No Food</div> :
+                    <>
+                      {data?.data.map((item, index) => (
+                        <FoodCard
+                          key={index}
+                          item={item}
+                          index={index}
+                          handleButtonClick={handleButtonClick}
+                          cardStates={cardStates}
+                          handleEdit={handleEdit}
+                          handleDelete={handleDelete}
+                        />
+                      ))}
+                    </>
+              }
+            </div>
+            {data?.totalPages ? <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={data.totalPages} /> : null}
+          </div>
+        ) : (
+          <div className="flex flex-wrap justify-center">
+            {drinkError ? (<div className='py-32'>Sorry something went wrong!</div>)
+              : drinkLoading ? <div className='py-32'>Loading...</div>
+                : !drinkData?.length ? <div className='py-32'>No Food</div> :
+                  <>
+                    {drinkData?.map((item, index) => (
+                      <DrinkCard
+                        key={index}
+                        item={item}
+                        index={index}
+                      // handleButtonClick={handleButtonClick}
+                      // cardStates={cardStates}
+                      // handleEdit={handleEdit}
+                      // handleDelete={handleDelete}
+                      />
+                    ))}
+                    {console.log(drinkData)}
+                  </>
+            }
+          </div>
+        )}
 
-        {data?.totalPages ? <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={data.totalPages} /> : null}
 
         <Modal
           open={open}
