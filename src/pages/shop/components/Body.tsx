@@ -1,7 +1,7 @@
 import { Box, Button, Modal } from '@mui/material';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
 import { useGlobalData } from '@/hook/useGlobalData';
 import { Pagination } from '@/components/Pagination';
@@ -12,6 +12,7 @@ import FoodCard from '@/components/FoodCard';
 import { LoadingButton } from '@mui/lab';
 import { Rating } from '@material-tailwind/react';
 import DrinkCard from './DrinkCard';
+import DrinkModal from './DrinkModal';
 
 interface Food {
   _id: string;
@@ -60,9 +61,17 @@ const style = {
 
 const drinkId = '65faeeee5960607a1d29e8f9'
 
+const initStateDrink = {
+  image: '',
+  name: '',
+  drinks: [
+    { name: '', price: '' }
+  ]
+}
+
 const Body = () => {
   const { foodType } = useParams()
-  const [ImagePreview, setImagePreview] = useState<any>('')
+  const [imagePreview, setImagePreview] = useState<any>('')
   const [currentPage, setCurrentPage] = useState(1)
   const initState = {
     _id: '',
@@ -77,6 +86,9 @@ const Body = () => {
   }
   const [formInput, setFormInput] = useState<any>(initState)
   const [requireImage, setRequireImage] = useState("")
+
+  // drink
+  const [formInputDrink, setFormInputDrink] = useState(initStateDrink)
 
   const isDrink = drinkId === foodType
 
@@ -117,11 +129,21 @@ const Body = () => {
     setRequireImage('')
   }
 
+  const onOpenDrinkModal = () => {
+    (document.getElementById('drink_modal') as HTMLDialogElement).showModal()
+  }
+
   const handleChange = (e: any) => {
     const { name, value, type } = e.target;
     const inputValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
-    setFormInput({ ...formInput, [name]: inputValue });
+    setFormInput(prev => ({ ...prev, [name]: inputValue }));
   };
+
+  const handleChangeDrink = useCallback((e: any) => {
+    const { name, value, type } = e.target;
+    const inputValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
+    setFormInputDrink(prev => ({ ...prev, [name]: inputValue }));
+  }, [setFormInputDrink]);
 
   const mutation = useMutation({
     mutationFn: (formData: FormData) => {
@@ -183,6 +205,20 @@ const Body = () => {
       })
     },
   })
+
+  const deleteDrinkMutation = useMutation({
+    mutationFn: (id: string) => {
+      return axios.delete(`/drink/${id}`).then(() => {
+        drinkRefetch()
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      })
+    },
+  })
+
   const handleDelete = async (id: string) => {
     await Swal.fire({
       title: "Are you sure?",
@@ -194,8 +230,8 @@ const Body = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteMutation.mutate(id)
-
+        if (!isDrink) deleteMutation.mutate(id)
+        else deleteDrinkMutation.mutate(id)
       }
     });
   }
@@ -206,6 +242,11 @@ const Body = () => {
     handleOpen()
   }
 
+  const handleEditDrink = (data: any) => {
+    setFormInputDrink({ ...data })
+    setImagePreview(data.image)
+    onOpenDrinkModal()
+  }
 
   const { addCard } = useGlobalData()
 
@@ -305,12 +346,17 @@ const Body = () => {
             </NavLink>
           ))}
         </div>
+        {/* Add  */}
         <div className='text-end'>
           {admin && (
             <Button variant='contained' onClick={() => {
-              handleOpen()
-              setFormInput({ ...formInput, foodType: foodType })
-            }}>Add Food</Button>
+              if (!isDrink) {
+                handleOpen()
+                setFormInput({ ...formInput, foodType: foodType })
+              } else {
+                onOpenDrinkModal()
+              }
+            }}>Add {!isDrink ? 'Food' : 'Drink'}</Button>
           )}
         </div>
         {!isDrink ? (
@@ -337,7 +383,7 @@ const Body = () => {
             {data?.totalPages ? <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={data.totalPages} /> : null}
           </div>
         ) : (
-          <div className="flex flex-wrap justify-center">
+          <div className="flex flex-col justify-center items-center gap-5">
             {drinkError ? (<div className='py-32'>Sorry something went wrong!</div>)
               : drinkLoading ? <div className='py-32'>Loading...</div>
                 : !drinkData?.length ? <div className='py-32'>No Food</div> :
@@ -347,13 +393,12 @@ const Body = () => {
                         key={index}
                         item={item}
                         index={index}
-                      // handleButtonClick={handleButtonClick}
-                      // cardStates={cardStates}
-                      // handleEdit={handleEdit}
-                      // handleDelete={handleDelete}
+                        // handleButtonClick={handleButtonClick}
+                        // cardStates={cardStates}
+                        handleEdit={handleEditDrink}
+                        handleDelete={handleDelete}
                       />
                     ))}
-                    {console.log(drinkData)}
                   </>
             }
           </div>
@@ -376,11 +421,11 @@ const Body = () => {
                 onChange={handleChangeImage}
                 accept="image/*"
               />
-              {ImagePreview && (
+              {imagePreview && (
                 <img
-                  src={ImagePreview}
+                  src={imagePreview}
                   className='h-[200px] w-full'
-                  alt={ImagePreview}
+                  alt={imagePreview}
                   onError={(e) => {
                     (e.target as any).src = default_image
                   }}
@@ -494,6 +539,18 @@ const Body = () => {
             </Box>
           </form>
         </Modal>
+
+        {/* {openDrink && ( */}
+        <DrinkModal
+          initState={initStateDrink}
+          formInput={formInputDrink}
+          setFormInput={setFormInputDrink}
+          handleChange={handleChangeDrink}
+          refetch={drinkRefetch}
+          imagePreview={imagePreview}
+          setImagePreview={setImagePreview}
+        />
+        {/* )} */}
         {/* <div className="toast toast-bottom toast-end z-10">
           <div className="alert alert-success text-white">
             <span>Message sent successfully.</span>
