@@ -105,6 +105,27 @@
   border-bottom: 2px solid #000;
 }
 
+.button6 {
+  /* background-color: #eee; */
+  font-size: 13px;
+  border-bottom: 2px solid var(--color);
+  border-radius: 12px;
+  color: var(--color);
+  /* box-shadow: 0 0.2rem #ffffff; */
+  cursor: pointer;
+}
+
+.button6:active {
+  color: white;
+  border-bottom: 2px solid #ffffff;
+  transform: translateY(0.2rem);
+}
+
+.button6:hover:not(:disabled) {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
 
 .button3 {
   /* background-color: #eee; */

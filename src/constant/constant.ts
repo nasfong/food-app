@@ -4,7 +4,7 @@ export const phone = '+855 93 315 841'
 export const weekday = 'Mon - Sun: 11:00am - 10:30pm'
 // export const holiday = 'Sat - Sun: 10:00 - 23:00'
 export const facebook = 'https://www.facebook.com/share/cZs4DfB9yPjGH9Tr/?mibextid=qi2Omg'
-export const tiktok = ''
+export const whatsapp = ''
 export const telegram = 'https://t.me/maomkhmercuisine'
 
 export const admin = !!localStorage.getItem('admin')

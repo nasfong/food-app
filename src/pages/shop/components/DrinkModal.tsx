@@ -237,10 +237,13 @@ const DrinkModal = memo(({
 
           </div>
           <div className="modal-action font-sans">
-            <form method="dialog">
-              <button className="btn" onClick={onClose}>Close</button>
-            </form>
-            <button className="btn" type="submit">{!formInput?._id ? 'Create' : 'Update'}</button>
+            <button className="btn" type="button" onClick={onClose}>Close</button>
+            <button className="btn" type="submit">
+              {!formInput?._id ? 'Create' : 'Update'}
+              {mutation.isPending && (
+                <span className="loading loading-spinner"></span>
+              )}
+            </button>
           </div>
         </div>
       </form >

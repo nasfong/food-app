@@ -1,7 +1,7 @@
 import '../styles/footer.css'
 import { IconButton } from '@mui/material';
-import { address, facebook, phone, telegram, tiktok, weekday } from '@/constant/constant';
-import { facebook_icon, telegram_icon, tiktok_icon } from '@/constant/data';
+import { address, facebook, phone, telegram, whatsapp, weekday } from '@/constant/constant';
+import { facebook_icon, telegram_icon, whatsapp_icon } from '@/constant/data';
 
 const Footer = () => {
   function handleSocial(url: string) {
@@ -34,10 +34,10 @@ const Footer = () => {
               dangerouslySetInnerHTML={{ __html: telegram_icon }}
             />
           </IconButton>
-          <IconButton size="large" onClick={() => handleSocial(tiktok)}>
+          <IconButton size="large" onClick={() => handleSocial(whatsapp)}>
             <div
               className='icon-footer icon-hover'
-              dangerouslySetInnerHTML={{ __html: tiktok_icon }}
+              dangerouslySetInnerHTML={{ __html: whatsapp_icon }}
             />
           </IconButton>
         </div>

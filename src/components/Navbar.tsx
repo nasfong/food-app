@@ -9,14 +9,14 @@ import { Badge, Button, Divider, Drawer, IconButton, List, ListItem, ListItemBut
 import { LocalGroceryStore, Menu } from '@mui/icons-material';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/pages/Home/components/Footer'; import { useGlobalData } from '@/hook/useGlobalData';
-import { address, admin, facebook, phone, telegram, tiktok } from '@/constant/constant';
-import { address_icon, facebook_icon, phone_icon, telegram_icon, tiktok_icon } from '@/constant/data';
+import { address, admin, facebook, phone, telegram, whatsapp } from '@/constant/constant';
+import { address_icon, facebook_icon, phone_icon, telegram_icon, whatsapp_icon } from '@/constant/data';
 import { Analytics } from '@vercel/analytics/react'
 
 const navItems = [
   { label: 'Home', url: '/' },
   { label: 'Our Menu', url: '/our-menu' },
-  { label: 'Shop', url: '/shop' },
+  { label: 'Shop', url: '/shop', drop: true },
   { label: 'Gallery', url: '/gallery' },
   { label: 'Our News', url: '/our-news' },
   { label: 'Contact Us', url: '/contact-us' },
@@ -60,6 +60,7 @@ export default function ElevateAppBar(props: Props) {
   const { window } = props;
   const location = useLocation();
   const navigate = useNavigate()
+  const { foodType } = useGlobalData()
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 200,
@@ -156,8 +157,8 @@ export default function ElevateAppBar(props: Props) {
                   />
                   <div
                     className='icon icon-hover cursor-pointer'
-                    dangerouslySetInnerHTML={{ __html: tiktok_icon }}
-                    onClick={() => handleSocial(tiktok)}
+                    dangerouslySetInnerHTML={{ __html: whatsapp_icon }}
+                    onClick={() => handleSocial(whatsapp)}
                   />
                 </div>
               </div>
@@ -213,19 +214,55 @@ export default function ElevateAppBar(props: Props) {
                       {admin ? 'Logout' : item.label}
                     </NavLink>
                   ) : (
-                    <NavLink
-                      key={index}
-                      to={item.url}
-                      className={`
+                    !item.drop ? (
+                      <NavLink
+                        key={index}
+                        to={item.url}
+                        className={`
                       text-sm
                       uppercase mx-5 
                       font-serif
                       ${location.pathname === item.url ? 'text-[#CB933D]' : ''}
                       hover:text-[#CB933D]
                       `}
-                    >
-                      {item.label}
-                    </NavLink>
+                      >
+                        {item.label}
+                      </NavLink>
+                    ) : (
+                      <span className="group relative cursor-pointer" key={index}>
+                        <NavLink
+                          to={item.url}
+                          className={`
+                            text-sm
+                            uppercase mx-5 
+                            font-serif
+                            ${location.pathname.startsWith(item.url) ? 'text-[#CB933D]' : ''}
+                            hover:text-[#CB933D]
+                          `}
+                        >
+                          {item.label}
+                        </NavLink>
+                        <div
+                          className="invisible absolute z-50 flex flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity duration-800
+                          left-1/2 transform -translate-x-1/2 top-full"
+                        >
+                          {foodType?.map(food => (
+                            <NavLink
+                              key={food._id}
+                              to={`/shop/${food._id}`}
+                              className={`my-2 block border-b border-gray-100 
+                                py-1 font-semibold
+                                md:mx-2
+                                ${location.pathname.includes(food._id) ? 'text-[#CB933D]' : ''}
+                                hover:text-[#CB933D]
+                              `}
+                            >
+                              {food.name}
+                            </NavLink>
+                          ))}
+                        </div>
+                      </span>
+                    )
                   )
                 ))}
               </Box>

@@ -1,5 +1,13 @@
 import { createContext, useContext, useReducer, ReactNode, useEffect } from "react";
 import { Friend, addFriend, deleteFriend, getAllFriends } from "@/lib/indexedDb";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+type FoodType = {
+  _id: string
+  name: string
+  
+}
 
 type State = {
   card: Friend[]; // Adjusted the type to use Friend
@@ -16,6 +24,7 @@ type Action = {
   payload: Friend[]
 }
 
+
 const reducer = (state: State, { type, payload }: Action) => {
   switch (type) {
     case "LIST_CARD":
@@ -29,7 +38,7 @@ const reducer = (state: State, { type, payload }: Action) => {
   }
 };
 
-const DataContext = createContext<{ card: Friend[]; addCard: (friend: Friend, quantity: number) => void, removeCard: (id: number) => void } | null>(null);
+const DataContext = createContext<{ foodType: FoodType[], card: Friend[]; addCard: (friend: Friend, quantity: number) => void, removeCard: (id: number) => void } | null>(null);
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useGlobalData = () => {
@@ -46,6 +55,14 @@ export const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { data } = useQuery<any[]>({
+    queryKey: ['food-type'],
+    queryFn: () =>
+      axios.get('/food-type').then((res) =>
+        res.data,
+      ),
+  })
 
   // Function to add a card
   const removeCard = async (id: number) => {
@@ -85,9 +102,10 @@ export const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   }, []);
   return (
     <DataContext.Provider value={{
+      foodType: data,
       card: state.card,
       addCard,
-      removeCard
+      removeCard,
     }}>
       {children}
     </DataContext.Provider>

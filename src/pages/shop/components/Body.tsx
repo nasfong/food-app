@@ -260,7 +260,13 @@ const Body = () => {
     if (data) {
       setCardStates(data?.data.map(() => ({ loading: false, checked: false })));
     }
-  }, [data]);
+    if (drinkData) {
+      const result = drinkData.reduce((acc, curr) => {
+        return acc.concat(curr.drinks);
+      }, []);
+      setCardStates(result?.map(() => ({ loading: false, checked: false })));
+    }
+  }, [data, drinkData]);
 
   const handleButtonClick = (index: number, item: Food) => {
     const newCardStates = [...cardStates];
@@ -310,7 +316,14 @@ const Body = () => {
     e.preventDefault();
     mutation.mutate(formInput);
   };
-
+  let indexCounter = 0;
+  const drinkDataAddIndex = drinkData?.map((item) => ({
+    ...item,
+    drinks: item.drinks.map((drink) => ({
+      ...drink,
+      index: indexCounter++,
+    }))
+  }))
   return (
     <>
       <Background data={foodTypeList?.find(item => item._id === foodType) || { image: 'https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg', title: 'Shop' }} />
@@ -388,15 +401,15 @@ const Body = () => {
               : drinkLoading ? <div className='py-32'>Loading...</div>
                 : !drinkData?.length ? <div className='py-32'>No Food</div> :
                   <>
-                    {drinkData?.map((item, index) => (
+                    {drinkDataAddIndex?.map((item, index) => (
                       <DrinkCard
                         key={index}
                         item={item}
-                        index={index}
-                        // handleButtonClick={handleButtonClick}
-                        // cardStates={cardStates}
+                        handleButtonClick={handleButtonClick}
+                        cardStates={cardStates}
                         handleEdit={handleEditDrink}
                         handleDelete={handleDelete}
+                        data={drinkData}
                       />
                     ))}
                   </>
