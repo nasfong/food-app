@@ -230,36 +230,34 @@ export default function ElevateAppBar(props: Props) {
                       </NavLink>
                     ) : (
                       <span className="group relative cursor-pointer" key={index}>
-                        <NavLink
-                          to={item.url}
-                          className={`
+                        <div className="dropdown dropdown-hover">
+                          <NavLink
+                            to={item.url}
+                            className={`
                             text-sm
                             uppercase mx-5 
                             font-serif
                             ${location.pathname.startsWith(item.url) ? 'text-[#CB933D]' : ''}
                             hover:text-[#CB933D]
                           `}
-                        >
-                          {item.label}
-                        </NavLink>
-                        <div
-                          className="invisible absolute z-50 flex flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity duration-800
-                          left-1/2 transform -translate-x-1/2 top-full"
-                        >
-                          {foodType?.map(food => (
-                            <NavLink
-                              key={food._id}
-                              to={`/shop/${food._id}`}
-                              className={`my-2 block border-b border-gray-100 
-                                py-1 font-semibold
-                                md:mx-2
-                                ${location.pathname.includes(food._id) ? 'text-[#CB933D]' : ''}
+                          >{item.label}</NavLink>
+                          <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                            {foodType?.map(food => (
+                              <li>
+                                <NavLink
+                                  key={food._id}
+                                  to={`/shop/${food._id}`}
+                                  className={`block border-b border-gray-100 
+                                font-semibold
+                                ${location.pathname.includes(food._id) ? 'text-[#CB933D]' : 'text-black'}
                                 hover:text-[#CB933D]
                               `}
-                            >
-                              {food.name}
-                            </NavLink>
-                          ))}
+                                >
+                                  {food.name}
+                                </NavLink>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </span>
                     )
