@@ -61,7 +61,6 @@ const DrinkModal = memo(({
         }).then(() => {
           refetch();
           onClose();
-          setFormInput(initState);
         })
       } else {
         const formDataToSend = new FormData();
@@ -75,7 +74,6 @@ const DrinkModal = memo(({
         }).then(() => {
           refetch()
           onClose()
-          setFormInput(initState)
         })
       }
     },

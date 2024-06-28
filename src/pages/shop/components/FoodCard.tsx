@@ -72,7 +72,7 @@ const FoodCard = ({ data, handleAddCard }: any) => {
           <div className="flex gap-3">
             <button
               className="text-white bg-[#d1a054]  hover:bg-black transition duration-500
-               font-medium  text-sm px-5 py-2.5  
+              font-medium  text-sm px-5 py-2.5  
               text-center flex justify-center align-middle gap-3"
               onClick={() => handleButtonClick(data, count)}
             >
@@ -89,7 +89,7 @@ const FoodCard = ({ data, handleAddCard }: any) => {
                 id="decrement-button"
                 data-input-counter-decrement="quantity-input"
                 className="bg-transparent
-               border 
+                  border 
                 border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 
                 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
                 onClick={() => (count > 1) && setCount(c => c - 1)}

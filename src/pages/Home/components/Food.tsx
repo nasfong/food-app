@@ -12,30 +12,13 @@ import { admin, default_image } from '@/constant/constant';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { Box, Button, Modal } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
-
+import { Button } from '@mui/material';
 interface FormData {
   _id: string
   name: string;
   image: string
   description: string
 }
-
-const style = {
-  position: 'absolute' as const,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-  overflowY: 'scroll',
-  height: '60vh',
-  display: 'block'
-};
 
 const Food = ({ data, refetch, isLoading, error }: any) => {
   const navigate = useNavigate()
@@ -50,17 +33,20 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
     description: '',
   }
   const [formInput, setFormInput] = useState<any>(initState)
-  const [ImagePreview, setImagePreview] = useState<any>('')
+  const [imagePreview, setImagePreview] = useState<any>('')
   const [requireImage, setRequireImage] = useState("")
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => {
-    setOpen(true)
-  }
-  const handleClose = () => {
-    setOpen(false)
+
+  const onClose = () => {
     setFormInput(initState)
     setImagePreview('')
-    setRequireImage('')
+    mutation.reset()
+    setRequireImage('');
+    const modal = document.getElementById('food_type_modal') as HTMLDialogElement
+    modal.close()
+  }
+  const handleOpen = () => {
+    const modal = document.getElementById('food_type_modal') as HTMLDialogElement
+    modal.showModal()
   }
 
   const handleChangeImage = (e: any) => {
@@ -71,23 +57,24 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
 
     const maxFileSize = 3 * 1024 * 1024; // 3MB in bytes
     if (file.size > maxFileSize) {
-      setFormInput({ ...formInput, image: '' });
+      setFormInput(prev => ({ ...prev, image: '' }));
       setRequireImage("File size exceeds the maximum limit of 3MB");
       return;
     }
 
     setRequireImage("")
-    setFormInput({ ...formInput, image: file })
+    setFormInput(prev => ({ ...prev, image: file }))
     const reader = new FileReader()
     reader.onloadend = function (e) {
       setImagePreview(e.target?.result)
     }
     reader.readAsDataURL(file)
   }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     const inputValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
-    setFormInput({ ...formInput, [name]: inputValue });
+    setFormInput(prev => ({ ...prev, [name]: inputValue }));
   };
 
   const mutation = useMutation({
@@ -106,8 +93,7 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
           }
         }).then(() => {
           refetch()
-          handleClose()
-          setFormInput(initState)
+          onClose()
         })
       } else {
         const formDataToSend = new FormData();
@@ -120,8 +106,7 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
           }
         }).then(() => {
           refetch()
-          handleClose()
-          setFormInput(initState)
+          onClose()
         })
       }
     },
@@ -154,7 +139,7 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
         <h4 className='title'>ORDER ONLINE</h4>
       </div>
       {admin && (
-        <div className='text-end mt-3'>
+        <div className='text-end my-3'>
           <Button variant='contained' onClick={handleOpen}>Add Food-Type</Button>
         </div>
       )}
@@ -206,93 +191,99 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
                     {item.name}
                   </div>
                   <div className="inner-shadow-footer"></div>
-
-                  <div className='absolute bottom-0'>
-                    {/* <Button
-                      variant='contained'
-                      color='primary'
-                      onClick={() => handleEdit(item)}
-                    >Edit</Button> */}
-                    {/* <Button
-                      variant='contained'
-                      color='error'
-                      onClick={() => handleDelete(item._id)}
-                    >Delete</Button> */}
-                  </div>
+                  {/* action */}
+                  {admin && (
+                    <span className='absolute left-2 top-2'>
+                      <button className="btn px-0 min-h-0 h-[30px] rounded-[50%] mt-1" onClick={(e) => {
+                        e.stopPropagation(); // This stops the event from bubbling up to SwiperSlide
+                        handleEdit(item);
+                      }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                          <path d="M16.2141 4.98239L17.6158 3.58063C18.39 2.80646 19.6452 2.80646 20.4194 3.58063C21.1935 4.3548 21.1935 5.60998 20.4194 6.38415L19.0176 7.78591M16.2141 4.98239L10.9802 10.2163C9.93493 11.2616 9.41226 11.7842 9.05637 12.4211C8.70047 13.058 8.3424 14.5619 8 16C9.43809 15.6576 10.942 15.2995 11.5789 14.9436C12.2158 14.5877 12.7384 14.0651 13.7837 13.0198L19.0176 7.78591M16.2141 4.98239L19.0176 7.78591" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M21 12C21 16.2426 21 18.364 19.682 19.682C18.364 21 16.2426 21 12 21C7.75736 21 5.63604 21 4.31802 19.682C3 18.364 3 16.2426 3 12C3 7.75736 3 5.63604 4.31802 4.31802C5.63604 3 7.75736 3 12 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                        </svg>
+                      </button>
+                    </span>
+                  )}
                 </SwiperSlide>
               ))}
             </Swiper>
           )}
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
+      <dialog id="food_type_modal" className="modal font-sans">
         <form onSubmit={onSubmit}>
-          <Box sx={style}>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Upload file</label>
-            <input
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-              id="file_input"
-              type="file"
-              name='image'
-              onChange={handleChangeImage}
-              accept="image/*"
-            />
-            {ImagePreview && (
-              <img
-                src={ImagePreview}
-                className='h-[200px] w-full'
-                alt={ImagePreview}
-                onError={(e) => {
-                  (e.target as any).src = default_image
-                }}
-                loading="lazy"
-              />
-            )}
-            <div className='text-red-700'>
-              {requireImage}
-              {mutation.isError && (mutation.error as any).response.data.message}
+          <div className="modal-box xs:w-100 sm:w-[500px] md:w-[1200px]">
+            <div className="flex flex-col gap-3">
+              {/* image */}
+              <div>
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Upload file</label>
+                <input
+                  className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                  id="file_input"
+                  type="file"
+                  name='image'
+                  onChange={handleChangeImage}
+                  accept="image/*"
+                />
+                {imagePreview && (
+                  <img
+                    src={imagePreview}
+                    className='h-[200px] w-full'
+                    alt={imagePreview}
+                    onError={(e) => {
+                      (e.target as any).src = default_image
+                    }}
+                    loading="lazy"
+                  />
+                )}
+                <div className='text-red-700'>
+                  {requireImage}
+                  {mutation.isError && (mutation.error as any).response.data.message}
+                </div>
+              </div>
+              {/* name */}
+              <div className='flex items-center gap-3'>
+                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-[120px]">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  name="name"
+                  onChange={handleChange}
+                  value={formInput.name}
+                  placeholder="name"
+                  required
+                />
+              </div>
+              {/* description */}
+              <div className='flex items-center gap-3'>
+                <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-[120px]">
+                  Description
+                </label>
+                <textarea
+                  rows={4}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  name="description"
+                  onChange={handleChange}
+                  value={formInput.description}
+                  placeholder="description"
+                  required
+                />
+              </div>
+
             </div>
-            <div className='mb-3'>
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Name
-              </label>
-              <input
-                type="text"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="name"
-                onChange={handleChange}
-                value={formInput.name}
-                placeholder="name"
-                required
-              />
+            <div className="modal-action font-sans">
+              <button className="btn" type="button" onClick={onClose}>Close</button>
+              <button className="btn" type="submit">
+                {!formInput?._id ? 'Create' : 'Update'}
+                {mutation.isPending && (
+                  <span className="loading loading-spinner"></span>
+                )}
+              </button>
             </div>
-            <div className='mb-3'>
-              <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Description
-              </label>
-              <textarea
-                id="content"
-                rows={4}
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Write your thoughts here..."
-                name='description'
-                onChange={handleChange}
-                value={formInput.description}
-                required
-              ></textarea>
-            </div>
-            <LoadingButton
-              loading={mutation.isPending}
-              variant='contained'
-              type='submit'
-            >
-              Create
-            </LoadingButton>
-          </Box>
+          </div>
         </form>
-      </Modal>
+      </dialog>
     </section>
   )
 }

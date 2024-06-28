@@ -1,18 +1,17 @@
-import { Box, Button, Modal } from '@mui/material';
+import { Button } from '@mui/material';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
 import { useGlobalData } from '@/hook/useGlobalData';
 import { Pagination } from '@/components/Pagination';
-import { admin, default_image } from '@/constant/constant';
+import { admin } from '@/constant/constant';
 import Background from '@/components/Background';
 import Swal from 'sweetalert2'
 import FoodCard from '@/components/FoodCard';
-import { LoadingButton } from '@mui/lab';
-import { Rating } from '@material-tailwind/react';
 import DrinkCard from './DrinkCard';
 import DrinkModal from './DrinkModal';
+import FoodModal from './FoodModal';
 
 interface Food {
   _id: string;
@@ -32,42 +31,7 @@ interface FoodQuery {
   currentPage: number;
 }
 
-interface FormData {
-  _id: string;
-  name: string;
-  image: File | string;
-  star: number;
-  price: number;
-  description: string;
-  foodType: string;
-  chef: boolean;
-  promotion: boolean
-}
-
-const style = {
-  position: 'absolute' as const,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-  overflowY: 'scroll',
-  height: '70vh',
-  display: 'block'
-};
-
-const drinkId = '65faeeee5960607a1d29e8f9'
-
-const initStateDrink = {
-  image: '',
-  name: '',
-  drinks: [
-    { name: '', price: '' }
-  ]
-}
+const drinkId = import.meta.env.VITE_DRINK_ID
 
 const Body = () => {
   const { foodType } = useParams()
@@ -84,8 +48,14 @@ const Body = () => {
     chef: false,
     promotion: false,
   }
+  const initStateDrink = {
+    image: '',
+    name: '',
+    drinks: [
+      { name: '', price: '' }
+    ]
+  }
   const [formInput, setFormInput] = useState<any>(initState)
-  const [requireImage, setRequireImage] = useState("")
 
   // drink
   const [formInputDrink, setFormInputDrink] = useState(initStateDrink)
@@ -118,19 +88,14 @@ const Body = () => {
     enabled: isDrink
   })
 
-  const [open, setOpen] = useState(false)
   const handleOpen = () => {
-    setOpen(true)
-  }
-  const handleClose = () => {
-    setOpen(false)
-    setFormInput(initState)
-    setImagePreview('')
-    setRequireImage('')
+    const modal = document.getElementById('food_modal') as HTMLDialogElement
+    modal.showModal()
   }
 
   const onOpenDrinkModal = () => {
-    (document.getElementById('drink_modal') as HTMLDialogElement).showModal()
+    const modal = document.getElementById('drink_modal') as HTMLDialogElement
+    modal.showModal()
   }
 
   const handleChange = (e: any) => {
@@ -144,54 +109,6 @@ const Body = () => {
     const inputValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
     setFormInputDrink(prev => ({ ...prev, [name]: inputValue }));
   }, [setFormInputDrink]);
-
-  const mutation = useMutation({
-    mutationFn: (formData: FormData) => {
-      if (formData._id) {
-        const formDataToSend = new FormData();
-        formDataToSend.append('name', formData.name);
-        if (formData.image) {
-          formDataToSend.append('image', formData.image)
-        }
-        formDataToSend.append('star', formData.star.toString());
-        formDataToSend.append('price', formData.price.toString());
-        formDataToSend.append('description', formData.description);
-        formDataToSend.append('foodType', formData.foodType);
-        formDataToSend.append('chef', formData.chef.toString());
-        formDataToSend.append('promotion', formData.promotion.toString());
-        formDataToSend.append('_method', 'PUT')
-        return axios.put(`/food/${formData._id}`, formDataToSend, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          }
-        }).then(() => {
-          refetch();
-          handleClose();
-          setFormInput(initState);
-        })
-      } else {
-        const formDataToSend = new FormData();
-        formDataToSend.append('name', formData.name);
-        formDataToSend.append('image', formData.image); // Access the first file in the FileList
-        formDataToSend.append('star', formData.star.toString());
-        formDataToSend.append('price', formData.price.toString());
-        formDataToSend.append('description', formData.description);
-        formDataToSend.append('foodType', formData.foodType);
-        formDataToSend.append('chef', formData.chef.toString());
-        formDataToSend.append('promotion', formData.promotion.toString());
-        return axios.post('/food', formDataToSend, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          }
-        }).then(() => {
-          refetch()
-          handleClose()
-          setFormInput(initState)
-        })
-      }
-    },
-  })
-
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => {
@@ -290,32 +207,6 @@ const Body = () => {
     }
   };
 
-  const handleChangeImage = (e: any) => {
-    let files = e.target.files || e.dataTransfer.files
-    if (!files.length) return
-
-    const file = files[0]
-
-    const maxFileSize = 3 * 1024 * 1024; // 3MB in bytes
-    if (file.size > maxFileSize) {
-      setFormInput({ ...formInput, image: '' });
-      setRequireImage("File size exceeds the maximum limit of 3MB");
-      return;
-    }
-
-    setRequireImage("")
-    setFormInput({ ...formInput, image: file })
-    const reader = new FileReader()
-    reader.onloadend = function (e) {
-      setImagePreview(e.target?.result)
-    }
-    reader.readAsDataURL(file)
-  }
-
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-    mutation.mutate(formInput);
-  };
   let indexCounter = 0;
   const drinkDataAddIndex = drinkData?.map((item) => ({
     ...item,
@@ -416,160 +307,28 @@ const Body = () => {
             }
           </div>
         )}
-
-
-        <Modal
-          open={open}
-          onClose={handleClose}
-          className=''
-        >
-          <form onSubmit={onSubmit}>
-            <Box sx={style}>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Upload file</label>
-              <input
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                id="file_input"
-                type="file"
-                name='image'
-                onChange={handleChangeImage}
-                accept="image/*"
-              />
-              {imagePreview && (
-                <img
-                  src={imagePreview}
-                  className='h-[200px] w-full'
-                  alt={imagePreview}
-                  onError={(e) => {
-                    (e.target as any).src = default_image
-                  }}
-                  loading="lazy"
-                />
-              )}
-              <div className='text-red-700'>
-                {requireImage}
-                {mutation.isError && (mutation.error as any).response.data.message}
-              </div>
-              <div className='mb-3'>
-                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  name="name"
-                  onChange={handleChange}
-                  value={formInput.name}
-                  placeholder="name"
-                  required
-                />
-              </div>
-              <div className='mb-3'>
-                <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Description
-                </label>
-                <textarea
-                  id="description"
-                  rows={4}
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  name="description"
-                  onChange={handleChange}
-                  value={formInput.description}
-                  required
-                ></textarea>
-              </div>
-              <div className='mb-3'>
-                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Price
-                </label>
-                <input
-                  type="number"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  name="price"
-                  onChange={handleChange}
-                  value={formInput.price}
-                  placeholder="0"
-                  required
-                />
-              </div>
-              <div className='mb-3'>
-                <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Food Type
-                </label>
-                <select
-                  id="countries"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  name="foodType"
-                  onChange={handleChange}
-                  value={formInput.foodType}
-                  required
-                >
-                  <option value=''>-- select type --</option>
-                  {foodTypeList?.map((item) => (
-                    <option key={item._id} value={item._id}>{item.name}</option>
-                  ))}
-                </select>
-              </div>
-              <Rating
-                value={formInput.star}
-                onChange={(val) => handleChange({ target: { name: 'star', value: val } })}
-                placeholder={undefined} />
-
-              <div className="flex items-center mb-4">
-                <input
-                  id="default-checkbox"
-                  type="checkbox"
-                  onChange={handleChange}
-                  checked={formInput.chef}
-                  name='chef'
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Chef Recommend
-                </label>
-              </div>
-
-              <div className="flex items-center mb-4">
-                <input
-                  id="default-checkbox"
-                  type="checkbox"
-                  onChange={handleChange}
-                  checked={formInput.promotion}
-                  name='promotion'
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Promotion
-                </label>
-              </div>
-
-              <LoadingButton
-                loading={mutation.isPending}
-                variant='contained'
-                type='submit'
-              >
-                {!formInput._id ? 'Create' : 'Update'}
-              </LoadingButton>
-            </Box>
-          </form>
-        </Modal>
-
-        {/* {openDrink && ( */}
-        <DrinkModal
-          initState={initStateDrink}
-          formInput={formInputDrink}
-          setFormInput={setFormInputDrink}
-          handleChange={handleChangeDrink}
-          refetch={drinkRefetch}
-          imagePreview={imagePreview}
-          setImagePreview={setImagePreview}
-        />
-        {/* )} */}
-        {/* <div className="toast toast-bottom toast-end z-10">
-          <div className="alert alert-success text-white">
-            <span>Message sent successfully.</span>
-          </div>
-        </div> */}
       </div>
+      {/* food modal */}
+      <FoodModal
+        initState={initState}
+        formInput={formInput}
+        setFormInput={setFormInput}
+        handleChange={handleChange}
+        refetch={refetch}
+        imagePreview={imagePreview}
+        setImagePreview={setImagePreview}
+      />
+
+      {/* drink modal */}
+      <DrinkModal
+        initState={initStateDrink}
+        formInput={formInputDrink}
+        setFormInput={setFormInputDrink}
+        handleChange={handleChangeDrink}
+        refetch={drinkRefetch}
+        imagePreview={imagePreview}
+        setImagePreview={setImagePreview}
+      />
     </>
   )
 }

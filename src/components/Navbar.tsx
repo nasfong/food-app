@@ -243,9 +243,8 @@ export default function ElevateAppBar(props: Props) {
                           >{item.label}</NavLink>
                           <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                             {foodType?.map(food => (
-                              <li>
+                              <li key={food._id}>
                                 <NavLink
-                                  key={food._id}
                                   to={`/shop/${food._id}`}
                                   className={`block border-b border-gray-100 
                                 font-semibold
