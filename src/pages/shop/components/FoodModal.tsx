@@ -1,4 +1,4 @@
-import { memo, useState } from "react"
+import { memo, useEffect, useState } from "react"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { default_image } from "@/constant/constant"
@@ -37,6 +37,7 @@ const FoodModal = memo(({
   setImagePreview
 }: Props) => {
   const [requireImage, setRequireImage] = useState("")
+  const [resetStar, setResetStar] = useState(false)
 
   const { data: foodTypeList } = useQuery<any[]>({
     queryKey: ['food-type'],
@@ -100,6 +101,13 @@ const FoodModal = memo(({
     },
   })
 
+  useEffect(() => {
+    setResetStar(false)
+    setTimeout(() => {
+      setResetStar(true)
+    }, 10)
+  }, [formInput.star])
+
   const handleChangeImage = (e: any) => {
     let files = e.target.files || e.dataTransfer.files
     if (!files.length) return
@@ -128,7 +136,7 @@ const FoodModal = memo(({
   };
 
   return (
-    <dialog id="food_modal" className="modal font-sans">
+    <dialog  id="food_modal" className="modal font-sans">
       <form onSubmit={onSubmit}>
         <div className="modal-box xs:w-100 sm:w-[500px] md:w-[1200px]">
           <div className="flex flex-col gap-3">
@@ -224,10 +232,12 @@ const FoodModal = memo(({
               </select>
             </div>
             {/* star */}
-            <Rating
-              value={formInput.star}
-              onChange={(val) => handleChange({ target: { name: 'star', value: val } })}
-              placeholder={undefined} />
+            {resetStar && (
+              <Rating
+                value={formInput.star}
+                onChange={(val) => handleChange({ target: { name: 'star', value: val } })}
+                placeholder={undefined} />
+            )}
             {/* chef recommend */}
             <div className="flex items-center">
               <input

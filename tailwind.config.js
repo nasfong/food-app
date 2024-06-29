@@ -76,5 +76,14 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require('daisyui')],
+  plugins: [
+    require("tailwindcss-animate"),
+    require('postcss-nested'),
+    require('autoprefixer'),
+    require('tailwindcss'),
+    require('daisyui'),
+  ],
+  daisyui: {
+    themes: ["light"],
+  },
 }
