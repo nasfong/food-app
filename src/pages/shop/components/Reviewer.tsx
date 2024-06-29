@@ -28,7 +28,6 @@ const Reviewer = ({ data, dataFood, refetch }: any) => {
   }
 
   const handleChangeStar = (val: any) => {
-    console.log(val)
     setFormInput({ ...formInput, star: val })
   }
 
