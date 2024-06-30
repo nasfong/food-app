@@ -174,16 +174,19 @@ const Body = () => {
   const [cardStates, setCardStates] = useState<{ loading: boolean; checked: boolean; }[]>([]);
 
   useEffect(() => {
-    if (data) {
-      setCardStates(data?.data.map(() => ({ loading: false, checked: false })));
+    if (!isDrink) {
+      if (data) {
+        setCardStates(data?.data.map(() => ({ loading: false, checked: false })));
+      }
+    } else {
+      if (drinkData) {
+        const result = drinkData.reduce((acc, curr) => {
+          return acc.concat(curr.drinks);
+        }, []);
+        setCardStates(result?.map(() => ({ loading: false, checked: false })));
+      }
     }
-    if (drinkData) {
-      const result = drinkData.reduce((acc, curr) => {
-        return acc.concat(curr.drinks);
-      }, []);
-      setCardStates(result?.map(() => ({ loading: false, checked: false })));
-    }
-  }, [data, drinkData]);
+  }, [data, drinkData, isDrink]);
 
   const handleButtonClick = (index: number, item: Food) => {
     const newCardStates = [...cardStates];

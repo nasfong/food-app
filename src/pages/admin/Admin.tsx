@@ -116,7 +116,6 @@ const Admin = () => {
 
   const onSubmit = (data: any) => {
     const image = data.image[0] ? data.image : null
-    console.log(image)
     if (data._id) updateMutation.mutate({ ...data, image }, data._id)
     else mutation.mutate(data)
   }

@@ -39,7 +39,6 @@ const DrinkCard = memo(({
               className='button6'
               onClick={() => {
                 handleButtonClick(drink.index, item?.drinks[idx])
-                console.log(item?.drinks[drink.index])
               }}
             >
               {cardStates[drink.index]?.loading ? (
