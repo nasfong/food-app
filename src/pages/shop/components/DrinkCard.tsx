@@ -1,15 +1,15 @@
 import { admin, default_image } from '@/constant/constant'
 import { formatMoney } from '@/lib/utils'
-import { Check, LocalGroceryStore } from '@mui/icons-material'
-import { CircularProgress } from '@mui/material'
+// import { Check, LocalGroceryStore } from '@mui/icons-material'
+// import { CircularProgress } from '@mui/material'
 import { memo } from 'react'
 
 const DrinkCard = memo(({
   item,
   handleEdit,
   handleDelete,
-  handleButtonClick,
-  cardStates,
+  // handleButtonClick,
+  // cardStates,
 }: any) => {
   return (
     <div className='flex flex-col align-middle w-[250px] gap-2 relative'>
@@ -35,7 +35,7 @@ const DrinkCard = memo(({
           </div>
           <div>
             {formatMoney(drink?.price)}
-            <button
+            {/* <button
               className='button6'
               onClick={() => {
                 handleButtonClick(drink.index, item?.drinks[idx])
@@ -49,7 +49,7 @@ const DrinkCard = memo(({
               ) : (
                 <LocalGroceryStore />
               )}
-            </button>
+            </button> */}
           </div>
         </div>
       ))}</div>

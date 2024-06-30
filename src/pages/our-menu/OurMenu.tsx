@@ -13,7 +13,7 @@ const OurMenu = () => {
 
   return (
     <section>
-      <Background data={{ image: 'https://wallpapers.com/images/hd/food-4k-1vrcb0mw76zcg4qf.jpg', title: 'Our Menu' }} />
+      <Background data={{ image: '/image/our-menu.jpg', title: 'Our Menu' }} />
       {error ? (<div className='py-32'>Sorry something went wrong!</div>)
         : isLoading ? <div className='py-32 text-center'>Loading...</div>
           : !data.length ? <div className='py-32 text-center'>No Food</div> :

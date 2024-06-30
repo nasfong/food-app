@@ -217,7 +217,7 @@ const Body = () => {
   }))
   return (
     <>
-      <Background data={foodTypeList?.find(item => item._id === foodType) || { image: 'https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg', title: 'Shop' }} />
+      <Background data={foodTypeList?.find(item => item._id === foodType) || { image: '/image/shop.jpg', title: 'Shop' }} />
       <div className='container text-center my-20'>
         <div className='mb-10 flex flex-wrap justify-start md:justify-center gap-3'>
           <NavLink

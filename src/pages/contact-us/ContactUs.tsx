@@ -6,7 +6,7 @@ import SendEmail from './components/SendEmail'
 const ContactUs = () => {
   return (
     <section>
-      <Background data={{ image: 'https://wallpapers.com/images/hd/food-4k-1pf6px6ryqfjtnyr.jpg', title: 'Contact us' }} />
+      <Background data={{ image: '/image/contact-us.jpg', title: 'Contact us' }} />
       <div className='container'>
         <VisitUs />
         <SendEmail />
