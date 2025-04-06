@@ -1,5 +1,5 @@
 import { admin, default_image } from '@/constant/constant'
-import { formatMoney, truncateDescription } from '@/lib/utils'
+import { formatMoney, replaceImage, truncateDescription } from '@/lib/utils'
 import { Check } from '@mui/icons-material'
 import { CircularProgress } from '@mui/material'
 import { Link } from 'react-router-dom'
@@ -15,8 +15,8 @@ const FoodCard = ({ item, index, handleButtonClick, cardStates, handleEdit, hand
       <Link to={`/shop/${item._id}/${item.foodType}/detail`}>
         <img
           className="w-full h-52 object-cover"
-          src={item.image}
-          alt={item.image}
+          src={replaceImage(item.image)}
+          alt={replaceImage(item.image)}
           onError={(e) => {
             (e.target as any).src = default_image
           }}

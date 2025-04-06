@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { default_image } from '@/constant/constant';
+import { replaceImage } from '@/lib/utils';
 
 interface Food {
   _id: string;
@@ -132,8 +133,8 @@ const Admin = () => {
               <Link to="/shop/salad/detail" className="w-full h-64 rounded overflow-hidden shadow-lg flex flex-col relative">
                 <img
                   className="w-full h-full object-cover"
-                  src={item.image}
-                  alt={item.image}
+                  src={replaceImage(item.image)}
+                  alt={replaceImage(item.image)}
                   onError={(e) => {
                     (e.target as any).src = default_image
                   }}

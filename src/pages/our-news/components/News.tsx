@@ -1,6 +1,6 @@
 import { default_image } from "@/constant/constant";
 import { readMore } from "@/constant/readmore";
-import { truncateDescription } from "@/lib/utils";
+import { replaceImage, truncateDescription } from "@/lib/utils";
 // import { LoadingButton } from "@mui/lab";
 import {
   // Box, 
@@ -149,8 +149,8 @@ const News = (
           className={`my-20 relative flex ${index % 2 && 'flex-row-reverse'} ${matches ? '' : 'flex-col'}`}
         >
           <img
-            src={item.image}
-            alt={item.image}
+            src={replaceImage(item.image)}
+            alt={replaceImage(item.image)}
             className="object-cover h-80 w-full md:w-[600px] rounded-sm"
             onError={(e) => {
               (e.target as any).src = default_image

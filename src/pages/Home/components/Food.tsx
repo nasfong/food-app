@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { Button } from '@mui/material';
+import { replaceImage } from '@/lib/utils';
 interface FormData {
   _id: string
   name: string;
@@ -177,8 +178,8 @@ const Food = ({ data, refetch, isLoading, error }: any) => {
               {data?.map((item, index) => (
                 <SwiperSlide key={index} onClick={() => handleClick(item._id)}>
                   <img
-                    src={item.image || default_image}
-                    alt={item.image || default_image}
+                    src={replaceImage(item.image) || default_image}
+                    alt={replaceImage(item.image) || default_image}
                     className='img rounded-lg'
                     onError={(e) => {
                       (e.target as any).src = default_image

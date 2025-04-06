@@ -1,5 +1,5 @@
 import { admin, default_image } from '@/constant/constant'
-import { formatMoney } from '@/lib/utils'
+import { formatMoney, replaceImage } from '@/lib/utils'
 // import { Check, LocalGroceryStore } from '@mui/icons-material'
 // import { CircularProgress } from '@mui/material'
 import { memo } from 'react'
@@ -15,8 +15,8 @@ const DrinkCard = memo(({
     <div className='flex flex-col align-middle w-[250px] gap-2 relative'>
       {item?.image ? (
         <img
-          src={item?.image}
-          alt=""
+          src={replaceImage(item?.image)}
+          alt={replaceImage(item?.image)}
           className="object-cover h-[200px]"
           onError={(e) => {
             (e.target as any).src = default_image

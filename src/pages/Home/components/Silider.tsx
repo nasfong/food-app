@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './../../../slider.css'
 import { address, default_image, restaurant_name, sliders } from '@/constant/constant';
+import { replaceImage } from '@/lib/utils';
 
 const interval = 7000
 
@@ -60,8 +61,8 @@ const Slider = () => {
           >
             <img
               key={idx}
-              src={image}
-              alt={`${image} ${idx}`}
+              src={replaceImage(image)}
+              alt={`${replaceImage(image)} ${idx}`}
               className={(idx === index ? 'active' : 'inactive') + ''}
               loading='lazy'
               onError={(e) => {

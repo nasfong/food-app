@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 
 import './../../../promoition.css';
 import { default_image } from '@/constant/constant';
+import { replaceImage } from '@/lib/utils';
 type Props = {
   data: { image: string, name: string, description: string }
 }
@@ -15,8 +16,8 @@ const SlideWithCard = ({ data }: Props) => {
   return (
     <div className='relative h-[500px] my-10 bg-gray flex justify-center items-center'>
       <img
-        src={data.image}
-        alt={data.image}
+        src={replaceImage(data.image)}
+        alt={replaceImage(data.image)}
         className='w-full h-full object-cover absolute'
         onError={(e) => {
           (e.target as any).src = default_image

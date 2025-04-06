@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 import { IconButton } from "@mui/material";
 import { Clear } from '@mui/icons-material'
-import { formatMoney } from "@/lib/utils";
+import { formatMoney, replaceImage } from "@/lib/utils";
 import { default_image } from "@/constant/constant";
 
 
@@ -36,8 +36,8 @@ export function TableWithStripedRows({ data, handleDelete }: any) {
               </td>
               <td className="p-4">
                 <img
-                  src={item.image}
-                  alt={item.image}
+                  src={replaceImage(item.image)}
+                  alt={replaceImage(item.image)}
                   className="w-[120px] h-[80px]"
                   onError={(e) => {
                     (e.target as any).src = default_image;

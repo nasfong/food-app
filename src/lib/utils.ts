@@ -19,3 +19,7 @@ export function truncateDescription(description: string, maxLength: number) {
     return description;
   }
 }
+
+export function replaceImage(image: string) {
+  return image?.replace("http://maomkhmercuisine.online", import.meta.env.VITE_API_URL)
+}

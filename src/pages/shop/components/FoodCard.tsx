@@ -1,6 +1,6 @@
 // import { Rating } from "@material-tailwind/react"
 import { default_image } from "@/constant/constant"
-import { formatMoney } from "@/lib/utils"
+import { formatMoney, replaceImage } from "@/lib/utils"
 import { Rating } from "@material-tailwind/react"
 import { Check } from "@mui/icons-material"
 import { CircularProgress } from "@mui/material"
@@ -38,8 +38,8 @@ const FoodCard = ({ data, handleAddCard }: any) => {
       <div className="rounded mt-28 md:mt-[200px] relative bg-clip-border bg-white bg-opacity-50 text-gray-700 shadow-md w-full flex flex-col md:flex-row items-center">
         <div className="relative w-full md:w-1/2 m-0 overflow-hidden text-gray-700 bg-white bg-clip-border shrink-0">
           <img
-            src={data?.image}
-            alt={data?.image}
+            src={replaceImage(data?.image)}
+            alt={replaceImage(data?.image)}
             className="object-cover"
             onError={(e) => {
               (e.target as any).src = default_image

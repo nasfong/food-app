@@ -41,6 +41,7 @@ import { useNavigate } from 'react-router-dom';
 // import { truncateDescription } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { replaceImage } from '@/lib/utils';
 
 const LatestNews = () => {
   const navigate = useNavigate();
@@ -71,8 +72,8 @@ const LatestNews = () => {
         {data?.map((item, index) => (
           <SwiperSlide key={index} className='relative'>
             <img
-              src={item.image}
-              alt={item.image}
+              src={replaceImage(item.image)}
+              alt={replaceImage(item.image)}
               className="brightness-50 h-full w-full object-cover"
               onError={(e) => {
                 (e.target as any).src = default_image
@@ -82,8 +83,8 @@ const LatestNews = () => {
 
             <div className='absolute top-44 right-50 flex flex-col md:flex-row justify-center items-center gap-5  w-[70%] md:w-[90%]'>
               <img
-                src={item.image}
-                alt={item.image}
+                src={replaceImage(item.image)}
+                alt={replaceImage(item.image)}
                 className='h-[200px] w-[600px] md:h-[400px] md:w-[600px] object-cover'
                 onError={(e) => {
                   (e.target as any).src = default_image

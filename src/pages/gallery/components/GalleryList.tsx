@@ -6,6 +6,7 @@ import { PhotoProvider, PhotoView } from 'react-photo-view'
 import { LoadingButton } from '@mui/lab'
 import 'react-photo-view/dist/react-photo-view.css';
 import { admin, default_image } from '@/constant/constant';
+import { replaceImage } from '@/lib/utils';
 interface FormData {
   _id: string
   image: string
@@ -131,9 +132,9 @@ const GalleryList = () => {
         <div className="flex flex-wrap justify-center gap-3">
           {data?.map((item, index) => (
             <div key={index} className=' w-full md:w-1/2 lg:w-1/3 xl:w-1/4  h-full md:h-1/2 lg:h-1/3 xl:h-1/4'>
-              <PhotoView src={item.image}>
+              <PhotoView src={replaceImage(item.image)}>
                 <img
-                  src={item.image}
+                  src={replaceImage(item.image)}
                   alt={item.image}
                   className='object-cover h-full max-w-full'
                   onError={(e) => {

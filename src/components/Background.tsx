@@ -1,6 +1,7 @@
 import { useState } from "react";
 import '../assets/styles/image-animation.css'
 import { default_image } from "@/constant/constant";
+import { replaceImage } from "@/lib/utils";
 
 type Props = {
   // data: {
@@ -60,7 +61,7 @@ const Background = ({ data }: Props) => {
       onMouseLeave={handleMouseLeave}
     >
       <img
-        src={data?.image}
+        src={replaceImage(data?.image)}
         className={`
         relative object-cover w-full 
         h-[60vh]
@@ -70,7 +71,7 @@ const Background = ({ data }: Props) => {
         onError={(e) => {
           (e.target as any).src = default_image
         }}
-        alt={data?.image}
+        alt={replaceImage(data?.image)}
         loading="lazy"
       />
       {/* <div className="inner-shadow"></div> */}

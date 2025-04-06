@@ -12,6 +12,7 @@ import { Pagination, Navigation } from 'swiper/modules';
 import { default_image } from '@/constant/constant';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { replaceImage } from '@/lib/utils';
 
 interface IFood {
   _id: string;
@@ -53,8 +54,8 @@ const Promotion = () => {
         {data?.data?.map((item, index) => (
           <SwiperSlide key={index}>
             <img
-              src={item.image}
-              alt={item.image}
+              src={replaceImage(item.image)}
+              alt={replaceImage(item.image)}
               className='promotion object-cover'
               onError={(e) => {
                 (e.target as any).src = default_image
